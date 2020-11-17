@@ -57,6 +57,7 @@
         android:drawableStart="@drawable/ic_email"
         android:drawablePadding="12dp"
         android:hint="Email"
+        android:text="email@email.com"
         android:inputType="textEmailAddress"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -74,6 +75,7 @@
         android:drawablePadding="12dp"
         android:ems="10"
         android:hint="Password"
+        android:text="password"
         android:inputType="textPassword"
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
@@ -84,7 +86,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextEmail" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/textViewEsquecer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -98,19 +100,20 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buttonLogin"
         android:layout_width="306dp"
         android:layout_height="60dp"
         android:layout_marginTop="88dp"
+        android:background="@drawable/button_login"
         android:fontFamily="@font/montserrat_bold"
+        android:onClick="onClickLogin"
         android:text="LOGIN"
         android:textColor="@color/branco"
         android:textSize="24sp"
-        android:background="@drawable/button_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewEsquecer" />
 
     <TextView
         android:id="@+id/textView5"
@@ -121,13 +124,13 @@
         android:text="Ainda não tens conta?"
         android:textColor="@color/cinza"
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/textView6"
+        app:layout_constraintEnd_toStartOf="@+id/textViewRegistar"
         app:layout_constraintHorizontal_bias="0.962"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonLogin" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/textViewRegistar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -138,6 +141,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.85"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonLogin" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
