@@ -60,23 +60,21 @@ public class ListaRestauranteAdaptador extends BaseAdapter {
     }
 
     private class ViewHolderLista {
-        private TextView tvTitulo, tvSerie, tvAutor, tvAno;
+        private TextView tvNome, tvClassificacao, tvLocalizacao;
         private ImageView ivCapa;
 
         public ViewHolderLista(View view){
-            tvTitulo = view.findViewById(R.id.textViewTitulo);
-            tvSerie = view.findViewById(R.id.textViewSerie);
-            tvAutor = view.findViewById(R.id.textViewAutor);
-            tvAno = view.findViewById(R.id.textViewAno);
-            ivCapa = view.findViewById(R.id.imageViewLivro);
+            tvNome = view.findViewById(R.id.textViewNome);
+            tvClassificacao = view.findViewById(R.id.textViewClass);
+            tvLocalizacao = view.findViewById(R.id.textViewLocalizacao);
+            ivCapa = view.findViewById(R.id.imageViewCapa);
         }
 
         public void update(Restaurante restaurante){
-            tvTitulo.setText(livro.getTitulo());
-            tvSerie.setText(livro.getSerie());
-            tvAutor.setText(livro.getAutor());
-            tvAno.setText(livro.getAno() + "");
-            ivCapa.setImageResource(livro.getCapa());
+            tvNome.setText(restaurante.getNome());
+            //tvClassificacao.setText(restaurante.());
+            tvLocalizacao.setText(restaurante.getLocalizacao());
+            ivCapa.setImageResource(restaurante.getCapa());
         }
     }
 }

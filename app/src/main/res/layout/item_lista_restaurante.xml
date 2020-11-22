@@ -4,4 +4,79 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <Space
+        android:layout_width="30dp"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="350dp"
+            android:layout_height="300dp"
+            android:layout_marginBottom="25dp"
+            android:background="@drawable/item_restaurante"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="350dp"
+                android:layout_height="200dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imageViewCapa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/img_restaurante" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textViewNome"
+                        android:layout_width="245dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="Restaurante"
+                        android:textColor="@color/cinza"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/textViewClass"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_estrela"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text=" 5.5 / 5"
+                        android:textColor="@color/cinza"
+                        android:textSize="18sp" />/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textViewLocalizacao"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:textColor="@color/cinza"
+                    android:textSize="15sp"
+                    android:text="Leiria" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
 </LinearLayout>
