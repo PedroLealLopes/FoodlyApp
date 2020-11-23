@@ -1,15 +1,16 @@
 package pt.ipleiria.estg.dei.foodlyandroid.modelos;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class Restaurante {
     private int id, maxPessoas, currPessoas, capa;
     private String nome, descricao, localizacao, classificacao;
-    private Date horaAbertura, horaFecho;
+    private String horaAbertura, horaFecho;
     private boolean wifi, animais;
 
-    public Restaurante(int id, int maxPessoas, int currPessoas, int capa, String nome, String descricao, String localizacao, String classificacao, Date horaAbertura, Date horaFecho, boolean wifi, boolean animais) {
+    public Restaurante(int id, int maxPessoas, int currPessoas, int capa, String nome, String descricao, String localizacao, String classificacao, String horaAbertura, String horaFecho, boolean wifi, boolean animais) {
         this.id = id;
         this.maxPessoas = maxPessoas;
         this.currPessoas = currPessoas;
@@ -80,19 +81,19 @@ public class Restaurante {
         this.localizacao = localizacao;
     }
 
-    public Date getHoraAbertura() {
+    public String getHoraAbertura() {
         return horaAbertura;
     }
 
-    public void setHoraAbertura(Date horaAbertura) {
+    public void setHoraAbertura(String horaAbertura) {
         this.horaAbertura = horaAbertura;
     }
 
-    public Date getHoraFecho() {
+    public String getHoraFecho() {
         return horaFecho;
     }
 
-    public void setHoraFecho(Date horaFecho) {
+    public void setHoraFecho(String horaFecho) {
         this.horaFecho = horaFecho;
     }
 

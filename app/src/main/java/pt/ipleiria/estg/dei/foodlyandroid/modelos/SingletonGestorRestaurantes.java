@@ -20,12 +20,15 @@ public class SingletonGestorRestaurantes {
     }
 
     private void gerarFakeData() {
-        /*restaurantes = new ArrayList<>();
-        restaurantes.add(new Livro(2020, R.drawable.programarandroid2, "Programar em Android AMSI - 1", "2ª Temporada", "AMSI TEAM"));
-        restaurantes.add(new Livro(2020, R.drawable.programarandroid1, "Programar em Android AMSI - 2", "2ª Temporada", "AMSI TEAM"));
-        restaurantes.add(new Livro(2020, R.drawable.logoipl, "Programar em Android AMSI - 3", "2ª Temporada", " AMSI TEAM"));
-        restaurantes.add(new Livro(2020, R.drawable.programarandroid1, "Programar em Android AMSI - 5", "2ª Temporada", "AMSI TEAM"));
-        restaurantes.add(new Livro(2020, R.drawable.logoipl, "Programar em Android AMSI - 6", "2ª Temporada", " AMSI TEAM"));*/
+        restaurantes = new ArrayList<>();
+        restaurantes.add(new Restaurante(1, 20, 10, R.drawable.img_restaurante, "Rei das Pizzas", "Restaurante de Pizzas", "Leiria", "3",
+                "07:00:00", "23:00:00", true, true));
+        restaurantes.add(new Restaurante(2, 20, 10, R.drawable.img_restaurante, "Rei dos Hambuerguers", "Restaurante de Hambuerguers", "Leiria", "4",
+                "07:00:00", "23:00:00", true, false));
+        restaurantes.add(new Restaurante(3, 20, 10, R.drawable.img_restaurante, "Sushi", "Restaurante de Sushi", "Leiria", "1",
+                "07:00:00", "23:00:00", false, true));
+        restaurantes.add(new Restaurante(4, 20, 10, R.drawable.img_restaurante, "KFC", "Melhor restaurante", "Não é em Leiria", "5",
+                "07:00:00", "23:00:00", true, true));
     }
 
     public ArrayList<Restaurante> getRestaurantes() {

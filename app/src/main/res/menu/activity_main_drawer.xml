@@ -11,11 +11,17 @@
         <item
             android:id="@+id/nav_lista"
             android:icon="@drawable/ic_lista_restaurantes"
-            android:title="Lista Restaurantes" />
+            android:title="Lista de Restaurantes" />
     </group>
 
-    <item
-        android:id="@+id/nav_logout"
-        android:icon="@drawable/ic_logout"
-        android:title="Sair" />
+    <item android:title="">
+        <menu>
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/ic_logout"
+                android:title="Logout"
+                android:visible="true"></item>
+        </menu>
+    </item>
+
 </menu>

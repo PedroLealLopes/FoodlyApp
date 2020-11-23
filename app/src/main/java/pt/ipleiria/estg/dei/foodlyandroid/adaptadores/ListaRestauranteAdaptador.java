@@ -19,7 +19,7 @@ public class ListaRestauranteAdaptador extends BaseAdapter {
     private LayoutInflater inflater;
     private ArrayList<Restaurante> restaurantes;
 
-    public ListaRestauranteAdaptador(Context context, ArrayList<Restaurante> livros) {
+    public ListaRestauranteAdaptador(Context context, ArrayList<Restaurante> restaurantes) {
         this.context = context;
         this.restaurantes = restaurantes;
     }
@@ -72,7 +72,7 @@ public class ListaRestauranteAdaptador extends BaseAdapter {
 
         public void update(Restaurante restaurante){
             tvNome.setText(restaurante.getNome());
-            //tvClassificacao.setText(restaurante.());
+            tvClassificacao.setText(restaurante.getClassificacao() + " / 5");
             tvLocalizacao.setText(restaurante.getLocalizacao());
             ivCapa.setImageResource(restaurante.getCapa());
         }
