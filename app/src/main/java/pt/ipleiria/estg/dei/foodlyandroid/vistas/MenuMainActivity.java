@@ -2,6 +2,7 @@ package pt.ipleiria.estg.dei.foodlyandroid.vistas;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -10,6 +11,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -55,9 +58,9 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
         email = getIntent().getStringExtra(EMAIL);
         SharedPreferences sharedPrefUser = getSharedPreferences(USER, Context.MODE_PRIVATE);
 
-        if(email == null)
+        if (email == null)
             email = sharedPrefUser.getString(EMAIL, "Sem Nome de Utilizador");
-        else{
+        else {
             SharedPreferences.Editor editor = sharedPrefUser.edit();
             editor.putString(EMAIL, email);
             editor.apply();
@@ -81,21 +84,21 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
 
         switch (item.getItemId()) {
             case R.id.nav_perfil:
+                fragment = new PerfilFragment();
                 setTitle(item.getTitle());
                 break;
             case R.id.nav_lista:
                 fragment = new ListaRestaurantesFragment();
                 setTitle(item.getTitle());
-                //Intent intentDinamico = new Intent(this, DetalhesDinamicoActivity.class);
-                //startActivity(intentDinamico);
                 break;
             case R.id.nav_logout:
-                logout();
+                dialogLogout();
                 break;
             default:
+                fragment = new PerfilFragment();
         }
 
-        if(fragment != null){
+        if (fragment != null) {
             fragmentManager.beginTransaction().replace(R.id.contentFragment, fragment).commit();
         }
 
@@ -103,7 +106,24 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
         return true;
     }
 
-    private void logout() {
+    private void dialogLogout(){
+        AlertDialog.Builder builder;
+        builder = new AlertDialog.Builder(this);
+        builder.setTitle("Logout")
+                .setMessage("Deseja mesmo sair?")
+                .setPositiveButton(R.string.respostaSim, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(MenuMainActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }})
 
+                .setNegativeButton(R.string.respostaNao, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }})
+                .setIcon(R.drawable.ic_logout)
+                .show();
     }
 }

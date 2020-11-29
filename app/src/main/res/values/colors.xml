@@ -6,8 +6,11 @@
 
 
     <color name="roxo">#9D4EDD</color>
-    <color name="vermelho">#CE4760</color>
-    <color name="verde">#81E979</color>
+    <color name="roxo_escuro">#8327CE</color>
+    <color name="vermelho">#E74C3C</color>
+    <color name="verde">#2ECC71</color>
+    <color name="amarelo">#F1C40F</color>
+    <color name="laranja">#E67E22</color>
     <color name="preto">#0A0A0A</color>
     <color name="branco">#F5F5F5</color>
     <color name="cinza">#3A404C</color>

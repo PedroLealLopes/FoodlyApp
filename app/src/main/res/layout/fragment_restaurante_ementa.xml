@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".vistas.RestauranteInfoFragment">
+
+    <Button
+        android:id="@+id/buttonEntrada"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/button_ementa"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="ENTRADAS"
+        android:textColor="@color/roxo"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonPrincipal"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_ementa"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="PRATOS PRINCIPAIS"
+        android:textColor="@color/roxo"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonEntrada" />
+
+    <Button
+        android:id="@+id/buttonSobremesa"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_ementa"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="SOBREMESAS"
+        android:textColor="@color/roxo"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonPrincipal" />
+
+    <ListView
+        android:id="@+id/listViewEmentas"
+        android:layout_width="393dp"
+        android:layout_height="585dp"
+        android:layout_marginTop="32dp"
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonSobremesa" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

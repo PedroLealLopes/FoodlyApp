@@ -20,8 +20,6 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import java.util.ArrayList;
 
 import pt.ipleiria.estg.dei.foodlyandroid.R;
@@ -31,8 +29,6 @@ import pt.ipleiria.estg.dei.foodlyandroid.modelos.SingletonGestorRestaurantes;
 
 public class ListaRestaurantesFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
-    private static final int EDITAR = 2;
-    private static final int ADICIONAR = 1;
     private ListView lvListaRestaurantes;
     private ArrayList<Restaurante> listaRestaurantes;
     private SearchView searchView;
@@ -48,15 +44,15 @@ public class ListaRestaurantesFragment extends Fragment implements SwipeRefreshL
         setHasOptionsMenu(true);
 
         listaRestaurantes = SingletonGestorRestaurantes.getInstance().getRestaurantes();
-        lvListaRestaurantes = view.findViewById(R.id.lvListaRestaurantes);
+        lvListaRestaurantes = view.findViewById(R.id.listViewRestaurantes);
         lvListaRestaurantes.setAdapter(new ListaRestauranteAdaptador(getContext(), listaRestaurantes));
 
         lvListaRestaurantes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                /*Intent intent = new Intent(getContext(), DetalhesRestauranteActivity.class);
+                Intent intent = new Intent(getContext(), DetalhesRestauranteActivity.class);
                 intent.putExtra(DetalhesRestauranteActivity.ID, (int) id);
-                startActivityForResult(intent, EDITAR);*/
+                startActivity(intent);
             }
         });
 
@@ -64,25 +60,6 @@ public class ListaRestaurantesFragment extends Fragment implements SwipeRefreshL
         swipeRefreshLayout.setOnRefreshListener(this);
 
         return view;
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if(resultCode == Activity.RESULT_OK){
-            switch (requestCode){
-                case ADICIONAR:
-                    listaRestaurantes = SingletonGestorRestaurantes.getInstance().getRestaurantes();
-                    lvListaRestaurantes.setAdapter(new ListaRestauranteAdaptador(getContext(), listaRestaurantes));
-                    Toast.makeText(getContext(), "Restaurante adicionado com sucesso", Toast.LENGTH_SHORT).show();
-                    break;
-                case EDITAR:
-                    listaRestaurantes = SingletonGestorRestaurantes.getInstance().getRestaurantes();
-                    lvListaRestaurantes.setAdapter(new ListaRestauranteAdaptador(getContext(), listaRestaurantes));
-                    Toast.makeText(getContext(), "Livro editado com sucesso", Toast.LENGTH_SHORT).show();
-                    break;
-            }
-        }
-        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override

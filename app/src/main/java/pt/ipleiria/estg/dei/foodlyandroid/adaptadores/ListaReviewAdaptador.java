@@ -11,32 +11,32 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import pt.ipleiria.estg.dei.foodlyandroid.R;
-import pt.ipleiria.estg.dei.foodlyandroid.modelos.Restaurante;
+import pt.ipleiria.estg.dei.foodlyandroid.modelos.Review;
 
-public class ListaRestauranteAdaptador extends BaseAdapter {
+public class ListaReviewAdaptador extends BaseAdapter {
 
     private Context context;
     private LayoutInflater inflater;
-    private ArrayList<Restaurante> restaurantes;
+    private ArrayList<Review> reviews;
 
-    public ListaRestauranteAdaptador(Context context, ArrayList<Restaurante> restaurantes) {
+    public ListaReviewAdaptador(Context context, ArrayList<Review> reviews) {
         this.context = context;
-        this.restaurantes = restaurantes;
+        this.reviews = reviews;
     }
 
     @Override
     public int getCount() {
-        return restaurantes.size();
+        return reviews.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return restaurantes.get(position);
+        return reviews.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return restaurantes.get(position).getId();
+        return reviews.get(position).getId();
     }
 
     @Override
@@ -45,7 +45,7 @@ public class ListaRestauranteAdaptador extends BaseAdapter {
             inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         if (convertView == null)
-            convertView = inflater.inflate(R.layout.item_lista_restaurante, null);
+            convertView = inflater.inflate(R.layout.item_lista_review, null);
 
         //OTIMIZAÇÃO
         ViewHolderLista viewHolderLista = (ViewHolderLista) convertView.getTag();
@@ -54,27 +54,29 @@ public class ListaRestauranteAdaptador extends BaseAdapter {
             convertView.setTag(viewHolderLista);
         }
 
-        viewHolderLista.update(restaurantes.get(position));
+        viewHolderLista.update(reviews.get(position));
 
         return convertView;
     }
 
     private class ViewHolderLista {
-        private TextView tvNome, tvClassificacao, tvLocalizacao;
-        private ImageView ivCapa;
+        private TextView tvUsername, tvData, tvClassificacao, tvComentario;
+        private ImageView ivPic;
 
         public ViewHolderLista(View view){
-            tvNome = view.findViewById(R.id.textViewUsername);
-            tvClassificacao = view.findViewById(R.id.textViewClass);
-            tvLocalizacao = view.findViewById(R.id.textViewLocalizacao);
-            ivCapa = view.findViewById(R.id.imageViewCapa);
+            tvUsername = view.findViewById(R.id.textViewUsername);
+            tvData = view.findViewById(R.id.textViewDataCriacao);
+            tvClassificacao = view.findViewById(R.id.textViewClassificacao);
+            tvComentario = view.findViewById(R.id.textViewComentario);
+            ivPic = view.findViewById(R.id.imageViewProfilePic);
         }
 
-        public void update(Restaurante restaurante){
-            tvNome.setText(restaurante.getNome());
-            tvClassificacao.setText(restaurante.getClassificacao() + " / 5");
-            tvLocalizacao.setText(restaurante.getLocalizacao());
-            ivCapa.setImageResource(restaurante.getCapa());
+        public void update(Review review){
+            tvUsername.setText(review.getUsername());
+            tvData.setText(review.getDataCriacao());
+            tvClassificacao.setText(review.getClassificacao()+"");
+            tvComentario.setText(review.getComentario());
+            ivPic.setImageResource(review.getProfilePic());
         }
     }
 }

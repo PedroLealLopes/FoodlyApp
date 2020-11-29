@@ -5,4 +5,7 @@
     <string name="etPasswordInvalida">Password Inválida</string>
     <string name="ndOpen">drawerOpne</string>
     <string name="ndClose">drawerClose</string>
+    <string name="respostaSim">Sim</string>
+    <string name="respostaNao">Não</string>
+    <string name="respostaVoltar">Voltar</string>
 </resources>

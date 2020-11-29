@@ -5,38 +5,37 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import pt.ipleiria.estg.dei.foodlyandroid.R;
-import pt.ipleiria.estg.dei.foodlyandroid.modelos.Restaurante;
+import pt.ipleiria.estg.dei.foodlyandroid.modelos.Ementa;
 
-public class ListaRestauranteAdaptador extends BaseAdapter {
+public class ListaEmentaAdaptador extends BaseAdapter {
 
     private Context context;
     private LayoutInflater inflater;
-    private ArrayList<Restaurante> restaurantes;
+    private ArrayList<Ementa> ementas;
 
-    public ListaRestauranteAdaptador(Context context, ArrayList<Restaurante> restaurantes) {
+    public ListaEmentaAdaptador(Context context, ArrayList<Ementa> ementas) {
         this.context = context;
-        this.restaurantes = restaurantes;
+        this.ementas = ementas;
     }
 
     @Override
     public int getCount() {
-        return restaurantes.size();
+        return ementas.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return restaurantes.get(position);
+        return ementas.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return restaurantes.get(position).getId();
+        return ementas.get(position).getId();
     }
 
     @Override
@@ -45,7 +44,7 @@ public class ListaRestauranteAdaptador extends BaseAdapter {
             inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         if (convertView == null)
-            convertView = inflater.inflate(R.layout.item_lista_restaurante, null);
+            convertView = inflater.inflate(R.layout.item_lista_ementa, null);
 
         //OTIMIZAÇÃO
         ViewHolderLista viewHolderLista = (ViewHolderLista) convertView.getTag();
@@ -54,27 +53,22 @@ public class ListaRestauranteAdaptador extends BaseAdapter {
             convertView.setTag(viewHolderLista);
         }
 
-        viewHolderLista.update(restaurantes.get(position));
+        viewHolderLista.update(ementas.get(position));
 
         return convertView;
     }
 
     private class ViewHolderLista {
-        private TextView tvNome, tvClassificacao, tvLocalizacao;
-        private ImageView ivCapa;
+        private TextView tvNome, tvPreco;
 
         public ViewHolderLista(View view){
             tvNome = view.findViewById(R.id.textViewUsername);
-            tvClassificacao = view.findViewById(R.id.textViewClass);
-            tvLocalizacao = view.findViewById(R.id.textViewLocalizacao);
-            ivCapa = view.findViewById(R.id.imageViewCapa);
+            tvPreco = view.findViewById(R.id.textViewPreco);
         }
 
-        public void update(Restaurante restaurante){
-            tvNome.setText(restaurante.getNome());
-            tvClassificacao.setText(restaurante.getClassificacao() + " / 5");
-            tvLocalizacao.setText(restaurante.getLocalizacao());
-            ivCapa.setImageResource(restaurante.getCapa());
+        public void update(Ementa ementa){
+            tvNome.setText(ementa.getNome());
+            tvPreco.setText(ementa.getPreco() + "€");
         }
     }
 }

@@ -33,29 +33,29 @@ public class LoginActivity extends AppCompatActivity {
         String email = etEmail.getText().toString();
         String password = etPassword.getText().toString();
 
-        if(!isEmailValido(email)){
+        if (!isEmailValido(email)) {
             etEmail.setError(getString(R.string.etEmailInvalido));
             return;
         }
-        if(!isPasswordValida(password)){
+        if (!isPasswordValida(password)) {
             etPassword.setError(getString(R.string.etPasswordInvalida));
             return;
         }
 
-        Intent intent = new Intent (this, MenuMainActivity.class);
+        Intent intent = new Intent(this, MenuMainActivity.class);
         intent.putExtra("EMAIL", email);
         startActivity(intent);
     }
 
-    private boolean isEmailValido(String email){
-        if(email == null){
+    private boolean isEmailValido(String email) {
+        if (email == null) {
             return false;
         }
         return Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
-    private boolean isPasswordValida(String password){
-        if(password == null){
+    private boolean isPasswordValida(String password) {
+        if (password == null) {
             return false;
         }
         return password.length() >= 4;

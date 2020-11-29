@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".vistas.RestauranteInfoFragment">
+
+    <TextView
+        android:id="@+id/textViewReviewNota"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="Excelente"
+        android:textColor="@color/roxo"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/montserrat_regular"
+        android:text="de acordo com "
+        android:textColor="@color/cinza"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.216"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewReviewNota" />
+
+    <TextView
+        android:id="@+id/textViewPessoas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="15"
+        android:textColor="@color/cinza"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textView1"
+        app:layout_constraintTop_toBottomOf="@+id/textViewReviewNota" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text=" pessoas"
+        android:textColor="@color/cinza"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textViewPessoas"
+        app:layout_constraintTop_toBottomOf="@+id/textViewReviewNota" />
+
+    <TextView
+        android:id="@+id/textViewReviewClassificacao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="4.8"
+        android:textColor="@color/cinza"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.416"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView1" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/montserrat_regular"
+        android:text=" /5"
+        android:textColor="@color/cinza"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textViewReviewClassificacao"
+        app:layout_constraintTop_toBottomOf="@+id/textView1" />
+
+    <ImageView
+        android:id="@+id/imageViewVermelho"
+        android:layout_width="60dp"
+        android:layout_height="10dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/retangulo_vermelho"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.048"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewReviewClassificacao" />
+
+    <ImageView
+        android:id="@+id/imageViewLaranja"
+        android:layout_width="60dp"
+        android:layout_height="10dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/retangulo_laranja"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.06"
+        app:layout_constraintStart_toEndOf="@+id/imageViewVermelho"
+        app:layout_constraintTop_toBottomOf="@+id/textViewReviewClassificacao" />
+
+    <ImageView
+        android:id="@+id/imageViewAmarelo"
+        android:layout_width="60dp"
+        android:layout_height="10dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/retangulo_amarelo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.08"
+        app:layout_constraintStart_toEndOf="@+id/imageViewLaranja"
+        app:layout_constraintTop_toBottomOf="@+id/textViewReviewClassificacao" />
+
+    <ImageView
+        android:id="@+id/imageViewRoxo"
+        android:layout_width="60dp"
+        android:layout_height="10dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/retangulo_roxo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toEndOf="@+id/imageViewAmarelo"
+        app:layout_constraintTop_toBottomOf="@+id/textViewReviewClassificacao" />
+
+    <ImageView
+        android:id="@+id/imageViewRoxoEscuro"
+        android:layout_width="60dp"
+        android:layout_height="10dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/retangulo_roxo_escuro"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/imageViewRoxo"
+        app:layout_constraintTop_toBottomOf="@+id/textViewReviewClassificacao" />
+
+    <ImageView
+        android:id="@+id/imageViewSeparador1"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="40dp"
+        android:alpha="0.5"
+        android:src="@drawable/retangulo_cinza"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewAmarelo" />
+
+    <TextView
+        android:id="@+id/textViewNumeroComentarios"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/montserrat_semi_bold"
+        android:text="5"
+        android:textColor="@color/cinza"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.041"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewSeparador1" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/montserrat_semi_bold"
+        android:text=" comentários"
+        android:textColor="@color/cinza"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textViewNumeroComentarios"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewSeparador1" />
+
+    <ImageView
+        android:id="@+id/imageViewSeparador2"
+        android:layout_width="391dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="5dp"
+        android:alpha="0.5"
+        android:src="@drawable/retangulo_cinza"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <ListView
+        android:id="@+id/listViewReviews"
+        android:layout_width="393dp"
+        android:layout_height="442dp"
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewSeparador2"
+        app:layout_scrollFlags="scroll|enterAlways" />
+</androidx.constraintlayout.widget.ConstraintLayout>
