@@ -48,7 +48,7 @@ public class ListaEmentaAdaptador extends BaseAdapter {
 
         //OTIMIZAÇÃO
         ViewHolderLista viewHolderLista = (ViewHolderLista) convertView.getTag();
-        if(viewHolderLista == null){
+        if (viewHolderLista == null) {
             viewHolderLista = new ViewHolderLista(convertView);
             convertView.setTag(viewHolderLista);
         }
@@ -61,12 +61,12 @@ public class ListaEmentaAdaptador extends BaseAdapter {
     private class ViewHolderLista {
         private TextView tvNome, tvPreco;
 
-        public ViewHolderLista(View view){
+        public ViewHolderLista(View view) {
             tvNome = view.findViewById(R.id.textViewUsername);
             tvPreco = view.findViewById(R.id.textViewPreco);
         }
 
-        public void update(Ementa ementa){
+        public void update(Ementa ementa) {
             tvNome.setText(ementa.getNome());
             tvPreco.setText(ementa.getPreco() + "€");
         }

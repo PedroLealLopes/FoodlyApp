@@ -31,16 +31,15 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    app:cardCornerRadius="10dp"
-                    android:elevation="10dp">
+                    android:elevation="10dp"
+                    app:cardCornerRadius="10dp">
 
                     <ImageView
                         android:id="@+id/imageViewCapa"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/img_restaurante"
                         android:scaleType="centerCrop"
-                        />
+                        android:src="@drawable/img_restaurante" />
                 </androidx.cardview.widget.CardView>
 
             </LinearLayout>
@@ -84,11 +83,10 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="4dp"
                     android:fontFamily="@font/montserrat_regular"
+                    android:text="Leiria"
                     android:textColor="@color/cinza"
-                    android:textSize="15sp"
-                    android:text="Leiria" />
+                    android:textSize="15sp" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-
 </LinearLayout>

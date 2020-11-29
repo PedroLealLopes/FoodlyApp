@@ -1,9 +1,5 @@
 package pt.ipleiria.estg.dei.foodlyandroid.modelos;
 
-import java.sql.Time;
-import java.util.ArrayList;
-import java.util.Date;
-
 public class Restaurante {
     private int id, maxPessoas, currPessoas, capa;
     private String nome, descricao, localizacao, classificacao;

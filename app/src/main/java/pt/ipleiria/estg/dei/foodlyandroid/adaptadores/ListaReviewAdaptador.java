@@ -49,7 +49,7 @@ public class ListaReviewAdaptador extends BaseAdapter {
 
         //OTIMIZAÇÃO
         ViewHolderLista viewHolderLista = (ViewHolderLista) convertView.getTag();
-        if(viewHolderLista == null){
+        if (viewHolderLista == null) {
             viewHolderLista = new ViewHolderLista(convertView);
             convertView.setTag(viewHolderLista);
         }
@@ -63,7 +63,7 @@ public class ListaReviewAdaptador extends BaseAdapter {
         private TextView tvUsername, tvData, tvClassificacao, tvComentario;
         private ImageView ivPic;
 
-        public ViewHolderLista(View view){
+        public ViewHolderLista(View view) {
             tvUsername = view.findViewById(R.id.textViewUsername);
             tvData = view.findViewById(R.id.textViewDataCriacao);
             tvClassificacao = view.findViewById(R.id.textViewClassificacao);
@@ -71,10 +71,10 @@ public class ListaReviewAdaptador extends BaseAdapter {
             ivPic = view.findViewById(R.id.imageViewProfilePic);
         }
 
-        public void update(Review review){
+        public void update(Review review) {
             tvUsername.setText(review.getUsername());
             tvData.setText(review.getDataCriacao());
-            tvClassificacao.setText(review.getClassificacao()+"");
+            tvClassificacao.setText(review.getClassificacao() + "");
             tvComentario.setText(review.getComentario());
             ivPic.setImageResource(review.getProfilePic());
         }

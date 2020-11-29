@@ -1,5 +1,14 @@
 package pt.ipleiria.estg.dei.foodlyandroid.vistas;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
@@ -9,15 +18,6 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -106,7 +106,7 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
         return true;
     }
 
-    private void dialogLogout(){
+    private void dialogLogout() {
         AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(this);
         builder.setTitle("Logout")
@@ -117,12 +117,14 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
                         Intent intent = new Intent(MenuMainActivity.this, LoginActivity.class);
                         startActivity(intent);
                         finish();
-                    }})
+                    }
+                })
 
                 .setNegativeButton(R.string.respostaNao, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                    }})
+                    }
+                })
                 .setIcon(R.drawable.ic_logout)
                 .show();
     }

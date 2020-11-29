@@ -53,7 +53,7 @@ public class RestauranteEmentaFragment extends Fragment implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-        switch(v.getId()) {
+        switch (v.getId()) {
             case R.id.buttonEntrada:
                 btnEntrada.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.button_ementa_focused));
                 btnEntrada.setTextColor(getResources().getColor(R.color.branco));

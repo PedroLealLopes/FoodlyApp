@@ -1,6 +1,5 @@
 package pt.ipleiria.estg.dei.foodlyandroid.modelos;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Ementa {

@@ -49,7 +49,7 @@ public class ListaRestauranteAdaptador extends BaseAdapter {
 
         //OTIMIZAÇÃO
         ViewHolderLista viewHolderLista = (ViewHolderLista) convertView.getTag();
-        if(viewHolderLista == null){
+        if (viewHolderLista == null) {
             viewHolderLista = new ViewHolderLista(convertView);
             convertView.setTag(viewHolderLista);
         }
@@ -63,14 +63,14 @@ public class ListaRestauranteAdaptador extends BaseAdapter {
         private TextView tvNome, tvClassificacao, tvLocalizacao;
         private ImageView ivCapa;
 
-        public ViewHolderLista(View view){
+        public ViewHolderLista(View view) {
             tvNome = view.findViewById(R.id.textViewUsername);
             tvClassificacao = view.findViewById(R.id.textViewClass);
             tvLocalizacao = view.findViewById(R.id.textViewLocalizacao);
             ivCapa = view.findViewById(R.id.imageViewCapa);
         }
 
-        public void update(Restaurante restaurante){
+        public void update(Restaurante restaurante) {
             tvNome.setText(restaurante.getNome());
             tvClassificacao.setText(restaurante.getClassificacao() + " / 5");
             tvLocalizacao.setText(restaurante.getLocalizacao());

@@ -1,7 +1,5 @@
 package pt.ipleiria.estg.dei.foodlyandroid.vistas;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -9,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import pt.ipleiria.estg.dei.foodlyandroid.R;
 

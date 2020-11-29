@@ -12,21 +12,20 @@
         android:id="@+id/profile_image"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:src="@drawable/gordon"
-        app:civ_border_width="1dp"
-        app:civ_border_color="#FFFFFF"
+        android:layout_marginLeft="8dp"
         android:layout_marginBottom="15dp"
-        android:layout_marginLeft="8dp"/>
+        android:src="@drawable/gordon"
+        app:civ_border_color="#FFFFFF"
+        app:civ_border_width="1dp" />
 
 
     <TextView
         android:id="@+id/nav_header_nome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Utilizador"
+        android:layout_marginLeft="8dp"
         android:fontFamily="@font/montserrat_bold"
+        android:text="Utilizador"
         android:textColor="@color/cinza"
-        android:textSize="25sp"
-        android:layout_marginLeft="8dp"/>
-
+        android:textSize="25sp" />
 </LinearLayout>

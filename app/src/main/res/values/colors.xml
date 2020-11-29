@@ -4,7 +4,6 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#9D4EDD</color>
 
-
     <color name="roxo">#9D4EDD</color>
     <color name="roxo_escuro">#8327CE</color>
     <color name="vermelho">#E74C3C</color>
@@ -14,7 +13,6 @@
     <color name="preto">#0A0A0A</color>
     <color name="branco">#F5F5F5</color>
     <color name="cinza">#3A404C</color>
-
 
 
 </resources>

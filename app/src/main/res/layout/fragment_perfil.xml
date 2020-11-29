@@ -44,10 +44,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/imageViewProfilePic"
+        android:layout_centerHorizontal="true"
         android:fontFamily="@font/montserrat_bold"
         android:text="Utilizador"
-        android:layout_centerHorizontal="true"
         android:textColor="@color/cinza"
         android:textSize="30sp" />
-
 </RelativeLayout>
