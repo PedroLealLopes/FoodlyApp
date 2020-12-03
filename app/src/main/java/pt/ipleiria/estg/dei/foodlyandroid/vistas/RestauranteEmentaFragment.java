@@ -23,7 +23,7 @@ public class RestauranteEmentaFragment extends Fragment implements View.OnClickL
     private Context context;
     private ListView lvListaEmentas;
     private ArrayList<Ementa> listaEmentas;
-    Button btnEntrada, btnPrincipal, btnSobremesa;
+    private Button btnEntrada, btnPrincipal, btnSobremesa;
 
     public RestauranteEmentaFragment(Context context) {
         this.context = context;
@@ -51,6 +51,7 @@ public class RestauranteEmentaFragment extends Fragment implements View.OnClickL
         return view;
     }
 
+    //region BUTÕES
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -81,4 +82,5 @@ public class RestauranteEmentaFragment extends Fragment implements View.OnClickL
             default:
         }
     }
+    //endregion
 }

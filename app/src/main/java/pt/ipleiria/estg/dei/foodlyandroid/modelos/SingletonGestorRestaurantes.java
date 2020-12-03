@@ -81,7 +81,7 @@ public class SingletonGestorRestaurantes {
 
     private void gerarFakeDataEmenta() {
         ementas = new ArrayList<>();
-        ementas.add(new Ementa(1, "Pao", 0.50, null));
+        ementas.add(new Ementa(1, "Pão", 0.50, null));
         ementas.add(new Ementa(2, "Sopa", 1, getIngredientes()));
         ementas.add(new Ementa(3, "Bitoque", 5, getIngredientes()));
         ementas.add(new Ementa(4, "Gelado", 1.20, null));
