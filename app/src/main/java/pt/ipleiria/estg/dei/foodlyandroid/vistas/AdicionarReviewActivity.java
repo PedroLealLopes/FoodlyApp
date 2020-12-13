@@ -10,7 +10,7 @@ import android.widget.ImageView;
 
 import pt.ipleiria.estg.dei.foodlyandroid.R;
 
-public class AdicionarReviewActivity extends AppCompatActivity {
+public class AdicionarReviewActivity extends AppCompatActivity implements View.OnClickListener {
     private ImageView ivEstrela_0_5, ivEstrela_1, ivEstrela_1_5, ivEstrela_2, ivEstrela_2_5, ivEstrela_3, ivEstrela_3_5, ivEstrela_4, ivEstrela_4_5, ivEstrela_5;
 
     @Override
@@ -33,10 +33,9 @@ public class AdicionarReviewActivity extends AppCompatActivity {
         avaliarEstrelas();
     }
 
-    public void avaliarEstrelas(){
-        ivEstrela_0_5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    public void onClick(View view){
+        switch(view.getId()){
+            case R.id.imageViewEstrela0_5:
                 //HIGHLIGHTS
                 ivEstrela_0_5.setImageResource(R.drawable.estrela_roxo_esquerda);
 
@@ -50,8 +49,12 @@ public class AdicionarReviewActivity extends AppCompatActivity {
                 ivEstrela_4.setImageResource(R.drawable.estrela_cinza_direita);
                 ivEstrela_4_5.setImageResource(R.drawable.estrela_cinza_esquerda);
                 ivEstrela_5.setImageResource(R.drawable.estrela_cinza_direita);
-            }
-        });
+                break;
+        }
+    }
+
+    public void avaliarEstrelas(){
+
         ivEstrela_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
