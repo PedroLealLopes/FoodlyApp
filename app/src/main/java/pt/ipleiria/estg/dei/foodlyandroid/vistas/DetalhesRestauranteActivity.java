@@ -31,7 +31,7 @@ public class DetalhesRestauranteActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             bottomNav.setItemSelected(R.id.itemInformacao, true);
             fragmentManager = getSupportFragmentManager();
-            RestauranteInfoFragment infoFragment = new RestauranteInfoFragment();
+            RestauranteInfoFragment infoFragment = new RestauranteInfoFragment(getApplicationContext());
             fragmentManager.beginTransaction()
                     .replace(R.id.fragment_container, infoFragment)
                     .commit();
@@ -43,7 +43,7 @@ public class DetalhesRestauranteActivity extends AppCompatActivity {
                 Fragment fragment = null;
                 switch (id) {
                     case R.id.itemInformacao:
-                        fragment = new RestauranteInfoFragment();
+                        fragment = new RestauranteInfoFragment(getApplicationContext());
                         break;
                     case R.id.itemEmenta:
                         fragment = new RestauranteEmentaFragment(getApplicationContext());

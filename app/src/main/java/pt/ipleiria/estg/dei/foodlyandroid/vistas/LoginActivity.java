@@ -10,13 +10,15 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.textfield.TextInputEditText;
+
 import pt.ipleiria.estg.dei.foodlyandroid.R;
 
 public class LoginActivity extends AppCompatActivity {
 
-    EditText etEmail, etPassword;
-    TextView tvEsquecer, tvRegistar;
-    Button btnLogin;
+    private TextView tvEsquecer, tvRegistar;
+    private TextInputEditText etEmail, etPassword;
+    private Button btnLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
 
         etEmail = findViewById(R.id.editTextEmail);
         etPassword = findViewById(R.id.editTextPassword);
+        tvRegistar = findViewById(R.id.textViewRegistar);
 
         btnLogin = findViewById(R.id.buttonLogin);
     }
@@ -59,5 +62,10 @@ public class LoginActivity extends AppCompatActivity {
             return false;
         }
         return password.length() >= 4;
+    }
+
+    public void onClickRegistar(View view) {
+        Intent intent = new Intent(this, RegistarActivity.class);
+        startActivity(intent);
     }
 }

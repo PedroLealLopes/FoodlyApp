@@ -13,9 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".vistas.RegistarActivity"
+            android:parentActivityName=".vistas.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".vistas.AdicionarReviewActivity"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".vistas.DetalhesRestauranteActivity"/>
+            android:parentActivityName=".vistas.DetalhesRestauranteActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".vistas.DetalhesRestauranteActivity"
             android:screenOrientation="portrait"

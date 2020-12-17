@@ -21,76 +21,82 @@
 
     <ImageView
         android:id="@+id/imageViewEstrela1"
-        tools:ignore="ContentDescription"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
+        android:clickable="true"
+        android:onClick="onClick"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.166"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:srcCompat="@drawable/estrela_cinza_direita"
-        android:clickable="true" />
+        tools:ignore="ContentDescription" />
 
     <ImageView
         android:id="@+id/imageViewEstrela4"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
+        android:clickable="true"
+        android:onClick="onClick"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.725"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:srcCompat="@drawable/estrela_cinza_direita"
-        android:clickable="true" />
+        app:srcCompat="@drawable/estrela_cinza_direita" />
 
     <ImageView
         android:id="@+id/imageViewEstrela1_5"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
+        android:clickable="true"
+        android:onClick="onClick"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.288"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:srcCompat="@drawable/estrela_cinza_esquerda"
-        android:clickable="true"/>
+        app:srcCompat="@drawable/estrela_cinza_esquerda" />
 
     <ImageView
         android:id="@+id/imageViewEstrela3"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
+        android:clickable="true"
+        android:onClick="onClick"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.545"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:srcCompat="@drawable/estrela_cinza_direita"
-        android:clickable="true" />
+        app:srcCompat="@drawable/estrela_cinza_direita" />
 
     <ImageView
         android:id="@+id/imageViewEstrela4_5"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
+        android:clickable="true"
+        android:onClick="onClick"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.836"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:srcCompat="@drawable/estrela_cinza_esquerda"
-        android:clickable="true"/>
+        app:srcCompat="@drawable/estrela_cinza_esquerda" />
 
     <ImageView
         android:id="@+id/imageViewEstrela3_5"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
+        android:clickable="true"
+        android:onClick="onClick"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.653"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:srcCompat="@drawable/estrela_cinza_esquerda"
-        android:clickable="true"/>
+        app:srcCompat="@drawable/estrela_cinza_esquerda" />
 
     <ImageView
         android:id="@+id/imageViewEstrela0_5"
@@ -110,36 +116,39 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
+        android:clickable="true"
+        android:onClick="onClick"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.909"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:srcCompat="@drawable/estrela_cinza_direita"
-        android:clickable="true" />
+        app:srcCompat="@drawable/estrela_cinza_direita" />
 
     <ImageView
         android:id="@+id/imageViewEstrela2"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
+        android:clickable="true"
+        android:onClick="onClick"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.364"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:srcCompat="@drawable/estrela_cinza_direita"
-        android:clickable="true" />
+        app:srcCompat="@drawable/estrela_cinza_direita" />
 
     <ImageView
         android:id="@+id/imageViewEstrela2_5"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
+        android:clickable="true"
+        android:onClick="onClick"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.469"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:srcCompat="@drawable/estrela_cinza_esquerda"
-        android:clickable="true"/>
+        app:srcCompat="@drawable/estrela_cinza_esquerda" />
 
     <ImageView
         android:id="@+id/imageViewSeparador"
@@ -190,7 +199,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_regular"
             android:textColor="@color/cinza"
-            android:textSize="15sp"/>
+            android:textSize="15sp" />
     </ScrollView>
 
     <Button
@@ -200,9 +209,9 @@
         android:layout_marginTop="30dp"
         android:background="@drawable/button_login"
         android:fontFamily="@font/montserrat_bold"
+        android:text="SUBMETER REVIEW"
         android:textColor="@color/branco"
         android:textSize="20sp"
-        android:text="SUBMETER REVIEW"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"

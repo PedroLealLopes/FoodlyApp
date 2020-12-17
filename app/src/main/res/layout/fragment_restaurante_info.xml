@@ -47,11 +47,11 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewUsername" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/imageViewFav"
         android:layout_width="70dp"
         android:layout_height="53dp"
         android:layout_marginTop="124dp"
-        android:src="@drawable/ic_restaurante_fav_true"
+        android:src="@drawable/ic_restaurante_fav_false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -60,7 +60,7 @@
     <Button
         android:id="@+id/button"
         android:layout_width="300dp"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/button_login"
         android:fontFamily="@font/montserrat_bold"
