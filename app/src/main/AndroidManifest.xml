@@ -12,6 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".vistas.FazerPedidoActivity"></activity>
         <activity
             android:name=".vistas.RegistarActivity"
             android:parentActivityName=".vistas.LoginActivity"

@@ -84,7 +84,7 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
 
         switch (item.getItemId()) {
             case R.id.nav_perfil:
-                fragment = new PerfilFragment();
+                fragment = new PerfilFragment(getApplicationContext());
                 setTitle(item.getTitle());
                 break;
             case R.id.nav_lista:
@@ -95,7 +95,7 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
                 dialogLogout();
                 break;
             default:
-                fragment = new PerfilFragment();
+                fragment = new PerfilFragment(getApplicationContext());
         }
 
         if (fragment != null) {

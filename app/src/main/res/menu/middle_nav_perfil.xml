@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/itemInformacao"
+        android:icon="@drawable/ic_info"
+        android:title="Informação"
+        app:cnb_iconColor="@color/roxo" />
+
+    <item
+        android:id="@+id/itemFav"
+        android:icon="@drawable/ic_fav"
+        android:title="Favoritos"
+        app:cnb_iconColor="@color/roxo" />
+
+    <item
+        android:id="@+id/itemReviews"
+        android:icon="@drawable/ic_review"
+        android:title="Reviews"
+        app:cnb_iconColor="@color/roxo" />
+</menu>

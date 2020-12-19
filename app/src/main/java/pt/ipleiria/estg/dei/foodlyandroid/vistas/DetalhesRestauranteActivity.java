@@ -15,7 +15,6 @@ import pt.ipleiria.estg.dei.foodlyandroid.modelos.Restaurante;
 public class DetalhesRestauranteActivity extends AppCompatActivity {
 
     public static final String ID = "ID";
-    private Restaurante restaurante;
     ChipNavigationBar bottomNav;
     FragmentManager fragmentManager;
     private static final String TAG = DetalhesRestauranteActivity.class.getSimpleName();
