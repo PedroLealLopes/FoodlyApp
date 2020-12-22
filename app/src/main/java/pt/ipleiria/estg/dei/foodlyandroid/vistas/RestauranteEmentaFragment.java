@@ -1,11 +1,12 @@
 package pt.ipleiria.estg.dei.foodlyandroid.vistas;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import androidx.fragment.app.Fragment;
 
@@ -15,24 +16,33 @@ import pt.ipleiria.estg.dei.foodlyandroid.R;
 import pt.ipleiria.estg.dei.foodlyandroid.adaptadores.ListaEmentaAdaptador;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.Ementa;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.SingletonGestorRestaurantes;
+import pt.ipleiria.estg.dei.foodlyandroid.utils.SetListViewHeight;
 
 public class RestauranteEmentaFragment extends Fragment {
 
-    private Context context;
-    private ListView lvListaEmentaEntrada;
+    private ListView lvListaEmentaEntrada, lvListaEmentaPrincipal, lvListaEmenraSobremesa;
     private ArrayList<Ementa> listaEmentas;
 
-    public RestauranteEmentaFragment(Context context) {
-        this.context = context;
+    public RestauranteEmentaFragment() {
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_restaurante_ementa, container, false);
 
-        listaEmentas = SingletonGestorRestaurantes.getInstance().getEmentas();
         lvListaEmentaEntrada = view.findViewById(R.id.listViewEmentaEntrada);
+        lvListaEmentaPrincipal = view.findViewById(R.id.listViewEmentaPrincipal);
+        lvListaEmenraSobremesa = view.findViewById(R.id.listViewEmentaSobremesa);
+
+        listaEmentas = SingletonGestorRestaurantes.getInstance().getEmentas();
         lvListaEmentaEntrada.setAdapter(new ListaEmentaAdaptador(getContext(), listaEmentas));
+        lvListaEmentaPrincipal.setAdapter(new ListaEmentaAdaptador(getContext(), listaEmentas));
+        lvListaEmenraSobremesa.setAdapter(new ListaEmentaAdaptador(getContext(), listaEmentas));
+
+        SetListViewHeight.setListViewHeightBasedOnChildren(lvListaEmentaEntrada);
+        SetListViewHeight.setListViewHeightBasedOnChildren(lvListaEmentaPrincipal);
+        SetListViewHeight.setListViewHeightBasedOnChildren(lvListaEmenraSobremesa);
 
         return view;
     }

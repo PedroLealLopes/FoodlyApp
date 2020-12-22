@@ -54,7 +54,7 @@
             <ListView
                 android:id="@+id/listViewEmentaEntrada"
                 android:layout_width="wrap_content"
-                android:layout_height="250dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:divider="@null"
                 android:dividerHeight="0dp"
@@ -151,8 +151,8 @@
                 android:id="@+id/listViewEmentaSobremesa"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:divider="@null"
                 android:layout_marginTop="15dp"
+                android:divider="@null"
                 android:dividerHeight="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

@@ -45,7 +45,7 @@ public class DetalhesRestauranteActivity extends AppCompatActivity {
                         fragment = new RestauranteInfoFragment(getApplicationContext());
                         break;
                     case R.id.itemEmenta:
-                        fragment = new RestauranteEmentaFragment(getApplicationContext());
+                        fragment = new RestauranteEmentaFragment();
                         break;
                     case R.id.itemReviews:
                         fragment = new RestauranteReviewFragment();
