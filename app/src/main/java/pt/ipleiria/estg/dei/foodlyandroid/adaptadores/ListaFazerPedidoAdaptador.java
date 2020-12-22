@@ -1,11 +1,11 @@
 package pt.ipleiria.estg.dei.foodlyandroid.adaptadores;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -15,13 +15,14 @@ import java.util.ArrayList;
 import pt.ipleiria.estg.dei.foodlyandroid.R;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.Ementa;
 
-public class ListaEmentaAdaptador extends BaseAdapter {
+public class ListaFazerPedidoAdaptador extends BaseAdapter {
 
     private Context context;
     private LayoutInflater inflater;
     private ArrayList<Ementa> ementas;
+    private TextInputEditText tvItem;
 
-    public ListaEmentaAdaptador(Context context, ArrayList<Ementa> ementas) {
+    public ListaFazerPedidoAdaptador(Context context, ArrayList<Ementa> ementas) {
         this.context = context;
         this.ementas = ementas;
     }
@@ -47,7 +48,7 @@ public class ListaEmentaAdaptador extends BaseAdapter {
             inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         if (convertView == null)
-            convertView = inflater.inflate(R.layout.item_lista_ementa, null);
+            convertView = inflater.inflate(R.layout.item_lista_fazer_pedido, null);
 
         //OTIMIZAÇÃO
         ViewHolderLista viewHolderLista = (ViewHolderLista) convertView.getTag();
@@ -57,6 +58,7 @@ public class ListaEmentaAdaptador extends BaseAdapter {
         }
 
         viewHolderLista.update(ementas.get(position));
+
 
         return convertView;
     }

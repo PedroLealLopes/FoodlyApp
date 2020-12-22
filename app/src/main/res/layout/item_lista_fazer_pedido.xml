@@ -22,12 +22,29 @@
             android:id="@+id/textViewItemEmenta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/button_ementa"
             android:editable="false"
             android:fontFamily="@font/montserrat_regular"
             android:text="Ementa.......................1€"
             android:textColor="@color/cinza"
             android:textSize="16sp" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/textViewNrItem"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/forma_redonda"
+        android:text="3"
+        android:gravity="center"
+        android:fontFamily="@font/montserrat_semi_bold"
+        android:textColor="@color/branco"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 

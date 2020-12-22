@@ -4,10 +4,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListAdapter;
+import android.widget.Button;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
@@ -16,10 +17,9 @@ import pt.ipleiria.estg.dei.foodlyandroid.R;
 import pt.ipleiria.estg.dei.foodlyandroid.adaptadores.ListaEmentaAdaptador;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.Ementa;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.SingletonGestorRestaurantes;
-import pt.ipleiria.estg.dei.foodlyandroid.utils.SetListViewHeight;
+import pt.ipleiria.estg.dei.foodlyandroid.utils.GenericUtils;
 
 public class RestauranteEmentaFragment extends Fragment {
-
     private ListView lvListaEmentaEntrada, lvListaEmentaPrincipal, lvListaEmenraSobremesa;
     private ArrayList<Ementa> listaEmentas;
 
@@ -40,9 +40,9 @@ public class RestauranteEmentaFragment extends Fragment {
         lvListaEmentaPrincipal.setAdapter(new ListaEmentaAdaptador(getContext(), listaEmentas));
         lvListaEmenraSobremesa.setAdapter(new ListaEmentaAdaptador(getContext(), listaEmentas));
 
-        SetListViewHeight.setListViewHeightBasedOnChildren(lvListaEmentaEntrada);
-        SetListViewHeight.setListViewHeightBasedOnChildren(lvListaEmentaPrincipal);
-        SetListViewHeight.setListViewHeightBasedOnChildren(lvListaEmenraSobremesa);
+        GenericUtils.setListViewHeightBasedOnItems(lvListaEmentaEntrada);
+        GenericUtils.setListViewHeightBasedOnItems(lvListaEmentaPrincipal);
+        GenericUtils.setListViewHeightBasedOnItems(lvListaEmenraSobremesa);
 
         return view;
     }

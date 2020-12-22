@@ -5,8 +5,8 @@ import android.view.ViewGroup;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
-public class SetListViewHeight {
-    public static void setListViewHeightBasedOnChildren(ListView listView) {
+public class GenericUtils {
+    public static void setListViewHeightBasedOnItems(ListView listView) {
         ListAdapter listAdapter = listView.getAdapter();
         if (listAdapter == null) {
             // pre-condition
@@ -25,5 +25,4 @@ public class SetListViewHeight {
                 + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
         listView.setLayoutParams(params);
     }
-
 }
