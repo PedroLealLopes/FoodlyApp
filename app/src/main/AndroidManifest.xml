@@ -13,8 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".vistas.EditarPerfilActivity"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".vistas.FinalizarPedidoActivity"
-            android:parentActivityName=".vistas.FazerPedidoActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".vistas.FazerPedidoActivity"

@@ -1,9 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".vistas.FinalizarPedidoActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textViewUtilizador"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="Nome"
+            android:textColor="@color/cinza"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/textViewQtd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="Qtd"
+            android:textColor="@color/cinza"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/textViewPreco"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="Preço"
+            android:textColor="@color/cinza"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/textViewTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="Total"
+            android:textColor="@color/cinza"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageViewSeparador1"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="5dp"
+        android:alpha="0.5"
+        android:src="@drawable/retangulo_cinza" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="400dp" />
+
+    <ImageView
+        android:id="@+id/imageViewSeparador2"
+        android:layout_width="350dp"
+        android:layout_height="1dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:alpha="0.5"
+        android:src="@drawable/retangulo_cinza" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textViewTotalPedioo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="TOTAL"
+            android:textColor="@color/cinza"
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/textViewPreçoPedioo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="220dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="10.5€"
+            android:textColor="@color/cinza"
+            android:textSize="22sp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/buttonPedir"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/button_login"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="PEDIR"
+        android:textColor="@color/branco"
+        android:textSize="24sp" />
+</LinearLayout>

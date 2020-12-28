@@ -1,20 +1,18 @@
 package pt.ipleiria.estg.dei.foodlyandroid.vistas;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
 import pt.ipleiria.estg.dei.foodlyandroid.R;
-import pt.ipleiria.estg.dei.foodlyandroid.adaptadores.ListaEmentaAdaptador;
 import pt.ipleiria.estg.dei.foodlyandroid.adaptadores.ListaFazerPedidoAdaptador;
-import pt.ipleiria.estg.dei.foodlyandroid.adaptadores.ListaRestauranteAdaptador;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.Ementa;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.SingletonGestorRestaurantes;
 import pt.ipleiria.estg.dei.foodlyandroid.utils.GenericUtils;
@@ -43,5 +41,14 @@ public class FazerPedidoActivity extends AppCompatActivity {
         GenericUtils.setListViewHeightBasedOnItems(lvListaEmentaEntrada);
         GenericUtils.setListViewHeightBasedOnItems(lvListaEmentaPrincipal);
         GenericUtils.setListViewHeightBasedOnItems(lvListaEmenraSobremesa);
+
+        FloatingActionButton fab = findViewById(R.id.fabFinalizarPedido);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FazerPedidoActivity.this, FinalizarPedidoActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
