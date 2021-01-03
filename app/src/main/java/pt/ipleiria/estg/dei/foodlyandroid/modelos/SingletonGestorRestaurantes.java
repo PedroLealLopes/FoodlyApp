@@ -1,8 +1,8 @@
 package pt.ipleiria.estg.dei.foodlyandroid.modelos;
 
-import pt.ipleiria.estg.dei.foodlyandroid.R;
-
 import java.util.ArrayList;
+
+import pt.ipleiria.estg.dei.foodlyandroid.R;
 
 public class SingletonGestorRestaurantes {
 

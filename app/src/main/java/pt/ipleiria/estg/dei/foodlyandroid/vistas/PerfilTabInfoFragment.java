@@ -16,7 +16,8 @@ public class PerfilTabInfoFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_perfil_tab_info, container, false);
 
-        return inflater.inflate(R.layout.fragment_perfil_tab_info, container, false);
+        return view;
     }
 }

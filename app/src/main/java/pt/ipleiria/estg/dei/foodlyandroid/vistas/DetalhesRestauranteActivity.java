@@ -10,7 +10,6 @@ import androidx.fragment.app.FragmentManager;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
 import pt.ipleiria.estg.dei.foodlyandroid.R;
-import pt.ipleiria.estg.dei.foodlyandroid.modelos.Restaurante;
 
 public class DetalhesRestauranteActivity extends AppCompatActivity {
 

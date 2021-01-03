@@ -71,5 +71,5 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/bottom_nav"
         android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"/>
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>

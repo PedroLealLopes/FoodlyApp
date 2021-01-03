@@ -32,14 +32,14 @@
                     android:id="@+id/buttonAdicionarFoto"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
                     android:layout_marginStart="10dp"
+                    android:layout_marginTop="40dp"
                     android:backgroundTint="@color/branco"
+                    android:drawableLeft="@drawable/ic_foto"
+                    android:drawablePadding="12dp"
                     android:fontFamily="@font/montserrat_bold"
                     android:outlineSpotShadowColor="@color/branco"
                     android:text="Adicionar Foto"
-                    android:drawableLeft="@drawable/ic_foto"
-                    android:drawablePadding="12dp"
                     android:textColor="@color/roxo"
                     android:textSize="20sp" />
 
