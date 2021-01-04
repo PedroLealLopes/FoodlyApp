@@ -1,0 +1,82 @@
+package pt.ipleiria.estg.dei.foodlyandroid.adaptadores;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+
+import pt.ipleiria.estg.dei.foodlyandroid.R;
+import pt.ipleiria.estg.dei.foodlyandroid.modelos.Review;
+
+public class ListaReviewAdaptador extends BaseAdapter {
+
+    private Context context;
+    private LayoutInflater inflater;
+    private ArrayList<Review> reviews;
+
+    public ListaReviewAdaptador(Context context, ArrayList<Review> reviews) {
+        this.context = context;
+        this.reviews = reviews;
+    }
+
+    @Override
+    public int getCount() {
+        return reviews.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return reviews.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return reviews.get(position).getId();
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        if (inflater == null)
+            inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        if (convertView == null)
+            convertView = inflater.inflate(R.layout.item_lista_review, null);
+
+        //OTIMIZAÇÃO
+        ViewHolderLista viewHolderLista = (ViewHolderLista) convertView.getTag();
+        if (viewHolderLista == null) {
+            viewHolderLista = new ViewHolderLista(convertView);
+            convertView.setTag(viewHolderLista);
+        }
+
+        viewHolderLista.update(reviews.get(position));
+
+        return convertView;
+    }
+
+    private class ViewHolderLista {
+        private TextView tvUsername, tvData, tvClassificacao, tvComentario;
+        private ImageView ivPic;
+
+        public ViewHolderLista(View view) {
+            tvUsername = view.findViewById(R.id.textViewUsername);
+            tvData = view.findViewById(R.id.textViewDataCriacao);
+            tvClassificacao = view.findViewById(R.id.textViewClassificacao);
+            tvComentario = view.findViewById(R.id.textViewComentario);
+            ivPic = view.findViewById(R.id.imageViewProfilePic);
+        }
+
+        public void update(Review review) {
+            tvUsername.setText(review.getUsername());
+            tvData.setText(review.getDataCriacao());
+            tvClassificacao.setText(review.getClassificacao() + "");
+            tvComentario.setText(review.getComentario());
+            ivPic.setImageResource(review.getProfilePic());
+        }
+    }
+}

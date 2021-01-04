@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">FoodlyAndroid</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="etEmailInvalido">Email Inválido</string>
+    <string name="etPasswordInvalida">Password Inválida</string>
+    <string name="ndOpen">drawerOpne</string>
+    <string name="ndClose">drawerClose</string>
+    <string name="respostaSim">Sim</string>
+    <string name="respostaNao">Não</string>
+    <string name="respostaVoltar">Voltar</string>
 </resources>
