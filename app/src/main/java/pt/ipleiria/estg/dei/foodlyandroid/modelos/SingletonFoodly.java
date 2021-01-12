@@ -96,7 +96,7 @@ public class SingletonFoodly {
 
     public Restaurante getRestaurante(int id) {
         for (Restaurante r : restaurantes)
-            if (r.getId() == id)
+            if (r.getRestaurantId() == id)
                 return r;
         return null;
     }
@@ -125,6 +125,7 @@ public class SingletonFoodly {
                 }
             });
             volleyQueue.add(req);
+            System.out.println("Restaurantes ---> " + restaurantes);
         }
     }
 
@@ -147,16 +148,19 @@ public class SingletonFoodly {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("maxPessoas", restaurante.getMaxPessoas() + "");
-                params.put("currPessoas", restaurante.getCurrPessoas() + "");
-                params.put("capa", restaurante.getCapa());
-                params.put("descricao", restaurante.getDescricao());
-                params.put("localizacao", restaurante.getLocalizacao());
-                params.put("horaAbertura", restaurante.getHoraAbertura());
-                params.put("horaFecho", restaurante.getHoraFecho());
-                params.put("wifi", restaurante.getWifi());
-                params.put("animais", restaurante.isAnimais() + "");
-                params.put("vegetariano", restaurante.isVegetariano() + "");
+                params.put("maxPeople", restaurante.getMaxPeople() + "");
+                params.put("currentPeople", restaurante.getCurrentPeople() + "");
+                params.put("name", restaurante.getName());
+                params.put("image", restaurante.getImage());
+                params.put("phone", restaurante.getPhone());
+                params.put("email", restaurante.getEmail());
+                params.put("description", restaurante.getDescription());
+                params.put("location", restaurante.getLocation());
+                params.put("openingHour", restaurante.getOpeningHour());
+                params.put("closingHour", restaurante.getClosingHour());
+                params.put("wifiPassword", restaurante.getWifiPassword());
+                params.put("allowsPets", restaurante.getAllowsPets() + "");
+                params.put("hasVegan", restaurante.getVegan() + "");
                 params.put("token", token);
                 return params;
             }
@@ -165,7 +169,7 @@ public class SingletonFoodly {
     }
 
     public void editarRestauranteAPI(final Restaurante restaurante, final Context context, final String token) {
-        StringRequest req = new StringRequest(Request.Method.PUT, mUrlAPIResturantes + '/' + restaurante.getId(), new Response.Listener<String>() {
+        StringRequest req = new StringRequest(Request.Method.PUT, mUrlAPIResturantes + '/' + restaurante.getRestaurantId(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Restaurante r = RestauranteJsonParser.parserJsonRestaurante(response);
@@ -183,16 +187,19 @@ public class SingletonFoodly {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("maxPessoas", restaurante.getMaxPessoas() + "");
-                params.put("currPessoas", restaurante.getCurrPessoas() + "");
-                params.put("capa", restaurante.getCapa());
-                params.put("descricao", restaurante.getDescricao());
-                params.put("localizacao", restaurante.getLocalizacao());
-                params.put("horaAbertura", restaurante.getHoraAbertura());
-                params.put("horaFecho", restaurante.getHoraFecho());
-                params.put("wifi", restaurante.getWifi());
-                params.put("animais", restaurante.isAnimais() + "");
-                params.put("vegetariano", restaurante.isVegetariano() + "");
+                params.put("maxPeople", restaurante.getMaxPeople() + "");
+                params.put("currentPeople", restaurante.getCurrentPeople() + "");
+                params.put("name", restaurante.getName());
+                params.put("image", restaurante.getImage());
+                params.put("phone", restaurante.getPhone());
+                params.put("email", restaurante.getEmail());
+                params.put("description", restaurante.getDescription());
+                params.put("location", restaurante.getLocation());
+                params.put("openingHour", restaurante.getOpeningHour());
+                params.put("closingHour", restaurante.getClosingHour());
+                params.put("wifiPassword", restaurante.getWifiPassword());
+                params.put("allowsPets", restaurante.getAllowsPets() + "");
+                params.put("hasVegan", restaurante.getVegan() + "");
                 params.put("token", token);
                 return params;
             }
@@ -201,7 +208,7 @@ public class SingletonFoodly {
     }
 
     public void removerRestauranteAPI(final Restaurante restaurante, final Context context) {
-        StringRequest req = new StringRequest(Request.Method.DELETE, mUrlAPIResturantes + '/' + restaurante.getId(), new Response.Listener<String>() {
+        StringRequest req = new StringRequest(Request.Method.DELETE, mUrlAPIResturantes + '/' + restaurante.getRestaurantId(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 onUpdateListaRestaurantesBD(restaurante, REMOVER_BD);
@@ -238,7 +245,7 @@ public class SingletonFoodly {
     }
 
     public void editarRestauranteBD(Restaurante restaurante) {
-        Restaurante restauranteAux = getRestaurante(restaurante.getId());
+        Restaurante restauranteAux = getRestaurante(restaurante.getRestaurantId());
         if (restauranteAux != null)
             foodlyBDHelper.editarRestauranteDB(restauranteAux);
     }
@@ -258,7 +265,7 @@ public class SingletonFoodly {
                 editarRestauranteBD(restaurante);
                 break;
             case REMOVER_BD:
-                removerRestauranteBD(restaurante.getId());
+                removerRestauranteBD(restaurante.getRestaurantId());
                 break;
         }
     }

@@ -13,18 +13,21 @@ public class FoodlyBDHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "foodlyDB";
     private static final int DB_VERSION = 1;
 
-    private static final String TABLE_RESTAURANTES = "Restaurantes";
-    private static final String ID_RESTAURANTE = "id";
-    private static final String MAX_PESSOAS_RESTAURANTE = "maxPessoas";
-    private static final String CURR_PESSOAS_RESTAURANTE = "currPessoas";
-    private static final String CAPA_RESTAURANTE = "capa";
-    private static final String DESCRICAO_RESTAURANTE = "descricao";
-    private static final String LOCALIZACAO_RESTAURANTE = "localizacao";
-    private static final String HORA_ABERTURA_RESTAURANTE = "horaAbertura";
-    private static final String HORA_FECHO_RESTAURANTE = "horaFecho";
-    private static final String WIFI_RESTAURANTE = "wifi";
-    private static final String ANIMAIS_RESTAURANTE = "animais";
-    private static final String VEGETARIANO_RESTAURANTE = "vegetariano";
+    private static final String RESTAURANTS_TABLE = "Restaurantes";
+    private static final String RESTAURANT_ID = "restaurantId";
+    private static final String RESTAURANT_MAX_PEOPLE = "maxPeople";
+    private static final String RESTAURANT_CURR_PEOPLE = "currentPeople";
+    private static final String RESTAURANT_NAME = "name";
+    private static final String RESTAURANT_IMAGE = "image";
+    private static final String RESTAURANT_PHONE = "phone";
+    private static final String RESTAURANT_EMAIL = "email";
+    private static final String RESTAURANT_DESCRIPTION = "description";
+    private static final String RESTAURANT_LOCATION = "location";
+    private static final String RESTAURANT_OPENING_HOUR = "openingHour";
+    private static final String RESTAURANT_CLOSING_HOUR = "closingHour";
+    private static final String RESTAURANT_WIFI_PASSWORD = "wifiPassword";
+    private static final String RESTAURANT_ALLOWS_PETS = "allowsPets";
+    private static final String RESTAURANT_HAS_VEGAN = "hasVegan";
 
     private final SQLiteDatabase db;
 
@@ -35,24 +38,28 @@ public class FoodlyBDHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sqlCreateTableRestaurante = "CREATE TABLE " + TABLE_RESTAURANTES + " (" +
-                ID_RESTAURANTE + " INTEGER PRIMARY KEY, " +
-                MAX_PESSOAS_RESTAURANTE + " INTEGER NOT NULL, " +
-                CURR_PESSOAS_RESTAURANTE + " INTEGER NOT NULL, " +
-                CAPA_RESTAURANTE + " TEXT, " +
-                DESCRICAO_RESTAURANTE + " TEXT NOT NULL, " +
-                LOCALIZACAO_RESTAURANTE + " TEXT NOT NULL, " +
-                HORA_ABERTURA_RESTAURANTE + " TEXT NOT NULL, " +
-                HORA_FECHO_RESTAURANTE + " TEXT NOT NULL, " +
-                WIFI_RESTAURANTE + " TEXT NOT NULL, " +
-                ANIMAIS_RESTAURANTE + " INTEGER DEFAULT 0 NOT NULL, " +
-                VEGETARIANO_RESTAURANTE + " INTEGER DEFAULT 0 NOT NULL );";
+        String sqlCreateTableRestaurante = "CREATE TABLE " + RESTAURANTS_TABLE + " (" +
+                RESTAURANT_ID + " INTEGER PRIMARY KEY, " +
+                RESTAURANT_MAX_PEOPLE + " INTEGER NOT NULL, " +
+                RESTAURANT_CURR_PEOPLE + " INTEGER NOT NULL, " +
+                RESTAURANT_NAME + " TEXT, " +
+                RESTAURANT_IMAGE + " TEXT NOT NULL, " +
+                RESTAURANT_PHONE + " TEXT NOT NULL, " +
+                RESTAURANT_EMAIL + " TEXT NOT NULL, " +
+                RESTAURANT_DESCRIPTION + " TEXT NOT NULL, " +
+                RESTAURANT_LOCATION + " TEXT NOT NULL, " +
+                RESTAURANT_OPENING_HOUR + " TEXT NOT NULL, " +
+                RESTAURANT_CLOSING_HOUR + " TEXT NOT NULL, " +
+                RESTAURANT_WIFI_PASSWORD + " TEXT NOT NULL, " +
+                RESTAURANT_ALLOWS_PETS + " INTEGER NOT NULL," +
+                RESTAURANT_HAS_VEGAN + " INTEGER NOT NULL );";
         db.execSQL(sqlCreateTableRestaurante);
+        System.out.println("---> " + sqlCreateTableRestaurante);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        String sqlDropTableRestaurante = " DROP TABLE IF EXISTS " + TABLE_RESTAURANTES;
+        String sqlDropTableRestaurante = " DROP TABLE IF EXISTS " + RESTAURANTS_TABLE;
         db.execSQL(sqlDropTableRestaurante);
         this.onCreate(db);
     }
@@ -61,57 +68,64 @@ public class FoodlyBDHelper extends SQLiteOpenHelper {
 
     public void adicionarResturanteDB(Restaurante restaurante) {
         ContentValues values = new ContentValues();
-        values.put(ID_RESTAURANTE, restaurante.getId());
-        values.put(MAX_PESSOAS_RESTAURANTE, restaurante.getMaxPessoas());
-        values.put(CURR_PESSOAS_RESTAURANTE, restaurante.getCurrPessoas());
-        values.put(CAPA_RESTAURANTE, restaurante.getCapa());
-        values.put(DESCRICAO_RESTAURANTE, restaurante.getDescricao());
-        values.put(LOCALIZACAO_RESTAURANTE, restaurante.getLocalizacao());
-        values.put(HORA_ABERTURA_RESTAURANTE, restaurante.getHoraAbertura());
-        values.put(HORA_FECHO_RESTAURANTE, restaurante.getHoraFecho());
-        values.put(WIFI_RESTAURANTE, restaurante.getWifi());
-        values.put(ANIMAIS_RESTAURANTE, restaurante.isAnimais());
-        values.put(VEGETARIANO_RESTAURANTE, restaurante.isVegetariano());
+        values.put(RESTAURANT_ID, restaurante.getRestaurantId());
+        values.put(RESTAURANT_MAX_PEOPLE, restaurante.getMaxPeople());
+        values.put(RESTAURANT_CURR_PEOPLE, restaurante.getCurrentPeople());
+        values.put(RESTAURANT_NAME, restaurante.getName());
+        values.put(RESTAURANT_IMAGE, restaurante.getImage());
+        values.put(RESTAURANT_PHONE, restaurante.getPhone());
+        values.put(RESTAURANT_EMAIL, restaurante.getEmail());
+        values.put(RESTAURANT_DESCRIPTION, restaurante.getDescription());
+        values.put(RESTAURANT_LOCATION, restaurante.getLocation());
+        values.put(RESTAURANT_OPENING_HOUR, restaurante.getOpeningHour());
+        values.put(RESTAURANT_CLOSING_HOUR, restaurante.getClosingHour());
+        values.put(RESTAURANT_WIFI_PASSWORD, restaurante.getWifiPassword());
+        values.put(RESTAURANT_ALLOWS_PETS, restaurante.getAllowsPets());
+        values.put(RESTAURANT_HAS_VEGAN, restaurante.getVegan());
 
-        this.db.insert(TABLE_RESTAURANTES, null, values);
+        this.db.insert(RESTAURANTS_TABLE, null, values);
     }
 
     public boolean editarRestauranteDB(Restaurante restaurante) {
         ContentValues values = new ContentValues();
-        values.put(ID_RESTAURANTE, restaurante.getId());
-        values.put(MAX_PESSOAS_RESTAURANTE, restaurante.getMaxPessoas());
-        values.put(CURR_PESSOAS_RESTAURANTE, restaurante.getCurrPessoas());
-        values.put(CAPA_RESTAURANTE, restaurante.getCapa());
-        values.put(DESCRICAO_RESTAURANTE, restaurante.getDescricao());
-        values.put(LOCALIZACAO_RESTAURANTE, restaurante.getLocalizacao());
-        values.put(HORA_ABERTURA_RESTAURANTE, restaurante.getHoraAbertura());
-        values.put(HORA_FECHO_RESTAURANTE, restaurante.getHoraFecho());
-        values.put(WIFI_RESTAURANTE, restaurante.getWifi());
-        values.put(ANIMAIS_RESTAURANTE, restaurante.isAnimais());
-        values.put(VEGETARIANO_RESTAURANTE, restaurante.isVegetariano());
+        values.put(RESTAURANT_ID, restaurante.getRestaurantId());
+        values.put(RESTAURANT_MAX_PEOPLE, restaurante.getMaxPeople());
+        values.put(RESTAURANT_CURR_PEOPLE, restaurante.getCurrentPeople());
+        values.put(RESTAURANT_NAME, restaurante.getName());
+        values.put(RESTAURANT_IMAGE, restaurante.getImage());
+        values.put(RESTAURANT_PHONE, restaurante.getPhone());
+        values.put(RESTAURANT_EMAIL, restaurante.getEmail());
+        values.put(RESTAURANT_DESCRIPTION, restaurante.getDescription());
+        values.put(RESTAURANT_LOCATION, restaurante.getLocation());
+        values.put(RESTAURANT_OPENING_HOUR, restaurante.getOpeningHour());
+        values.put(RESTAURANT_CLOSING_HOUR, restaurante.getClosingHour());
+        values.put(RESTAURANT_WIFI_PASSWORD, restaurante.getWifiPassword());
+        values.put(RESTAURANT_ALLOWS_PETS, restaurante.getAllowsPets());
+        values.put(RESTAURANT_HAS_VEGAN, restaurante.getVegan());
 
-        return this.db.update(TABLE_RESTAURANTES, values, "id=?", new String[]{restaurante.getId() + ""}) > 0;
+        return this.db.update(RESTAURANTS_TABLE, values, "id=?", new String[]{restaurante.getRestaurantId() + ""}) > 0;
     }
 
     public boolean removerRestauranteDB(int id) {
-        return this.db.delete(TABLE_RESTAURANTES, "id=?", new String[]{id + ""}) > 0;
+        return this.db.delete(RESTAURANTS_TABLE, "id=?", new String[]{id + ""}) > 0;
     }
 
     public void removerAllRestaurantesBD() {
-        this.db.delete(TABLE_RESTAURANTES, null, null);
+        this.db.delete(RESTAURANTS_TABLE, null, null);
     }
 
     public ArrayList<Restaurante> getAllRestaurantesDB() {
         ArrayList<Restaurante> restaurantes = new ArrayList<>();
-        Cursor cursor = this.db.query(TABLE_RESTAURANTES, new String[]{ID_RESTAURANTE, MAX_PESSOAS_RESTAURANTE, CURR_PESSOAS_RESTAURANTE, CAPA_RESTAURANTE, DESCRICAO_RESTAURANTE,
-                        LOCALIZACAO_RESTAURANTE, HORA_ABERTURA_RESTAURANTE, HORA_FECHO_RESTAURANTE, WIFI_RESTAURANTE, ANIMAIS_RESTAURANTE, VEGETARIANO_RESTAURANTE},
+        Cursor cursor = this.db.query(RESTAURANTS_TABLE, new String[]{RESTAURANT_ID, RESTAURANT_MAX_PEOPLE, RESTAURANT_CURR_PEOPLE, RESTAURANT_NAME, RESTAURANT_IMAGE,
+                        RESTAURANT_PHONE, RESTAURANT_EMAIL, RESTAURANT_DESCRIPTION, RESTAURANT_LOCATION, RESTAURANT_OPENING_HOUR, RESTAURANT_CLOSING_HOUR, RESTAURANT_WIFI_PASSWORD, RESTAURANT_ALLOWS_PETS, RESTAURANT_HAS_VEGAN},
                 null, null, null, null, null);
 
         if (cursor.moveToFirst()) {
             do {
                 Restaurante auxRestaurante = new Restaurante(cursor.getInt(0), cursor.getInt(1), cursor.getInt(2),
                         cursor.getString(3), cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7),
-                        cursor.getString(8), cursor.getInt(9) > 0, cursor.getInt(10) > 0);
+                        cursor.getString(8), cursor.getString(9), cursor.getString(10), cursor.getString(11),
+                        cursor.getInt(12), cursor.getInt(13));
 
                 restaurantes.add(auxRestaurante);
             } while (cursor.moveToNext());
