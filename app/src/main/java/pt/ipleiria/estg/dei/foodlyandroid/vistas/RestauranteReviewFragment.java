@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import pt.ipleiria.estg.dei.foodlyandroid.R;
 import pt.ipleiria.estg.dei.foodlyandroid.adaptadores.ListaReviewAdaptador;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.Review;
-import pt.ipleiria.estg.dei.foodlyandroid.modelos.SingletonGestorRestaurantes;
+import pt.ipleiria.estg.dei.foodlyandroid.modelos.SingletonFoodly;
 
 public class RestauranteReviewFragment extends Fragment {
     private ListView lvListaReviews;
@@ -32,14 +32,14 @@ public class RestauranteReviewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_restaurante_review, container, false);
 
-        listaReviews = SingletonGestorRestaurantes.getInstance().getReviews();
+        listaReviews = SingletonFoodly.getInstance(getContext()).getReviews();
         lvListaReviews = view.findViewById(R.id.listViewReviews);
         lvListaReviews.setAdapter(new ListaReviewAdaptador(getContext(), listaReviews));
 
         lvListaReviews.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String comentario = SingletonGestorRestaurantes.getInstance().getReview(position + 1).getComentario();
+                String comentario = SingletonFoodly.getInstance(getContext()).getReview(position + 1).getComentario();
 
                 AlertDialog.Builder builder;
                 builder = new AlertDialog.Builder(view.getContext());

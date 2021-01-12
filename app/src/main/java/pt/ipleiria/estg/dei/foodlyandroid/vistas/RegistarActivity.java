@@ -17,7 +17,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.util.Calendar;
 
 import pt.ipleiria.estg.dei.foodlyandroid.R;
-import pt.ipleiria.estg.dei.foodlyandroid.utils.DatePickerFragment;
+import pt.ipleiria.estg.dei.foodlyandroid.utils.DatePickerFragmentUtil;
 
 public class RegistarActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
@@ -40,7 +40,7 @@ public class RegistarActivity extends AppCompatActivity implements DatePickerDia
         etIdade.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogFragment datePicker = new DatePickerFragment();
+                DialogFragment datePicker = new DatePickerFragmentUtil();
                 datePicker.show(getSupportFragmentManager(), "date picker");
             }
         });

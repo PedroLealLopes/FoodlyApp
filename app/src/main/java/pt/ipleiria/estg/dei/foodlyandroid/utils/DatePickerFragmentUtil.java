@@ -10,7 +10,7 @@ import androidx.fragment.app.DialogFragment;
 import java.util.Calendar;
 import java.util.Date;
 
-public class DatePickerFragment extends DialogFragment {
+public class DatePickerFragmentUtil extends DialogFragment {
 
     @NonNull
     @Override

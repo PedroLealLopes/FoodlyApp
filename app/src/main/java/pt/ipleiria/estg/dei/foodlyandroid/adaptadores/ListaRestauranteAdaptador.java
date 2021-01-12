@@ -8,6 +8,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
 import java.util.ArrayList;
 
 import pt.ipleiria.estg.dei.foodlyandroid.R;
@@ -72,9 +75,13 @@ public class ListaRestauranteAdaptador extends BaseAdapter {
 
         public void update(Restaurante restaurante) {
             tvNome.setText(restaurante.getNome());
-            tvClassificacao.setText(restaurante.getClassificacao() + " / 5");
+            tvClassificacao.setText("" + " / 5");
             tvLocalizacao.setText(restaurante.getLocalizacao());
-            ivCapa.setImageResource(restaurante.getCapa());
+            Glide.with(context)
+                    .load(restaurante.getCapa())
+                    .placeholder(R.drawable.gordon)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(ivCapa);
         }
     }
 }
