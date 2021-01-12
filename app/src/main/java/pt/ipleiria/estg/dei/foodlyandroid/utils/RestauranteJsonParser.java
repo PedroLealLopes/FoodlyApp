@@ -17,19 +17,22 @@ public class RestauranteJsonParser {
                 try {
                     JSONObject restaurante = (JSONObject) response.get(i);
 
-                    int id = restaurante.getInt("id");
-                    int maxPessoas = restaurante.getInt("maxPessoas");
-                    int currPessoas = restaurante.getInt("currPessoas");
-                    String capa = restaurante.getString("capa");
-                    String descricao = restaurante.getString("descricao");
-                    String localizacao = restaurante.getString("localizacao");
-                    String horaAbertura = restaurante.getString("horaAbertura");
-                    String horaFecho = restaurante.getString("horaFecho");
-                    String wifi = restaurante.getString("wifi");
-                    boolean animais = restaurante.getBoolean("animais");
-                    boolean vegetariano = restaurante.getBoolean("vegetariano");
+                    int restaurantId = restaurante.getInt("restaurantId");
+                    int maxPeople = restaurante.getInt("maxPeople");
+                    int currentPeople = restaurante.getInt("currentPeople");
+                    String name = restaurante.getString("name");
+                    String image = restaurante.getString("image");
+                    String phone = restaurante.getString("phone");
+                    String email = restaurante.getString("email");
+                    String description = restaurante.getString("description");
+                    String location = restaurante.getString("location");
+                    String openingHour = restaurante.getString("openingHour");
+                    String closingHour = restaurante.getString("closingHour");
+                    String wifiPassword = restaurante.getString("wifiPassword");
+                    int allowsPets = restaurante.getInt("allowsPets");
+                    int hasVegan = restaurante.getInt("hasVegan");
 
-                    Restaurante l = new Restaurante(id, maxPessoas, currPessoas, capa, descricao, localizacao, horaAbertura, horaFecho, wifi, animais, vegetariano);
+                    Restaurante l = new Restaurante(restaurantId, maxPeople, currentPeople, name, image, phone, email, description, location, openingHour, closingHour, wifiPassword, allowsPets, hasVegan);
                     restaurantes.add(l);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -44,19 +47,22 @@ public class RestauranteJsonParser {
         try {
             JSONObject restaurante = new JSONObject(response);
 
-            int id = restaurante.getInt("id");
-            int maxPessoas = restaurante.getInt("maxPessoas");
-            int currPessoas = restaurante.getInt("currPessoas");
-            String capa = restaurante.getString("capa");
-            String descricao = restaurante.getString("descricao");
-            String localizacao = restaurante.getString("localizacao");
-            String horaAbertura = restaurante.getString("horaAbertura");
-            String horaFecho = restaurante.getString("horaFecho");
-            String wifi = restaurante.getString("wifi");
-            boolean animais = restaurante.getBoolean("animais");
-            boolean vegetariano = restaurante.getBoolean("vegetariano");
+            int restaurantId = restaurante.getInt("restaurantId");
+            int maxPeople = restaurante.getInt("maxPeople");
+            int currentPeople = restaurante.getInt("currentPeople");
+            String name = restaurante.getString("name");
+            String image = restaurante.getString("image");
+            String phone = restaurante.getString("phone");
+            String email = restaurante.getString("email");
+            String description = restaurante.getString("description");
+            String location = restaurante.getString("location");
+            String openingHour = restaurante.getString("openingHour");
+            String closingHour = restaurante.getString("closingHour");
+            String wifiPassword = restaurante.getString("wifiPassword");
+            int allowsPets = restaurante.getInt("allowsPets");
+            int hasVegan = restaurante.getInt("hasVegan");
 
-            auxRestaurante = new Restaurante(id, maxPessoas, currPessoas, capa, descricao, localizacao, horaAbertura, horaFecho, wifi, animais, vegetariano);
+            auxRestaurante = new Restaurante(restaurantId, maxPeople, currentPeople, name, image, phone, email, description, location, openingHour, closingHour, wifiPassword, allowsPets, hasVegan);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -68,7 +74,7 @@ public class RestauranteJsonParser {
         try {
             JSONObject login = new JSONObject(response);
             if (login.getBoolean("success"))
-                capa = login.getString("capa");
+                capa = login.getString("image");
         } catch (JSONException e) {
             e.printStackTrace();
         }

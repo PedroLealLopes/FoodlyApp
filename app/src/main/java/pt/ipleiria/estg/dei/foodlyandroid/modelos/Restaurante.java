@@ -1,119 +1,136 @@
 package pt.ipleiria.estg.dei.foodlyandroid.modelos;
 
 public class Restaurante {
-    private int id, maxPessoas, currPessoas;
-    private String nome, descricao, localizacao, capa;
-    private String horaAbertura, horaFecho, wifi;
-    private boolean animais, vegetariano;
+    private int restaurantId, maxPeople, currentPeople;
+    private String name, image, phone, email, description, location, openingHour, closingHour, wifiPassword;
+    private int allowsPets, hasVegan;
 
-    public Restaurante(int id, int maxPessoas, int currPessoas, String capa, String descricao, String localizacao, String horaAbertura, String horaFecho, String wifi, boolean animais, boolean vegetariano) {
-        this.id = id;
-        this.maxPessoas = maxPessoas;
-        this.currPessoas = currPessoas;
-        this.capa = capa;
-        this.nome = nome;
-        this.descricao = descricao;
-        this.localizacao = localizacao;
-        this.horaAbertura = horaAbertura;
-        this.horaFecho = horaFecho;
-        this.wifi = wifi;
-        this.animais = animais;
-        this.vegetariano = vegetariano;
+    public Restaurante(int restaurantId, int maxPeople, int currentPeople, String name, String image, String phone, String email, String description, String location, String openingHour, String closingHour, String wifiPassword, int allowsPets, int hasVegan) {
+        this.restaurantId = restaurantId;
+        this.maxPeople = maxPeople;
+        this.currentPeople = currentPeople;
+        this.name = name;
+        this.image = image;
+        this.phone = phone;
+        this.email = email;
+        this.description = description;
+        this.location = location;
+        this.openingHour = openingHour;
+        this.closingHour = closingHour;
+        this.wifiPassword = wifiPassword;
+        this.allowsPets = allowsPets;
+        this.hasVegan = hasVegan;
     }
 
-    public int getId() {
-        return id;
+    public int getRestaurantId() {
+        return restaurantId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setRestaurantId(int restaurantId) {
+        this.restaurantId = restaurantId;
     }
 
-    public int getMaxPessoas() {
-        return maxPessoas;
+    public int getMaxPeople() {
+        return maxPeople;
     }
 
-    public void setMaxPessoas(int maxPessoas) {
-        this.maxPessoas = maxPessoas;
+    public void setMaxPeople(int maxPeople) {
+        this.maxPeople = maxPeople;
     }
 
-    public int getCurrPessoas() {
-        return currPessoas;
+    public int getCurrentPeople() {
+        return currentPeople;
     }
 
-    public void setCurrPessoas(int currPessoas) {
-        this.currPessoas = currPessoas;
+    public void setCurrentPeople(int currentPeople) {
+        this.currentPeople = currentPeople;
     }
 
-    public String getCapa() {
-        return capa;
+    public String getName() {
+        return name;
     }
 
-    public void setCapa(String capa) {
-        this.capa = capa;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getNome() {
-        return nome;
+    public String getImage() {
+        return image;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public String getLocalizacao() {
-        return localizacao;
+    public String getEmail() {
+        return email;
     }
 
-    public void setLocalizacao(String localizacao) {
-        this.localizacao = localizacao;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getHoraAbertura() {
-        return horaAbertura;
+    public String getDescription() {
+        return description;
     }
 
-    public void setHoraAbertura(String horaAbertura) {
-        this.horaAbertura = horaAbertura;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getHoraFecho() {
-        return horaFecho;
+    public String getLocation() {
+        return location;
     }
 
-    public void setHoraFecho(String horaFecho) {
-        this.horaFecho = horaFecho;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
-    public String getWifi() {
-        return wifi;
+    public String getOpeningHour() {
+        return openingHour;
     }
 
-    public void setWifi(String wifi) {
-        this.wifi = wifi;
+    public void setOpeningHour(String openingHour) {
+        this.openingHour = openingHour;
     }
 
-    public boolean isAnimais() {
-        return animais;
+    public String getClosingHour() {
+        return closingHour;
     }
 
-    public void setAnimais(boolean animais) {
-        this.animais = animais;
+    public void setClosingHour(String closingHour) {
+        this.closingHour = closingHour;
     }
 
-    public boolean isVegetariano() {
-        return vegetariano;
+    public String getWifiPassword() {
+        return wifiPassword;
     }
 
-    public void setVegetariano(boolean vegetariano) {
-        this.vegetariano = vegetariano;
+    public void setWifiPassword(String wifiPassword) {
+        this.wifiPassword = wifiPassword;
+    }
+
+    public int getAllowsPets() {
+        return allowsPets;
+    }
+
+    public void setAllowsPets(int allowsPets) {
+        this.allowsPets = allowsPets;
+    }
+
+    public int getVegan() {
+        return hasVegan;
+    }
+
+    public void setVegan(int hasVegan) {
+        this.hasVegan = hasVegan;
     }
 }
