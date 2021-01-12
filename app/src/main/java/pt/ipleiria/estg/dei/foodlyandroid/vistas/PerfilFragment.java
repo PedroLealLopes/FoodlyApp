@@ -8,13 +8,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
 import pt.ipleiria.estg.dei.foodlyandroid.R;
+import pt.ipleiria.estg.dei.foodlyandroid.utils.GenericUtils;
 
 public class PerfilFragment extends Fragment {
 
@@ -22,15 +30,18 @@ public class PerfilFragment extends Fragment {
     private ChipNavigationBar bottomNav;
     private FragmentManager fragmentManager;
     private static final String TAG = PerfilFragment.class.getSimpleName();
+    private static RequestQueue volleyQueue;
+    private static final String mUrlAPIProfile = "http://192.168.1.229/FoodlyWeb/frontend/web/api/profiles";
 
     public PerfilFragment(Context context) {
         this.context = context;
+        volleyQueue = Volley.newRequestQueue(context);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_perfil, container, false);
-
+        getProfileAPI(getContext());
         //region Bottom Navigation
         bottomNav = view.findViewById(R.id.bottom_nav);
 
@@ -81,5 +92,24 @@ public class PerfilFragment extends Fragment {
         });
 
         return view;
+    }
+
+    public void getProfileAPI(final Context context) {
+        final String[] profile = new String[1];
+        if (!GenericUtils.isConnectionInternet(context)) {
+            Toast.makeText(context, "Não há internet", Toast.LENGTH_SHORT).show();
+        } else {
+            StringRequest req = new StringRequest(Request.Method.POST, mUrlAPIProfile, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
+                }}, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+            volleyQueue.add(req);
+        }
     }
 }

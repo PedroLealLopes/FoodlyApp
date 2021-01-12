@@ -41,7 +41,7 @@ public class SingletonFoodly {
     private LoginListener loginListener;
 
     private static final String mUrlAPILogin = "";
-    private static final String mUrlAPIResturantes = "http://foodly.frontend/api/restaurants";
+    private static final String mUrlAPIResturantes = "http://192.168.1.229/FoodlyWeb/frontend/web/api/restaurants";
 
     public static synchronized SingletonFoodly getInstance(Context context) {
         if (instance == null)
@@ -101,14 +101,13 @@ public class SingletonFoodly {
         return null;
     }
 
-    //region API
+    //region API Restaurant
     public void getAllRestaurantesAPI(final Context context) {
         if (!GenericUtils.isConnectionInternet(context)) {
             Toast.makeText(context, "Não há internet", Toast.LENGTH_SHORT).show();
 
             if (restaurantesListener != null)
                 restaurantesListener.onRefreshListaRestaurantes(foodlyBDHelper.getAllRestaurantesDB());
-
         } else {
             JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlAPIResturantes, null, new Response.Listener<JSONArray>() {
                 @Override
@@ -219,6 +218,8 @@ public class SingletonFoodly {
         volleyQueue.add(req);
     }
     //endregion
+
+
 
     //region BDHelper
     public ArrayList<Restaurante> getRestaurantesBD() {
