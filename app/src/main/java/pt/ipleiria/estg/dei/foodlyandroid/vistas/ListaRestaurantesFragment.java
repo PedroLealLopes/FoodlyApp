@@ -76,7 +76,7 @@ public class ListaRestaurantesFragment extends Fragment implements SwipeRefreshL
                 ArrayList<Restaurante> tempRestaurantes = new ArrayList<>();
 
                 for (Restaurante r : SingletonFoodly.getInstance(getContext()).getRestaurantesBD())
-                    if (r.getNome().toLowerCase().contains(newText.toLowerCase()))
+                    if (r.getName().toLowerCase().contains(newText.toLowerCase()))
                         tempRestaurantes.add(r);
                 lvListaRestaurantes.setAdapter(new ListaRestauranteAdaptador(getContext(), tempRestaurantes));
                 return true;

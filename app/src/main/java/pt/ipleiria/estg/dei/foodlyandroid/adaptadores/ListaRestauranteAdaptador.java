@@ -39,7 +39,7 @@ public class ListaRestauranteAdaptador extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return restaurantes.get(position).getId();
+        return restaurantes.get(position).getRestaurantId();
     }
 
     @Override
@@ -74,11 +74,11 @@ public class ListaRestauranteAdaptador extends BaseAdapter {
         }
 
         public void update(Restaurante restaurante) {
-            tvNome.setText(restaurante.getNome());
+            tvNome.setText(restaurante.getName());
             tvClassificacao.setText("" + " / 5");
-            tvLocalizacao.setText(restaurante.getLocalizacao());
+            tvLocalizacao.setText(restaurante.getLocation());
             Glide.with(context)
-                    .load(restaurante.getCapa())
+                    .load(restaurante.getImage())
                     .placeholder(R.drawable.gordon)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(ivCapa);
