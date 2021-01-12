@@ -52,7 +52,7 @@ public class FoodlyBDHelper extends SQLiteOpenHelper {
                 RESTAURANT_CLOSING_HOUR + " TEXT NOT NULL, " +
                 RESTAURANT_WIFI_PASSWORD + " TEXT NOT NULL, " +
                 RESTAURANT_ALLOWS_PETS + " INTEGER NOT NULL," +
-                RESTAURANT_HAS_VEGAN + " INTEGER NOT NULL, );";
+                RESTAURANT_HAS_VEGAN + " INTEGER NOT NULL );";
         db.execSQL(sqlCreateTableRestaurante);
         System.out.println("---> " + sqlCreateTableRestaurante);
     }
