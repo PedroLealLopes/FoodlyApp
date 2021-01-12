@@ -3,6 +3,7 @@ package pt.ipleiria.estg.dei.foodlyandroid.vistas;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 import pt.ipleiria.estg.dei.foodlyandroid.R;
 import pt.ipleiria.estg.dei.foodlyandroid.adaptadores.ListaFazerPedidoAdaptador;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.Ementa;
-import pt.ipleiria.estg.dei.foodlyandroid.modelos.SingletonGestorRestaurantes;
+import pt.ipleiria.estg.dei.foodlyandroid.modelos.SingletonFoodly;
 import pt.ipleiria.estg.dei.foodlyandroid.utils.GenericUtils;
 
 public class FazerPedidoActivity extends AppCompatActivity {
@@ -33,7 +34,7 @@ public class FazerPedidoActivity extends AppCompatActivity {
         lvListaEmentaPrincipal = findViewById(R.id.listViewEmentaPrincipal);
         lvListaEmenraSobremesa = findViewById(R.id.listViewEmentaSobremesa);
 
-        listaEmentas = SingletonGestorRestaurantes.getInstance().getEmentas();
+        listaEmentas = SingletonFoodly.getInstance(getApplicationContext()).getEmentas();
         lvListaEmentaEntrada.setAdapter(new ListaFazerPedidoAdaptador(getApplicationContext(), listaEmentas));
         lvListaEmentaPrincipal.setAdapter(new ListaFazerPedidoAdaptador(getApplicationContext(), listaEmentas));
         lvListaEmenraSobremesa.setAdapter(new ListaFazerPedidoAdaptador(getApplicationContext(), listaEmentas));
@@ -48,6 +49,13 @@ public class FazerPedidoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(FazerPedidoActivity.this, FinalizarPedidoActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        lvListaEmentaEntrada.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //dialogQtd
             }
         });
     }

@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import pt.ipleiria.estg.dei.foodlyandroid.R;
 import pt.ipleiria.estg.dei.foodlyandroid.adaptadores.ListaEmentaAdaptador;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.Ementa;
-import pt.ipleiria.estg.dei.foodlyandroid.modelos.SingletonGestorRestaurantes;
+import pt.ipleiria.estg.dei.foodlyandroid.modelos.SingletonFoodly;
 import pt.ipleiria.estg.dei.foodlyandroid.utils.GenericUtils;
 
 public class RestauranteEmentaFragment extends Fragment {
@@ -32,7 +32,7 @@ public class RestauranteEmentaFragment extends Fragment {
         lvListaEmentaPrincipal = view.findViewById(R.id.listViewEmentaPrincipal);
         lvListaEmenraSobremesa = view.findViewById(R.id.listViewEmentaSobremesa);
 
-        listaEmentas = SingletonGestorRestaurantes.getInstance().getEmentas();
+        listaEmentas = SingletonFoodly.getInstance(getContext()).getEmentas();
         lvListaEmentaEntrada.setAdapter(new ListaEmentaAdaptador(getContext(), listaEmentas));
         lvListaEmentaPrincipal.setAdapter(new ListaEmentaAdaptador(getContext(), listaEmentas));
         lvListaEmenraSobremesa.setAdapter(new ListaEmentaAdaptador(getContext(), listaEmentas));

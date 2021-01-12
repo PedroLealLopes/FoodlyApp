@@ -20,10 +20,11 @@ import java.util.ArrayList;
 
 import pt.ipleiria.estg.dei.foodlyandroid.R;
 import pt.ipleiria.estg.dei.foodlyandroid.adaptadores.ListaRestauranteAdaptador;
+import pt.ipleiria.estg.dei.foodlyandroid.listeners.RestaurantesListener;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.Restaurante;
-import pt.ipleiria.estg.dei.foodlyandroid.modelos.SingletonGestorRestaurantes;
+import pt.ipleiria.estg.dei.foodlyandroid.modelos.SingletonFoodly;
 
-public class ListaRestaurantesFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public class ListaRestaurantesFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, RestaurantesListener {
 
     private ListView lvListaRestaurantes;
     private ArrayList<Restaurante> listaRestaurantes;
@@ -39,9 +40,10 @@ public class ListaRestaurantesFragment extends Fragment implements SwipeRefreshL
         View view = inflater.inflate(R.layout.fragment_lista_restaurantes, container, false);
         setHasOptionsMenu(true);
 
-        listaRestaurantes = SingletonGestorRestaurantes.getInstance().getRestaurantes();
         lvListaRestaurantes = view.findViewById(R.id.listViewRestaurantes);
-        lvListaRestaurantes.setAdapter(new ListaRestauranteAdaptador(getContext(), listaRestaurantes));
+
+        swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout.setOnRefreshListener(this);
 
         lvListaRestaurantes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -52,9 +54,8 @@ public class ListaRestaurantesFragment extends Fragment implements SwipeRefreshL
             }
         });
 
-        swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
-        swipeRefreshLayout.setOnRefreshListener(this);
-
+        SingletonFoodly.getInstance(getContext()).setRestaurantesListener(this);
+        SingletonFoodly.getInstance(getContext()).getAllRestaurantesAPI(getContext());
         return view;
     }
 
@@ -72,12 +73,12 @@ public class ListaRestaurantesFragment extends Fragment implements SwipeRefreshL
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                ArrayList<Restaurante> tempLivros = new ArrayList<>();
+                ArrayList<Restaurante> tempRestaurantes = new ArrayList<>();
 
-                for (Restaurante r : SingletonGestorRestaurantes.getInstance().getRestaurantes())
+                for (Restaurante r : SingletonFoodly.getInstance(getContext()).getRestaurantesBD())
                     if (r.getNome().toLowerCase().contains(newText.toLowerCase()))
-                        tempLivros.add(r);
-                lvListaRestaurantes.setAdapter(new ListaRestauranteAdaptador(getContext(), tempLivros));
+                        tempRestaurantes.add(r);
+                lvListaRestaurantes.setAdapter(new ListaRestauranteAdaptador(getContext(), tempRestaurantes));
                 return true;
             }
         });
@@ -95,8 +96,18 @@ public class ListaRestaurantesFragment extends Fragment implements SwipeRefreshL
 
     @Override
     public void onRefresh() {
-        listaRestaurantes = SingletonGestorRestaurantes.getInstance().getRestaurantes();
-        lvListaRestaurantes.setAdapter(new ListaRestauranteAdaptador(getContext(), listaRestaurantes));
+        SingletonFoodly.getInstance(getContext()).getAllRestaurantesAPI(getContext());
         swipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void onRefreshListaRestaurantes(ArrayList<Restaurante> restaurantes) {
+        if (restaurantes != null)
+            lvListaRestaurantes.setAdapter(new ListaRestauranteAdaptador(getContext(), restaurantes));
+    }
+
+    @Override
+    public void onRefreshDetalhes() {
+
     }
 }

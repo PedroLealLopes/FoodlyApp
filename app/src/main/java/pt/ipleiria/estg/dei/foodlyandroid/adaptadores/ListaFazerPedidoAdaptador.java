@@ -57,18 +57,19 @@ public class ListaFazerPedidoAdaptador extends BaseAdapter {
 
         viewHolderLista.update(ementas.get(position));
 
-
         return convertView;
     }
 
     private class ViewHolderLista {
         private TextInputEditText tvEmenta;
+        //declarar a TextView para qtd
 
         public ViewHolderLista(View view) {
             tvEmenta = view.findViewById(R.id.textViewItemEmenta);
         }
 
         public void update(Ementa ementa) {
+            // Verificar a qtd != 0, visisel ou não visivel, setText
             tvEmenta.setText(ementa.getNome() + "................" + ementa.getPreco() + "€");
         }
     }
