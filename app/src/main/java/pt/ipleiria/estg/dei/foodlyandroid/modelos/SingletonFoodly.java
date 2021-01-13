@@ -315,4 +315,31 @@ public class SingletonFoodly {
                 return r;
         return null;
     }
+
+    /*public void adicionarImagemApi(final String image, final Perfil perfil, final Context context){
+    public void adicionarImagemApi(final String image, final Context context){
+            StringRequest req = new StringRequest(Request.Method.POST, mUrlAPILivros + "/" + livro.getId() + "/upload", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                String capa = LivroJsonParser.parserJsonImagemLivro(response);
+
+                if (livrosListener != null)
+                    livrosListener.onRefreshDetalhes();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("image", image);
+                return params;
+            }
+        };
+        volleyQueue.add(req);
+    }
+     */
 }

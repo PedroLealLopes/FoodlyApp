@@ -37,8 +37,9 @@ public class PerfilFragment extends Fragment {
     private static final String TAG = PerfilFragment.class.getSimpleName();
     private static RequestQueue volleyQueue;
     private static final String mUrlAPIProfile = "http://192.168.1.229/FoodlyWeb/frontend/web/api/profiles/1";
+    private static final String mUrlAPIUser = "http://192.168.1.229/FoodlyWeb/frontend/web/api/users/1";
     private TextInputEditText editTextUsername, editTextIdadeProfile, editTextNomeAlergiaProfile,
-            editTextGeneroProfile,editTextNomeContactoProfile, editTextNomeMoradaProfile;
+            editTextGeneroProfile,editTextNomeContactoProfile, editTextNomeMoradaProfile, editTextEmailProfile, editTextNomeCompletoProfile;
 
     public PerfilFragment(Context context) {
         this.context = context;
@@ -55,6 +56,7 @@ public class PerfilFragment extends Fragment {
 
 
         getProfileAPI(getContext());
+        getUserAPI(getContext());
         //region Bottom Navigation
         bottomNav = view.findViewById(R.id.bottom_nav);
 
@@ -108,7 +110,6 @@ public class PerfilFragment extends Fragment {
     }
 
     public void getProfileAPI(final Context context) {
-        final String[] profile = new String[1];
         if (!GenericUtils.isConnectionInternet(context)) {
             Toast.makeText(context, "Não há internet", Toast.LENGTH_SHORT).show();
         } else {
@@ -125,22 +126,56 @@ public class PerfilFragment extends Fragment {
                         String morada = response.getString("morada");
 
 
-                        editTextUsername = getView().findViewById(R.id.editTextUsernameProfile);
                         editTextIdadeProfile = getView().findViewById(R.id.editTextIdadeProfile);
                         editTextNomeAlergiaProfile = getView().findViewById(R.id.editTextNomeAlergiaProfile);
                         editTextGeneroProfile = getView().findViewById(R.id.editTextGeneroProfile);
                         editTextNomeContactoProfile = getView().findViewById(R.id.editTextNomeContactoProfile);
                         editTextNomeMoradaProfile = getView().findViewById(R.id.editTextNomeMoradaProfile);
+                        editTextNomeCompletoProfile = getView().findViewById(R.id.editTextNomeCompletoProfile);
 
 
-                        editTextUsername.setText(fullname);
                         editTextIdadeProfile.setText(age);
                         editTextNomeAlergiaProfile.setText(alergias);
                         editTextGeneroProfile.setText(genero);
                         editTextNomeContactoProfile.setText(telefone);
                         editTextNomeMoradaProfile.setText(morada);
+                        editTextNomeCompletoProfile.setText(fullname);
 
-                        //Toast.makeText(context, fullname, Toast.LENGTH_SHORT).show();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+
+                }}, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+            volleyQueue.add(req);
+        }
+    }
+
+
+    public void getUserAPI(final Context context) {
+        if (!GenericUtils.isConnectionInternet(context)) {
+            Toast.makeText(context, "Não há internet", Toast.LENGTH_SHORT).show();
+        } else {
+            JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, mUrlAPIUser, null, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    try {
+                        String username = response.getString("username");
+                        String email = response.getString("email");
+
+
+                        editTextUsername = getView().findViewById(R.id.editTextUsernameProfile);
+                        editTextEmailProfile = getView().findViewById(R.id.editTextEmailProfile);
+
+
+                        editTextUsername.setText(username);
+                        editTextEmailProfile.setText(email);
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
