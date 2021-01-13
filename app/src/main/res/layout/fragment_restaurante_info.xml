@@ -1,256 +1,278 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".vistas.RestauranteInfoFragment">
 
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/img_restaurante"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textViewNomeRestaurante"
+    <FrameLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:fontFamily="@font/montserrat_bold"
-        android:text="Nome do Restaurante"
-        android:textColor="@color/cinza"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.153"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/textViewMorada"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:fontFamily="@font/montserrat_regular"
-        android:text="Morada"
-        android:textColor="@color/cinza"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.049"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewNomeRestaurante" />
+        <ImageView
+            android:id="@+id/imageViewRestaurantImage"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_restaurante" />
 
-    <ImageView
-        android:id="@+id/imageViewFav"
-        android:layout_width="70dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="124dp"
-        android:src="@drawable/ic_restaurante_fav_false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView3" />
-
-    <Button
-        android:id="@+id/buttonFazerPedido"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/button_login"
-        android:fontFamily="@font/montserrat_bold"
-        android:text="FAZER PEDIDO"
-        android:textColor="@color/branco"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewHorarioEstado" />
-
-    <TextView
-        android:id="@+id/textViewHorarioFecho"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/montserrat_regular"
-        android:text="23:00"
-        android:textColor="@color/cinza"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.01"
-        app:layout_constraintStart_toEndOf="@+id/textViewHorarioAbertura"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-    <TextView
-        android:id="@+id/textViewHorarioAbertura"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/montserrat_regular"
-        android:text=" 7:00 - "
-        android:textColor="@color/cinza"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/textViewHorarioEstado"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-    <ImageView
-        android:id="@+id/separador1"
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:layout_marginTop="16dp"
-        android:alpha="0.2"
-        android:src="@drawable/retangulo_cinza"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonFazerPedido" />
-
-    <TextView
-        android:id="@+id/textViewHorarioEstado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/montserrat_regular"
-        android:text="Aberto - "
-        android:textColor="@color/roxo"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.047"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/montserrat_semi_bold"
-        android:text="Telefone: "
-        android:textColor="@color/cinza"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.052"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewMorada" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
-        android:fontFamily="@font/montserrat_semi_bold"
-        android:text="Email: "
-        android:textColor="@color/cinza"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.048"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-    <TextView
-        android:id="@+id/textViewTelefone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="22dp"
-        android:fontFamily="@font/montserrat_regular"
-        android:text="931234567"
-        android:textColor="@color/cinza"
-        android:textSize="17sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/textViewMorada" />
-
-    <TextView
-        android:id="@+id/textViewEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="7dp"
-        android:fontFamily="@font/montserrat_regular"
-        android:text="restaurante_email@gmail.com"
-        android:textColor="@color/cinza"
-        android:textSize="17sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/textView3"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        <ImageView
+            android:id="@+id/imageViewFav"
+            android:layout_gravity="right"
+            android:layout_width="70dp"
+            android:layout_height="53dp"
+            android:layout_marginTop="124dp"
+            android:src="@drawable/ic_restaurante_fav_false" />
+    </FrameLayout>
 
     <ScrollView
-        android:id="@+id/scrollView2"
-        android:layout_width="397dp"
-        android:layout_height="122dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/separador1">
-
-        <TextView
-            android:id="@+id/textViewComentario"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="14dp"
-            android:layout_marginTop="5dp"
-            android:fontFamily="@font/montserrat_regular"
-            android:text="Descrição do restaurante"
-            android:textColor="@color/cinza"
-            android:textSize="16sp" />
-    </ScrollView>
-
-    <ImageView
-        android:id="@+id/separador2"
         android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:alpha="0.2"
-        android:src="@drawable/retangulo_cinza"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textViewAnimais"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:drawableLeft="@drawable/ic_task_false"
-        android:fontFamily="@font/montserrat_regular"
-        android:text=" Animais"
-        android:textColor="@color/cinza"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.055"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/separador2" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/textViewWiFi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
-        android:drawableLeft="@drawable/ic_task_true"
-        android:fontFamily="@font/montserrat_regular"
-        android:text=" Wi-Fi"
-        android:textColor="@color/cinza"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.049"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewAnimais" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <Space
+                android:layout_width="20dp"
+                android:layout_height="match_parent" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textViewRestaurantName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="Nome do Restaurante"
+                    android:textColor="@color/cinza"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/textViewRestaurantLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="Morada"
+                    android:textColor="@color/cinza"
+                    android:textSize="18sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text="Telefone: "
+                        android:textColor="@color/roxo"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/textViewRestaurantPhone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text="931234567"
+                        android:textColor="@color/cinza"
+                        android:textSize="17sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text="Email: "
+                        android:textColor="@color/roxo"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/textViewRestaurantEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text="restaurante_email@gmail.com"
+                        android:textColor="@color/cinza"
+                        android:textSize="17sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textViewRestaurantHourState"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text="Aberto - "
+                        android:textColor="@color/roxo"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/textViewRestaurantOpeningHour"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text=" 7:00"
+                        android:textColor="@color/cinza"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text=" - "
+                        android:textColor="@color/cinza"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/textViewRestaurantClosingHour"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text="23:00"
+                        android:textColor="@color/cinza"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text="Pessoas - "
+                        android:textColor="@color/roxo"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/textViewRestaurantCurrentPeople"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text="10"
+                        android:textColor="@color/cinza"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/textView5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text=" de "
+                        android:textColor="@color/cinza"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/textViewRestaurantMaxPeople"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text="50"
+                        android:textColor="@color/cinza"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/buttonFazerPedido"
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/button_login"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="FAZER PEDIDO"
+                    android:textColor="@color/branco"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/textViewRestaurantDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="Descrição do restaurante"
+                    android:textColor="@color/cinza"
+                    android:textSize="16sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textViewRestaurantHasWiFiPassword"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:drawableLeftCompat="@drawable/ic_task_false"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text=" Wi-Fi - "
+                        android:textColor="@color/cinza"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/textViewRestaurantWiFiPasswordText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_semi_bold"
+                        android:textColor="@color/cinza"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textViewRestaurantHasVegan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    app:drawableLeftCompat="@drawable/ic_task_false"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text=" Vegetariano"
+                    android:textColor="@color/cinza"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/textViewRestaurantAllowsPets"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    app:drawableLeftCompat="@drawable/ic_task_false"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text=" Animais"
+                    android:textColor="@color/cinza"
+                    android:textSize="16sp" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

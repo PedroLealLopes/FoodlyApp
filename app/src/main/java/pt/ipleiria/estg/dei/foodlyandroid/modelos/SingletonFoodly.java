@@ -126,7 +126,6 @@ public class SingletonFoodly {
                 }
             });
             volleyQueue.add(req);
-            System.out.println("Restaurantes ---> " + restaurantes);
         }
     }
 

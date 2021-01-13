@@ -27,7 +27,6 @@ import pt.ipleiria.estg.dei.foodlyandroid.modelos.SingletonFoodly;
 public class ListaRestaurantesFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, RestaurantesListener {
 
     private ListView lvListaRestaurantes;
-    private ArrayList<Restaurante> listaRestaurantes;
     private SearchView searchView;
     private SwipeRefreshLayout swipeRefreshLayout;
 
@@ -49,7 +48,7 @@ public class ListaRestaurantesFragment extends Fragment implements SwipeRefreshL
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getContext(), DetalhesRestauranteActivity.class);
-                intent.putExtra(DetalhesRestauranteActivity.ID, (int) id);
+                intent.putExtra(RestauranteInfoFragment.ID, (int) id);
                 startActivity(intent);
             }
         });

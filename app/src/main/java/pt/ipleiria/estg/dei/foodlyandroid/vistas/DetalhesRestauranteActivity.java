@@ -13,9 +13,8 @@ import pt.ipleiria.estg.dei.foodlyandroid.R;
 
 public class DetalhesRestauranteActivity extends AppCompatActivity {
 
-    public static final String ID = "ID";
-    ChipNavigationBar bottomNav;
-    FragmentManager fragmentManager;
+    private ChipNavigationBar bottomNav;
+    private FragmentManager fragmentManager;
     private static final String TAG = DetalhesRestauranteActivity.class.getSimpleName();
 
     @Override
@@ -29,7 +28,7 @@ public class DetalhesRestauranteActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             bottomNav.setItemSelected(R.id.itemInformacao, true);
             fragmentManager = getSupportFragmentManager();
-            RestauranteInfoFragment infoFragment = new RestauranteInfoFragment(getApplicationContext());
+            RestauranteInfoFragment infoFragment = new RestauranteInfoFragment();
             fragmentManager.beginTransaction()
                     .replace(R.id.fragment_container, infoFragment)
                     .commit();
@@ -41,7 +40,7 @@ public class DetalhesRestauranteActivity extends AppCompatActivity {
                 Fragment fragment = null;
                 switch (id) {
                     case R.id.itemInformacao:
-                        fragment = new RestauranteInfoFragment(getApplicationContext());
+                        fragment = new RestauranteInfoFragment();
                         break;
                     case R.id.itemEmenta:
                         fragment = new RestauranteEmentaFragment();
