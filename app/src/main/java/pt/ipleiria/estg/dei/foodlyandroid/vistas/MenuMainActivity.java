@@ -25,8 +25,9 @@ import pt.ipleiria.estg.dei.foodlyandroid.R;
 
 public class MenuMainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private static final String EMAIL = "EMAIL";
-    private static final String USER = "USER_PREF";
+    public static final String EMAIL = "EMAIL";
+    public static final String USER = "USER_PREF";
+    public static final String TOKEN = "TOKEN";
     private String email = "";
     private NavigationView navigationView;
     private DrawerLayout drawer;
