@@ -17,9 +17,14 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.textfield.TextInputEditText;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import pt.ipleiria.estg.dei.foodlyandroid.R;
 import pt.ipleiria.estg.dei.foodlyandroid.utils.GenericUtils;
@@ -31,16 +36,24 @@ public class PerfilFragment extends Fragment {
     private FragmentManager fragmentManager;
     private static final String TAG = PerfilFragment.class.getSimpleName();
     private static RequestQueue volleyQueue;
-    private static final String mUrlAPIProfile = "http://192.168.1.229/FoodlyWeb/frontend/web/api/profiles";
+    private static final String mUrlAPIProfile = "http://192.168.1.229/FoodlyWeb/frontend/web/api/profiles/1";
+    private TextInputEditText editTextUsername, editTextIdadeProfile, editTextNomeAlergiaProfile,
+            editTextGeneroProfile,editTextNomeContactoProfile, editTextNomeMoradaProfile;
 
     public PerfilFragment(Context context) {
         this.context = context;
         volleyQueue = Volley.newRequestQueue(context);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_perfil, container, false);
+
+
+
+
+
         getProfileAPI(getContext());
         //region Bottom Navigation
         bottomNav = view.findViewById(R.id.bottom_nav);
@@ -99,10 +112,40 @@ public class PerfilFragment extends Fragment {
         if (!GenericUtils.isConnectionInternet(context)) {
             Toast.makeText(context, "Não há internet", Toast.LENGTH_SHORT).show();
         } else {
-            StringRequest req = new StringRequest(Request.Method.POST, mUrlAPIProfile, new Response.Listener<String>() {
+            JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, mUrlAPIProfile, null, new Response.Listener<JSONObject>() {
                 @Override
-                public void onResponse(String response) {
-                    Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
+                public void onResponse(JSONObject response) {
+                    try {
+                        String userId = response.getString("userId");
+                        String fullname = response.getString("fullname");
+                        String age = response.getString("age");
+                        String alergias = response.getString("alergias");
+                        String genero = response.getString("genero");
+                        String telefone = response.getString("telefone");
+                        String morada = response.getString("morada");
+
+
+                        editTextUsername = getView().findViewById(R.id.editTextUsernameProfile);
+                        editTextIdadeProfile = getView().findViewById(R.id.editTextIdadeProfile);
+                        editTextNomeAlergiaProfile = getView().findViewById(R.id.editTextNomeAlergiaProfile);
+                        editTextGeneroProfile = getView().findViewById(R.id.editTextGeneroProfile);
+                        editTextNomeContactoProfile = getView().findViewById(R.id.editTextNomeContactoProfile);
+                        editTextNomeMoradaProfile = getView().findViewById(R.id.editTextNomeMoradaProfile);
+
+
+                        editTextUsername.setText(fullname);
+                        editTextIdadeProfile.setText(age);
+                        editTextNomeAlergiaProfile.setText(alergias);
+                        editTextGeneroProfile.setText(genero);
+                        editTextNomeContactoProfile.setText(telefone);
+                        editTextNomeMoradaProfile.setText(morada);
+
+                        //Toast.makeText(context, fullname, Toast.LENGTH_SHORT).show();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+
                 }}, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
