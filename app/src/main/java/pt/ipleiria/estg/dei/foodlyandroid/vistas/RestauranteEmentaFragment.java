@@ -47,7 +47,12 @@ public class RestauranteEmentaFragment extends Fragment implements EmentasListen
 
     @Override
     public void onRefreshListaEmentas(ArrayList<Ementa> ementas) {
-        String type = SingletonFoodly.getInstance(getContext()).getEmentaType();
+        System.out.println("--> Ementa Entrou");
+        String[] type = SingletonFoodly.getInstance(getContext()).getEmentaType();
+        //System.out.println("--> Ementa Type" + type[0]);
+        for (String strTemp : type){
+            System.out.println(strTemp);
+        }
 
         if (ementas == null){
 

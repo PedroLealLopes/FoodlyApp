@@ -1,6 +1,7 @@
 package pt.ipleiria.estg.dei.foodlyandroid.modelos;
 
 import android.content.Context;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -41,7 +42,8 @@ public class SingletonFoodly {
     private LoginListener loginListener;
 
     private static final String mUrlAPILogin = "";
-    private static final String mUrlAPIResturantes = "http://192.168.1.8/FoodlyWeb/frontend/web/api/restaurants";
+    private static final String mUrlAPIResturantes = "http://192.168.1.229/FoodlyWeb/frontend/web/api/restaurants";
+    private static final String mUrlAPIEmentas = "http://192.168.1.229/FoodlyWeb/frontend/web/api/dishes/restaurant";
 
     public static synchronized SingletonFoodly getInstance(Context context) {
         if (instance == null)
@@ -161,17 +163,23 @@ public class SingletonFoodly {
         return null;
     }
 
-    public String getEmentaType() {
-        for (Ementa e : ementas){
-            System.out.println("---> id " + e.getDishId());
-            return e.getType();
+    private int getEmentasSize(){
+        int i = 0;
+        for (Ementa e: ementas){
+            i++;
         }
-        return null;
+        return i;
+    }
+
+    public String[] getEmentaType() {
+        String[] Foo = new String[0];
+        for (Ementa e : ementas){
+            return Foo;
+        }
     }
 
     //region API
-    public void getAllEmentasAPI(int restaurantId, final Context context) {
-        String mUrlAPIEmentas = "http://192.168.1.8/FoodlyWeb/frontend/web/api/dishes/restaurant";
+    public void getAllEmentasAPI(final int restaurantId, final Context context) {
 
         if (!GenericUtils.isConnectionInternet(context)) {
             Toast.makeText(context, "Não há internet", Toast.LENGTH_SHORT).show();
@@ -179,7 +187,7 @@ public class SingletonFoodly {
             JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlAPIEmentas + "/" + restaurantId, null, new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {
-                    ementas = EmentaJsonParser.parserJsonEmentas(response);
+                    ementas = EmentaJsonParser.parserJsonEmentas(response, restaurantId);
 
                     if (ementasListener != null)
                         ementasListener.onRefreshListaEmentas(ementas);

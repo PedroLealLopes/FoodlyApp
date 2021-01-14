@@ -11,7 +11,7 @@ import pt.ipleiria.estg.dei.foodlyandroid.modelos.Restaurante;
 
 public class EmentaJsonParser {
 
-    public static ArrayList<Ementa> parserJsonEmentas(JSONArray response) {
+    public static ArrayList<Ementa> parserJsonEmentas(JSONArray response, int restaurantId) {
         ArrayList<Ementa> ementas = new ArrayList<>();
         if (response != null) {
             for (int i = 0; i < response.length(); i++) {
@@ -23,7 +23,7 @@ public class EmentaJsonParser {
                     String type = ementa.getString("type");
                     double price = ementa.getDouble("price");
 
-                    Ementa e = new Ementa(dishId, name, type, price);
+                    Ementa e = new Ementa(dishId, name, type, price, restaurantId);
                     ementas.add(e);
                 } catch (JSONException e) {
                     e.printStackTrace();

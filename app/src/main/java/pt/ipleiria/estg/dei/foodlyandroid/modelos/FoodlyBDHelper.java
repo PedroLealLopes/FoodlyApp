@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class FoodlyBDHelper extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "foodlyDB";
-    private static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 2;
 
     private static final String RESTAURANTS_TABLE = "Restaurants";
     private static final String RESTAURANT_ID = "restaurantId";

@@ -1,15 +1,16 @@
 package pt.ipleiria.estg.dei.foodlyandroid.modelos;
 
 public class Ementa {
-    private int dishId;
+    private int dishId, restaurantId;
     private String name, type;
     private double price;
 
-    public Ementa(int dishId, String name, String type, double price) {
+    public Ementa(int dishId, String name, String type, double price, int restaurantId) {
         this.dishId = dishId;
         this.name = name;
         this.type = type;
         this.price = price;
+        this.restaurantId = restaurantId;
     }
 
     public int getDishId() {
