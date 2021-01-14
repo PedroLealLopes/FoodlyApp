@@ -17,6 +17,15 @@ public class Ementa {
         return dishId;
     }
 
+
+    public int getRestaurantId() {
+        return restaurantId;
+    }
+
+    public void setRestaurantId(int restaurantId) {
+        this.restaurantId = restaurantId;
+    }
+
     public void setDishId(int dishId) {
         this.dishId = dishId;
     }

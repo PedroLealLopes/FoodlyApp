@@ -171,12 +171,13 @@ public class SingletonFoodly {
         return i;
     }
 
-    public String[] getEmentaType() {
-        String[] Foo = new String[0];
+    public ArrayList<Ementa> getEmentaType(int restaurantId) {
+        ArrayList<Ementa> foo = new ArrayList<>();
         for (Ementa e : ementas){
-            return Foo;
+            if(e.getRestaurantId() == restaurantId)
+                foo.add(e);
         }
-        return Foo;
+        return foo;
     }
 
     //region API

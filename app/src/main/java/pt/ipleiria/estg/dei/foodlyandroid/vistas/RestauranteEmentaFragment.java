@@ -47,26 +47,31 @@ public class RestauranteEmentaFragment extends Fragment implements EmentasListen
 
     @Override
     public void onRefreshListaEmentas(ArrayList<Ementa> ementas) {
-        System.out.println("--> Ementa Entrou");
-        String[] type = SingletonFoodly.getInstance(getContext()).getEmentaType();
-        //System.out.println("--> Ementa Type" + type[0]);
-        for (String strTemp : type){
-            System.out.println(strTemp);
+        int restaurantId = getActivity().getIntent().getIntExtra(ID_RESTAURANTE, -1);
+        ArrayList<Ementa> type = SingletonFoodly.getInstance(getContext()).getEmentaType(restaurantId);
+        ArrayList<Ementa> starters = new ArrayList<>();
+        ArrayList<Ementa> salads = new ArrayList<>();
+        ArrayList<Ementa> mainCourse = new ArrayList<>();
+        ArrayList<Ementa> drinks = new ArrayList<>();
+        ArrayList<Ementa> desserts = new ArrayList<>();
+
+        for(Ementa e: type){
+            if(e.getType().equals("STARTERS"))
+                starters.add(e);
+            if(e.getType().equals("SALADS"))
+                salads.add(e);
+            if(e.getType().equals("MAIN COURSE"))
+                mainCourse.add(e);
+            if(e.getType().equals("DRINKS"))
+                drinks.add(e);
+            if(e.getType().equals("DESSERTS"))
+                desserts.add(e);
         }
 
-        if (ementas == null){
-
-        }else{
-            if(type.equals("STARTERS"))
-                lvListaEmentaEntrada.setAdapter(new ListaEmentaAdaptador(getContext(), ementas));
-            if(type.equals("SALADS"))
-                lvListaEmentaSalada.setAdapter(new ListaEmentaAdaptador(getContext(), ementas));
-            if(type.equals("MAIN COURSE"))
-                lvListaEmentaPrincipal.setAdapter(new ListaEmentaAdaptador(getContext(), ementas));
-            if(type.equals("DRINKS"))
-                lvListaEmenraBebida.setAdapter(new ListaEmentaAdaptador(getContext(), ementas));
-            if(type.equals("DESSERTS"))
-                lvListaEmenraSobremesa.setAdapter(new ListaEmentaAdaptador(getContext(), ementas));
-        }
+        lvListaEmentaEntrada.setAdapter(new ListaEmentaAdaptador(getContext(), starters));
+        lvListaEmentaSalada.setAdapter(new ListaEmentaAdaptador(getContext(), salads));
+        lvListaEmentaPrincipal.setAdapter(new ListaEmentaAdaptador(getContext(), mainCourse));
+        lvListaEmenraBebida.setAdapter(new ListaEmentaAdaptador(getContext(), drinks));
+        lvListaEmenraSobremesa.setAdapter(new ListaEmentaAdaptador(getContext(), desserts));
     }
 }
