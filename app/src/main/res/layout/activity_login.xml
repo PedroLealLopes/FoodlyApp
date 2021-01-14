@@ -47,26 +47,26 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayoutEmail"
+        android:id="@+id/textInputLayoutUsername"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="306dp"
         android:layout_height="55dp"
         android:layout_marginTop="88dp"
-        android:hint="Email"
+        android:hint="Username"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextEmail"
+            android:id="@+id/editTextUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_email_custom"
+            android:drawableStart="@drawable/ic_username_custom"
             android:drawablePadding="12dp"
             android:fontFamily="@font/montserrat_regular"
             android:inputType="textEmailAddress"
-            android:text="email@email.com" />
+            android:text="username" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -79,7 +79,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEmail">
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutUsername">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextPassword"

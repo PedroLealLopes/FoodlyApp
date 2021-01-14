@@ -42,6 +42,9 @@ public class SingletonFoodly {
     private LoginListener loginListener;
 
     private static final String mUrlAPILogin = "";
+    private static final String IP_MiiTU = "192.168.1.8";
+    private static final String IP_Luckdude = "";
+    private static final String IP_Johnny = "";
     private static final String mUrlAPIResturantes = "http://192.168.1.8/FoodlyWeb/frontend/web/api/restaurants";
     private static final String mUrlAPIEmentas = "http://192.168.1.8/FoodlyWeb/frontend/web/api/dishes/restaurant";
 
