@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class FoodlyBDHelper extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "foodlyDB";
-    private static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 2;
 
     private static final String RESTAURANTS_TABLE = "Restaurants";
     private static final String RESTAURANT_ID = "restaurantId";
@@ -54,7 +54,6 @@ public class FoodlyBDHelper extends SQLiteOpenHelper {
                 RESTAURANT_ALLOWS_PETS + " INTEGER NOT NULL," +
                 RESTAURANT_HAS_VEGAN + " INTEGER NOT NULL );";
         db.execSQL(sqlCreateTableRestaurante);
-        System.out.println("---> " + sqlCreateTableRestaurante);
     }
 
     @Override
@@ -84,30 +83,6 @@ public class FoodlyBDHelper extends SQLiteOpenHelper {
         values.put(RESTAURANT_HAS_VEGAN, restaurante.getVegan());
 
         this.db.insert(RESTAURANTS_TABLE, null, values);
-    }
-
-    public boolean editarRestauranteDB(Restaurante restaurante) {
-        ContentValues values = new ContentValues();
-        values.put(RESTAURANT_ID, restaurante.getRestaurantId());
-        values.put(RESTAURANT_MAX_PEOPLE, restaurante.getMaxPeople());
-        values.put(RESTAURANT_CURR_PEOPLE, restaurante.getCurrentPeople());
-        values.put(RESTAURANT_NAME, restaurante.getName());
-        values.put(RESTAURANT_IMAGE, restaurante.getImage());
-        values.put(RESTAURANT_PHONE, restaurante.getPhone());
-        values.put(RESTAURANT_EMAIL, restaurante.getEmail());
-        values.put(RESTAURANT_DESCRIPTION, restaurante.getDescription());
-        values.put(RESTAURANT_LOCATION, restaurante.getLocation());
-        values.put(RESTAURANT_OPENING_HOUR, restaurante.getOpeningHour());
-        values.put(RESTAURANT_CLOSING_HOUR, restaurante.getClosingHour());
-        values.put(RESTAURANT_WIFI_PASSWORD, restaurante.getWifiPassword());
-        values.put(RESTAURANT_ALLOWS_PETS, restaurante.getAllowsPets());
-        values.put(RESTAURANT_HAS_VEGAN, restaurante.getVegan());
-
-        return this.db.update(RESTAURANTS_TABLE, values, "id=?", new String[]{restaurante.getRestaurantId() + ""}) > 0;
-    }
-
-    public boolean removerRestauranteDB(int id) {
-        return this.db.delete(RESTAURANTS_TABLE, "id=?", new String[]{id + ""}) > 0;
     }
 
     public void removerAllRestaurantesBD() {

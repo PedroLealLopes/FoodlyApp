@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import pt.ipleiria.estg.dei.foodlyandroid.R;
 import pt.ipleiria.estg.dei.foodlyandroid.adaptadores.ListaFazerPedidoAdaptador;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.Ementa;
-import pt.ipleiria.estg.dei.foodlyandroid.modelos.SingletonFoodly;
 import pt.ipleiria.estg.dei.foodlyandroid.utils.GenericUtils;
 
 public class FazerPedidoActivity extends AppCompatActivity {
@@ -31,17 +30,12 @@ public class FazerPedidoActivity extends AppCompatActivity {
         setTitle("Fazer Pedido");
 
         lvListaEmentaEntrada = findViewById(R.id.listViewEmentaEntrada);
-        lvListaEmentaPrincipal = findViewById(R.id.listViewEmentaPrincipal);
-        lvListaEmenraSobremesa = findViewById(R.id.listViewEmentaSobremesa);
+        lvListaEmentaPrincipal = findViewById(R.id.listViewEmentaSalada);
+        lvListaEmenraSobremesa = findViewById(R.id.listViewEmentaPrincipal);
 
-        listaEmentas = SingletonFoodly.getInstance(getApplicationContext()).getEmentas();
         lvListaEmentaEntrada.setAdapter(new ListaFazerPedidoAdaptador(getApplicationContext(), listaEmentas));
         lvListaEmentaPrincipal.setAdapter(new ListaFazerPedidoAdaptador(getApplicationContext(), listaEmentas));
         lvListaEmenraSobremesa.setAdapter(new ListaFazerPedidoAdaptador(getApplicationContext(), listaEmentas));
-
-        GenericUtils.setListViewHeightBasedOnItems(lvListaEmentaEntrada);
-        GenericUtils.setListViewHeightBasedOnItems(lvListaEmentaPrincipal);
-        GenericUtils.setListViewHeightBasedOnItems(lvListaEmenraSobremesa);
 
         FloatingActionButton fab = findViewById(R.id.fabFinalizarPedido);
         fab.setOnClickListener(new View.OnClickListener() {

@@ -114,9 +114,4 @@ public class RestauranteInfoFragment extends Fragment implements RestaurantesLis
     public void onRefreshListaRestaurantes(ArrayList<Restaurante> listaRestaurantes) {
 
     }
-
-    @Override
-    public void onRefreshDetalhes() {
-
-    }
 }

@@ -29,7 +29,7 @@ public class GenericUtils{
         return ni != null && ni.isConnected();
     }
 
-    public static void setListViewHeightBasedOnItems(ListView listView) {
+    public static void setListViewHeightBasedOnChildren(ListView listView) {
         ListAdapter listAdapter = listView.getAdapter();
         if (listAdapter == null) {
             // pre-condition
@@ -44,9 +44,9 @@ public class GenericUtils{
         }
 
         ViewGroup.LayoutParams params = listView.getLayoutParams();
-        params.height = totalHeight
-                + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
         listView.setLayoutParams(params);
+        listView.requestLayout();
     }
 
     public static String parserJsonLogin(String response) {

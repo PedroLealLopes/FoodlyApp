@@ -25,10 +25,10 @@ import pt.ipleiria.estg.dei.foodlyandroid.R;
 
 public class MenuMainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    public static final String EMAIL = "EMAIL";
+    public static final String USERNAME = "USERNAME";
     public static final String USER = "USER_PREF";
     public static final String TOKEN = "TOKEN";
-    private String email = "";
+    private String username = "";
     private NavigationView navigationView;
     private DrawerLayout drawer;
     private FragmentManager fragmentManager;
@@ -56,20 +56,20 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
     }
 
     private void carregarCabecalho() {
-        email = getIntent().getStringExtra(EMAIL);
+        username = getIntent().getStringExtra(USERNAME);
         SharedPreferences sharedPrefUser = getSharedPreferences(USER, Context.MODE_PRIVATE);
 
-        if (email == null)
-            email = sharedPrefUser.getString(EMAIL, "Sem Nome de Utilizador");
+        if (username == null)
+            username = sharedPrefUser.getString(USERNAME, "Sem Nome de Utilizador");
         else {
             SharedPreferences.Editor editor = sharedPrefUser.edit();
-            editor.putString(EMAIL, email);
+            editor.putString(USERNAME, username);
             editor.apply();
         }
 
         View hView = navigationView.getHeaderView(0);
         TextView tvEmail = hView.findViewById(R.id.nav_header_nome);
-        tvEmail.setText(email);
+        tvEmail.setText(username);
     }
 
     private void carregarFragmentoInicial() {
