@@ -16,7 +16,6 @@ public class RestauranteJsonParser {
             for (int i = 0; i < response.length(); i++) {
                 try {
                     JSONObject restaurante = (JSONObject) response.get(i);
-
                     int restaurantId = restaurante.getInt("restaurantId");
                     int maxPeople = restaurante.getInt("maxPeople");
                     int currentPeople = restaurante.getInt("currentPeople");
@@ -31,6 +30,7 @@ public class RestauranteJsonParser {
                     String wifiPassword = restaurante.getString("wifiPassword");
                     int allowsPets = restaurante.getInt("allowsPets");
                     int hasVegan = restaurante.getInt("hasVegan");
+
 
                     Restaurante l = new Restaurante(restaurantId, maxPeople, currentPeople, name, image, phone, email, description, location, openingHour, closingHour, wifiPassword, allowsPets, hasVegan);
                     restaurantes.add(l);

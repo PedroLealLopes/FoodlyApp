@@ -21,7 +21,7 @@ import pt.ipleiria.estg.dei.foodlyandroid.utils.DatePickerFragmentUtil;
 
 public class RegistarActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
-    private static final String[] GENEROS = new String[]{"Masculino", "Feminino"};
+    private static final String[] GENEROS = new String[]{"M", "F"};
     private TextInputEditText etIdade;
 
     @Override

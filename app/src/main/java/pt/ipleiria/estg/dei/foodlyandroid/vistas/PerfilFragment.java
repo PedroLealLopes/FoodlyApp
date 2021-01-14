@@ -27,6 +27,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import pt.ipleiria.estg.dei.foodlyandroid.R;
+import pt.ipleiria.estg.dei.foodlyandroid.modelos.SingletonFoodly;
 import pt.ipleiria.estg.dei.foodlyandroid.utils.GenericUtils;
 
 public class PerfilFragment extends Fragment {
@@ -50,9 +51,6 @@ public class PerfilFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_perfil, container, false);
-
-
-
 
 
         getProfileAPI(getContext());
@@ -184,7 +182,7 @@ public class PerfilFragment extends Fragment {
                 }}, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
             volleyQueue.add(req);

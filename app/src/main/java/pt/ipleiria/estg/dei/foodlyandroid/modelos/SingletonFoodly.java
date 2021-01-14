@@ -160,7 +160,6 @@ public class SingletonFoodly {
                 params.put("wifiPassword", restaurante.getWifiPassword());
                 params.put("allowsPets", restaurante.getAllowsPets() + "");
                 params.put("hasVegan", restaurante.getVegan() + "");
-                params.put("token", token);
                 return params;
             }
         };
@@ -199,7 +198,6 @@ public class SingletonFoodly {
                 params.put("wifiPassword", restaurante.getWifiPassword());
                 params.put("allowsPets", restaurante.getAllowsPets() + "");
                 params.put("hasVegan", restaurante.getVegan() + "");
-                params.put("token", token);
                 return params;
             }
         };

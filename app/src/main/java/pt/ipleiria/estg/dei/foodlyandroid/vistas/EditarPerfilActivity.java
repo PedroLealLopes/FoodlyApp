@@ -41,7 +41,7 @@ import pt.ipleiria.estg.dei.foodlyandroid.modelos.SingletonFoodly;
 
 public class EditarPerfilActivity extends AppCompatActivity {
 
-    private static final String[] GENEROS = new String[]{"Masculino", "Feminino"};
+    private static final String[] GENEROS = new String[]{"M", "F"};
 
     public static final int CAMERA_REQUEST = 1;
     public static final int IMAGEM_REQUEST = 2;
