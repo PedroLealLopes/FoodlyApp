@@ -1,49 +1,46 @@
 package pt.ipleiria.estg.dei.foodlyandroid.modelos;
 
-import java.util.List;
-
 public class Ementa {
-    private int id;
-    private String nome;
-    private double preco;
-    private List<Ingrediente> ingredientes;
+    private int dishId;
+    private String name, type;
+    private double price;
 
-    public Ementa(int id, String nome, double preco, List<Ingrediente> ingredientes) {
-        this.id = id;
-        this.nome = nome;
-        this.preco = preco;
-        this.ingredientes = ingredientes;
+    public Ementa(int dishId, String name, String type, double price) {
+        this.dishId = dishId;
+        this.name = name;
+        this.type = type;
+        this.price = price;
     }
 
-    public int getId() {
-        return id;
+    public int getDishId() {
+        return dishId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setDishId(int dishId) {
+        this.dishId = dishId;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public double getPreco() {
-        return preco;
+    public String getType() {
+        return type;
     }
 
-    public void setPreco(double preco) {
-        this.preco = preco;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public List<Ingrediente> getIngredientes() {
-        return ingredientes;
+    public double getPrice() {
+        return price;
     }
 
-    public void setIngredientes(List<Ingrediente> ingredientes) {
-        this.ingredientes = ingredientes;
+    public void setPrice(double price) {
+        this.price = price;
     }
 }

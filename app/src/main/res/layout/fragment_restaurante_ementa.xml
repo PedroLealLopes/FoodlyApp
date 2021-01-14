@@ -8,12 +8,14 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <!-- ENTRADAS -->
             <ImageView
                 android:id="@+id/imageViewSeparador1"
                 android:layout_width="match_parent"
@@ -62,6 +64,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageViewSeparador1_1" />
 
+            <!-- SALADAS -->
             <ImageView
                 android:id="@+id/imageViewSeparador2"
                 android:layout_width="match_parent"
@@ -80,7 +83,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="15dp"
                 android:fontFamily="@font/montserrat_bold"
-                android:text="PRATOS PRINCIAPIS"
+                android:text="SALADAS"
                 android:textColor="@color/cinza"
                 android:textSize="22sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -100,7 +103,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
             <ListView
-                android:id="@+id/listViewEmentaPrincipal"
+                android:id="@+id/listViewEmentaSalada"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -110,6 +113,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageViewSeparador2_1" />
 
+            <!-- PRATOS PRINCIPAIS -->
             <ImageView
                 android:id="@+id/imageViewSeparador3"
                 android:layout_width="match_parent"
@@ -119,7 +123,7 @@
                 android:src="@drawable/retangulo_cinza"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/listViewEmentaPrincipal" />
+                app:layout_constraintTop_toBottomOf="@+id/listViewEmentaSalada" />
 
             <TextView
                 android:id="@+id/textView3"
@@ -128,7 +132,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="15dp"
                 android:fontFamily="@font/montserrat_bold"
-                android:text="SOBREMESAS"
+                android:text="PRATOS PRINCIPAIS"
                 android:textColor="@color/cinza"
                 android:textSize="22sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -147,7 +151,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
             <ListView
-                android:id="@+id/listViewEmentaSobremesa"
+                android:id="@+id/listViewEmentaPrincipal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -156,6 +160,102 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageViewSeparador3_1" />
+
+            <!-- BEBIDAS -->
+            <ImageView
+                android:id="@+id/imageViewSeparador4"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="20dp"
+                android:alpha="0.5"
+                android:src="@drawable/retangulo_cinza"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/listViewEmentaPrincipal" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="BEBIDAS"
+                android:textColor="@color/cinza"
+                android:textSize="22sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewSeparador4" />
+
+            <ImageView
+                android:id="@+id/imageViewSeparador4_1"
+                android:layout_width="391dp"
+                android:layout_height="2dp"
+                android:layout_marginTop="15dp"
+                android:alpha="0.5"
+                android:src="@drawable/retangulo_cinza"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+            <ListView
+                android:id="@+id/listViewEmentaBebida"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:divider="@null"
+                android:dividerHeight="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewSeparador4_1" />
+
+            <!-- SOBREMESAS -->
+            <ImageView
+                android:id="@+id/imageViewSeparador5"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="20dp"
+                android:alpha="0.5"
+                android:src="@drawable/retangulo_cinza"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/listViewEmentaBebida" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="SOBREMESAS"
+                android:textColor="@color/cinza"
+                android:textSize="22sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewSeparador5" />
+
+            <ImageView
+                android:id="@+id/imageViewSeparador5_1"
+                android:layout_width="391dp"
+                android:layout_height="2dp"
+                android:layout_marginTop="15dp"
+                android:alpha="0.5"
+                android:src="@drawable/retangulo_cinza"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+            <ListView
+                android:id="@+id/listViewEmentaSobremesa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:divider="@null"
+                android:dividerHeight="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewSeparador5_1" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </RelativeLayout>

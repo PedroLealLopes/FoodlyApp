@@ -100,7 +100,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
             <ListView
-                android:id="@+id/listViewEmentaPrincipal"
+                android:id="@+id/listViewEmentaSalada"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -119,7 +119,7 @@
                 android:src="@drawable/retangulo_cinza"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/listViewEmentaPrincipal" />
+                app:layout_constraintTop_toBottomOf="@+id/listViewEmentaSalada" />
 
             <TextView
                 android:id="@+id/textView3"
@@ -147,7 +147,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
             <ListView
-                android:id="@+id/listViewEmentaSobremesa"
+                android:id="@+id/listViewEmentaPrincipal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"

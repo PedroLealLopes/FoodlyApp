@@ -37,7 +37,7 @@ public class ListaFazerPedidoAdaptador extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return ementas.get(position).getId();
+        return position;
     }
 
     @Override
@@ -70,7 +70,7 @@ public class ListaFazerPedidoAdaptador extends BaseAdapter {
 
         public void update(Ementa ementa) {
             // Verificar a qtd != 0, visisel ou não visivel, setText
-            tvEmenta.setText(ementa.getNome() + "................" + ementa.getPreco() + "€");
+            //tvEmenta.setText(ementa.getNome() + "................" + ementa.getPreco() + "€");
         }
     }
 }
