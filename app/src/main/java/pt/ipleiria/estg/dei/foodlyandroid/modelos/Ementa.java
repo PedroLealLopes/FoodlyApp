@@ -1,49 +1,56 @@
 package pt.ipleiria.estg.dei.foodlyandroid.modelos;
 
-import java.util.List;
-
 public class Ementa {
-    private int id;
-    private String nome;
-    private double preco;
-    private List<Ingrediente> ingredientes;
+    private int dishId, restaurantId;
+    private String name, type;
+    private double price;
 
-    public Ementa(int id, String nome, double preco, List<Ingrediente> ingredientes) {
-        this.id = id;
-        this.nome = nome;
-        this.preco = preco;
-        this.ingredientes = ingredientes;
+    public Ementa(int dishId, String name, String type, double price, int restaurantId) {
+        this.dishId = dishId;
+        this.name = name;
+        this.type = type;
+        this.price = price;
+        this.restaurantId = restaurantId;
     }
 
-    public int getId() {
-        return id;
+    public int getDishId() {
+        return dishId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+
+    public int getRestaurantId() {
+        return restaurantId;
     }
 
-    public String getNome() {
-        return nome;
+    public void setRestaurantId(int restaurantId) {
+        this.restaurantId = restaurantId;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setDishId(int dishId) {
+        this.dishId = dishId;
     }
 
-    public double getPreco() {
-        return preco;
+    public String getName() {
+        return name;
     }
 
-    public void setPreco(double preco) {
-        this.preco = preco;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public List<Ingrediente> getIngredientes() {
-        return ingredientes;
+    public String getType() {
+        return type;
     }
 
-    public void setIngredientes(List<Ingrediente> ingredientes) {
-        this.ingredientes = ingredientes;
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 }

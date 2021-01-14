@@ -21,7 +21,7 @@ import pt.ipleiria.estg.dei.foodlyandroid.listeners.LoginListener;
 public class LoginActivity extends AppCompatActivity implements LoginListener {
 
     private TextView tvEsquecer, tvRegistar;
-    private TextInputEditText etEmail, etPassword;
+    private TextInputEditText etUsername, etPassword;
     private Button btnLogin;
 
     @Override
@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        etEmail = findViewById(R.id.editTextEmail);
+        etUsername = findViewById(R.id.editTextUsername);
         etPassword = findViewById(R.id.editTextPassword);
         tvRegistar = findViewById(R.id.textViewRegistar);
 
@@ -37,11 +37,11 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
     }
 
     public void onClickLogin(View view) {
-        String email = etEmail.getText().toString();
+        String username = etUsername.getText().toString();
         String password = etPassword.getText().toString();
 
-        if (!isEmailValido(email)) {
-            etEmail.setError(getString(R.string.etEmailInvalido));
+        if (!isUsernameValido(username)) {
+            etUsername.setError(getString(R.string.etUsernameInvalido));
             return;
         }
         if (!isPasswordValida(password)) {
@@ -50,15 +50,15 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
         }
 
         Intent intent = new Intent(this, MenuMainActivity.class);
-        intent.putExtra("EMAIL", email);
+        intent.putExtra("USERNAME", username);
         startActivity(intent);
     }
 
-    private boolean isEmailValido(String email) {
-        if (email == null) {
+    private boolean isUsernameValido(String username) {
+        if (username == null) {
             return false;
         }
-        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
+        return username.length() >= 4;
     }
 
     private boolean isPasswordValida(String password) {
@@ -78,7 +78,7 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
         if (token != null) {
             SharedPreferences sharedPrefUser = getSharedPreferences(MenuMainActivity.USER, Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPrefUser.edit();
-            editor.putString(MenuMainActivity.EMAIL, email);
+            editor.putString(MenuMainActivity.USERNAME, email);
             editor.putString(MenuMainActivity.TOKEN, token);
             editor.apply();
 

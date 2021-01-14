@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -15,9 +16,9 @@ import pt.ipleiria.estg.dei.foodlyandroid.modelos.Ementa;
 
 public class ListaEmentaAdaptador extends BaseAdapter {
 
-    private Context context;
+    private final Context context;
     private LayoutInflater inflater;
-    private ArrayList<Ementa> ementas;
+    private final ArrayList<Ementa> ementas;
 
     public ListaEmentaAdaptador(Context context, ArrayList<Ementa> ementas) {
         this.context = context;
@@ -36,7 +37,7 @@ public class ListaEmentaAdaptador extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return ementas.get(position).getId();
+        return ementas.get(position).getDishId();
     }
 
     @Override
@@ -59,15 +60,17 @@ public class ListaEmentaAdaptador extends BaseAdapter {
         return convertView;
     }
 
-    private class ViewHolderLista {
-        private TextInputEditText tvEmenta;
+    private static class ViewHolderLista {
+        private final TextView tvDishName, tvDishPrice;
 
         public ViewHolderLista(View view) {
-            tvEmenta = view.findViewById(R.id.textViewItemEmenta);
+            tvDishName = view.findViewById(R.id.textViewDishName);
+            tvDishPrice = view.findViewById(R.id.textViewDishPrice);
         }
 
         public void update(Ementa ementa) {
-            tvEmenta.setText(ementa.getNome() + "................" + ementa.getPreco() + "€");
+            tvDishName.setText(ementa.getName());
+            tvDishPrice.setText(ementa.getPrice()+" €");
         }
     }
 }

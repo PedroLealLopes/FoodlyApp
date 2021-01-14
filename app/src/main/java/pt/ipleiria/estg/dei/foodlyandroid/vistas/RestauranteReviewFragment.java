@@ -32,19 +32,19 @@ public class RestauranteReviewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_restaurante_review, container, false);
 
-        listaReviews = SingletonFoodly.getInstance(getContext()).getReviews();
+        //listaReviews = SingletonFoodly.getInstance(getContext()).getReviews();
         lvListaReviews = view.findViewById(R.id.listViewReviews);
         lvListaReviews.setAdapter(new ListaReviewAdaptador(getContext(), listaReviews));
 
         lvListaReviews.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String comentario = SingletonFoodly.getInstance(getContext()).getReview(position + 1).getComentario();
+                //String comentario = SingletonFoodly.getInstance(getContext()).getReview(position + 1).getComentario();
 
                 AlertDialog.Builder builder;
                 builder = new AlertDialog.Builder(view.getContext());
                 builder.setTitle("Comentário")
-                        .setMessage(comentario)
+                        .setMessage("comentario")
                         .setNegativeButton(R.string.respostaVoltar, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
