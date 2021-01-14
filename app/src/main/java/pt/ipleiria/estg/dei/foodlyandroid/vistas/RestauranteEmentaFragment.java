@@ -73,5 +73,11 @@ public class RestauranteEmentaFragment extends Fragment implements EmentasListen
         lvListaEmentaPrincipal.setAdapter(new ListaEmentaAdaptador(getContext(), mainCourse));
         lvListaEmenraBebida.setAdapter(new ListaEmentaAdaptador(getContext(), drinks));
         lvListaEmenraSobremesa.setAdapter(new ListaEmentaAdaptador(getContext(), desserts));
+
+        GenericUtils.setListViewHeightBasedOnChildren(lvListaEmentaEntrada);
+        GenericUtils.setListViewHeightBasedOnChildren(lvListaEmentaSalada);
+        GenericUtils.setListViewHeightBasedOnChildren(lvListaEmentaPrincipal);
+        GenericUtils.setListViewHeightBasedOnChildren(lvListaEmenraBebida);
+        GenericUtils.setListViewHeightBasedOnChildren(lvListaEmenraSobremesa);
     }
 }

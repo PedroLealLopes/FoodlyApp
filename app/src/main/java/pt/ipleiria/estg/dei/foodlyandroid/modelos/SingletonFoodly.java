@@ -42,8 +42,8 @@ public class SingletonFoodly {
     private LoginListener loginListener;
 
     private static final String mUrlAPILogin = "";
-    private static final String mUrlAPIResturantes = "http://192.168.1.229/FoodlyWeb/frontend/web/api/restaurants";
-    private static final String mUrlAPIEmentas = "http://192.168.1.229/FoodlyWeb/frontend/web/api/dishes/restaurant";
+    private static final String mUrlAPIResturantes = "http://192.168.1.8/FoodlyWeb/frontend/web/api/restaurants";
+    private static final String mUrlAPIEmentas = "http://192.168.1.8/FoodlyWeb/frontend/web/api/dishes/restaurant";
 
     public static synchronized SingletonFoodly getInstance(Context context) {
         if (instance == null)
@@ -161,14 +161,6 @@ public class SingletonFoodly {
             if (e.getDishId() == id)
                 return e;
         return null;
-    }
-
-    private int getEmentasSize(){
-        int i = 0;
-        for (Ementa e: ementas){
-            i++;
-        }
-        return i;
     }
 
     public ArrayList<Ementa> getEmentaType(int restaurantId) {
