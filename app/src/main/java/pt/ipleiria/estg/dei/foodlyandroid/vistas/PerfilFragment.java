@@ -27,8 +27,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import pt.ipleiria.estg.dei.foodlyandroid.R;
+import pt.ipleiria.estg.dei.foodlyandroid.modelos.Profile;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.SingletonFoodly;
 import pt.ipleiria.estg.dei.foodlyandroid.utils.GenericUtils;
+import pt.ipleiria.estg.dei.foodlyandroid.utils.ProfileJsonParser;
 
 public class PerfilFragment extends Fragment {
 
@@ -114,34 +116,24 @@ public class PerfilFragment extends Fragment {
             JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, mUrlAPIProfile, null, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
-                    try {
-                        String userId = response.getString("userId");
-                        String fullname = response.getString("fullname");
-                        String age = response.getString("age");
-                        String alergias = response.getString("alergias");
-                        String genero = response.getString("genero");
-                        String telefone = response.getString("telefone");
-                        String morada = response.getString("morada");
+                    Profile profile = ProfileJsonParser.parserJsonProfiles(response);
+                    SingletonFoodly.getInstance(getContext()).setProfile(profile);
 
 
-                        editTextIdadeProfile = getView().findViewById(R.id.editTextIdadeProfile);
-                        editTextNomeAlergiaProfile = getView().findViewById(R.id.editTextNomeAlergiaProfile);
-                        editTextGeneroProfile = getView().findViewById(R.id.editTextGeneroProfile);
-                        editTextNomeContactoProfile = getView().findViewById(R.id.editTextNomeContactoProfile);
-                        editTextNomeMoradaProfile = getView().findViewById(R.id.editTextNomeMoradaProfile);
-                        editTextNomeCompletoProfile = getView().findViewById(R.id.editTextNomeCompletoProfile);
+                    editTextIdadeProfile = getView().findViewById(R.id.editTextIdadeProfile);
+                    editTextNomeAlergiaProfile = getView().findViewById(R.id.editTextNomeAlergiaProfile);
+                    editTextGeneroProfile = getView().findViewById(R.id.editTextGeneroProfile);
+                    editTextNomeContactoProfile = getView().findViewById(R.id.editTextNomeContactoProfile);
+                    editTextNomeMoradaProfile = getView().findViewById(R.id.editTextNomeMoradaProfile);
+                    editTextNomeCompletoProfile = getView().findViewById(R.id.editTextNomeCompletoProfile);
 
 
-                        editTextIdadeProfile.setText(age);
-                        editTextNomeAlergiaProfile.setText(alergias);
-                        editTextGeneroProfile.setText(genero);
-                        editTextNomeContactoProfile.setText(telefone);
-                        editTextNomeMoradaProfile.setText(morada);
-                        editTextNomeCompletoProfile.setText(fullname);
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                    editTextIdadeProfile.setText(profile.getAge());
+                    editTextNomeAlergiaProfile.setText(profile.getAlergias());
+                    editTextGeneroProfile.setText(profile.getGenero());
+                    editTextNomeContactoProfile.setText(profile.getTelefone());
+                    editTextNomeMoradaProfile.setText(profile.getMorada());
+                    editTextNomeCompletoProfile.setText(profile.getFullname());
 
 
                 }}, new Response.ErrorListener() {
@@ -167,9 +159,9 @@ public class PerfilFragment extends Fragment {
                         String email = response.getString("email");
 
 
+
                         editTextUsername = getView().findViewById(R.id.editTextUsernameProfile);
                         editTextEmailProfile = getView().findViewById(R.id.editTextEmailProfile);
-
 
                         editTextUsername.setText(username);
                         editTextEmailProfile.setText(email);

@@ -39,6 +39,7 @@ public class SingletonFoodly {
 
     private RestaurantesListener restaurantesListener;
     private LoginListener loginListener;
+    public Profile profile;
 
     private static final String mUrlAPILogin = "";
     private static final String mUrlAPIResturantes = "http://192.168.1.229/FoodlyWeb/frontend/web/api/restaurants";
@@ -59,6 +60,18 @@ public class SingletonFoodly {
     //region LOGIN
     public void setLoginListener(LoginListener loginListener) {
         this.loginListener = loginListener;
+    }
+
+    public void setProfile(Profile profile){
+        this.profile = profile;
+    }
+
+    public Profile getProfile(){
+        return this.profile;
+    }
+
+    public int getProfileId(){
+        return getProfile().getProfileId();
     }
 
     //region API
