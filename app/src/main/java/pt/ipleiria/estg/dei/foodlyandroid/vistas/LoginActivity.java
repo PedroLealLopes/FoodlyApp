@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -15,8 +16,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.io.UnsupportedEncodingException;
+
 import pt.ipleiria.estg.dei.foodlyandroid.R;
 import pt.ipleiria.estg.dei.foodlyandroid.listeners.LoginListener;
+import pt.ipleiria.estg.dei.foodlyandroid.modelos.SingletonFoodly;
 
 public class LoginActivity extends AppCompatActivity implements LoginListener {
 
@@ -49,6 +53,11 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
             return;
         }
 
+        password = encodePassword(password);
+        if(password != null){
+            SingletonFoodly.getInstance(getApplicationContext()).loginAPI(username, password, getApplicationContext());
+        }
+
         Intent intent = new Intent(this, MenuMainActivity.class);
         intent.putExtra("USERNAME", username);
         startActivity(intent);
@@ -66,6 +75,18 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
             return false;
         }
         return password.length() >= 4;
+    }
+
+    private String encodePassword(String password){
+        byte[] data = new byte[0];
+        try {
+            data = password.getBytes("UTF-8");
+            String base64 = Base64.encodeToString(data, Base64.DEFAULT);
+            return base64;
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public void onClickRegistar(View view) {

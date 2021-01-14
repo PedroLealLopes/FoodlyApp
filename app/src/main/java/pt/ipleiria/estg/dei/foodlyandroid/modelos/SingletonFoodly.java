@@ -9,10 +9,12 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,6 +25,7 @@ import pt.ipleiria.estg.dei.foodlyandroid.listeners.LoginListener;
 import pt.ipleiria.estg.dei.foodlyandroid.listeners.RestaurantesListener;
 import pt.ipleiria.estg.dei.foodlyandroid.utils.EmentaJsonParser;
 import pt.ipleiria.estg.dei.foodlyandroid.utils.GenericUtils;
+import pt.ipleiria.estg.dei.foodlyandroid.utils.ProfileJsonParser;
 import pt.ipleiria.estg.dei.foodlyandroid.utils.RestauranteJsonParser;
 
 public class SingletonFoodly {
@@ -42,12 +45,12 @@ public class SingletonFoodly {
     private EmentasListener ementasListener;
     private LoginListener loginListener;
 
-    private static final String mUrlAPILogin = "";
     private static final String IP_MiiTU = "192.168.1.8";
     private static final String IP_Luckdude = "192.168.1.229";
-    private static final String IP_Johnny = "";
-    private static final String mUrlAPIResturantes = "http://"+ IP_Luckdude +"/FoodlyWeb/frontend/web/api/restaurants";
-    private static final String mUrlAPIEmentas = "http://" + IP_Luckdude + "/FoodlyWeb/frontend/web/api/dishes/restaurant";
+    private static final String IP_Johnny = "192.168.1.253";
+    private static final String mUrlAPILogin = "http://"+ IP_Johnny +"/FoodlyWeb/frontend/web/api/users/login";
+    private static final String mUrlAPIResturantes = "http://"+ IP_Johnny +"/FoodlyWeb/frontend/web/api/restaurants";
+    private static final String mUrlAPIEmentas = "http://" + IP_Johnny + "/FoodlyWeb/frontend/web/api/dishes/restaurant";
 
     public static synchronized SingletonFoodly getInstance(Context context) {
         if (instance == null)
@@ -83,13 +86,10 @@ public class SingletonFoodly {
 
     //region API
     public void loginAPI(final String email, final String password, final Context context) {
-        StringRequest req = new StringRequest(Request.Method.POST, mUrlAPILogin, new Response.Listener<String>() {
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, mUrlAPILogin, null, new Response.Listener<JSONObject>() {
             @Override
-            public void onResponse(String response) {
-                String token = GenericUtils.parserJsonLogin(response);
-
-                if (loginListener != null)
-                    loginListener.onValidateLogin(token, email);
+            public void onResponse(JSONObject response) {
+                ProfileJsonParser.parserJsonProfiles(response);
             }
         }, new Response.ErrorListener() {
             @Override
