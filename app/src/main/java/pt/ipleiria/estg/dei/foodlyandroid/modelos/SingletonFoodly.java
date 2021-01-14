@@ -176,6 +176,7 @@ public class SingletonFoodly {
         for (Ementa e : ementas){
             return Foo;
         }
+        return Foo;
     }
 
     //region API
