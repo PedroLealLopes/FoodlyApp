@@ -16,6 +16,7 @@ public class ProfileJsonParser {
         Profile profile = new Profile(0, "", "","", "","", "","", "", "");
         if (response != null) {
             try {
+                profile.setProfileId(response.getInt("id"));
                 profile.setFullname(response.getString("fullname"));
                 profile.setAge(response.getString("age"));
                 profile.setAlergias(response.getString("alergias"));
@@ -24,6 +25,7 @@ public class ProfileJsonParser {
                 profile.setMorada(response.getString("morada"));
                 profile.setUsername(response.getString("username"));
                 profile.setEmail(response.getString("email"));
+                profile.setImage(response.getString("image"));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
