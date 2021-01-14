@@ -36,6 +36,7 @@ public class SingletonFoodly {
     private static final int EDITAR_BD = 2;
     private static final int REMOVER_BD = 3;
     private FoodlyBDHelper foodlyBDHelper = null;
+    public Profile profile;
 
     private RestaurantesListener restaurantesListener;
     private EmentasListener ementasListener;
@@ -43,10 +44,10 @@ public class SingletonFoodly {
 
     private static final String mUrlAPILogin = "";
     private static final String IP_MiiTU = "192.168.1.8";
-    private static final String IP_Luckdude = "";
+    private static final String IP_Luckdude = "192.168.1.229";
     private static final String IP_Johnny = "";
-    private static final String mUrlAPIResturantes = "http://192.168.1.8/FoodlyWeb/frontend/web/api/restaurants";
-    private static final String mUrlAPIEmentas = "http://192.168.1.8/FoodlyWeb/frontend/web/api/dishes/restaurant";
+    private static final String mUrlAPIResturantes = "http://"+ IP_Luckdude +"/FoodlyWeb/frontend/web/api/restaurants";
+    private static final String mUrlAPIEmentas = "http://" + IP_Luckdude + "/FoodlyWeb/frontend/web/api/dishes/restaurant";
 
     public static synchronized SingletonFoodly getInstance(Context context) {
         if (instance == null)
@@ -65,6 +66,19 @@ public class SingletonFoodly {
     //region LOGIN
     public void setLoginListener(LoginListener loginListener) {
         this.loginListener = loginListener;
+    }
+
+
+    public void setProfile(Profile profile){
+        this.profile = profile;
+    }
+
+    public Profile getProfile(){
+        return this.profile;
+    }
+
+    public int getProfileId(){
+        return getProfile().getProfileId();
     }
 
     //region API
