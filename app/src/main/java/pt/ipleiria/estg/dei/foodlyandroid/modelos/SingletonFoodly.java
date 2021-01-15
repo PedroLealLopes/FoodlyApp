@@ -14,6 +14,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -48,9 +49,9 @@ public class SingletonFoodly {
     private static final String IP_MiiTU = "192.168.1.8";
     private static final String IP_Luckdude = "192.168.1.229";
     private static final String IP_Johnny = "192.168.1.253";
-    private static final String mUrlAPILogin = "http://"+ IP_Johnny +"/FoodlyWeb/frontend/web/api/users/login";
-    private static final String mUrlAPIResturantes = "http://"+ IP_Johnny +"/FoodlyWeb/frontend/web/api/restaurants";
-    private static final String mUrlAPIEmentas = "http://" + IP_Johnny + "/FoodlyWeb/frontend/web/api/dishes/restaurant";
+    private static final String mUrlAPILogin = "http://"+ IP_Luckdude +"/FoodlyWeb/frontend/web/api/users/login";
+    private static final String mUrlAPIResturantes = "http://"+ IP_Luckdude +"/FoodlyWeb/frontend/web/api/restaurants";
+    private static final String mUrlAPIEmentas = "http://" + IP_Luckdude + "/FoodlyWeb/frontend/web/api/dishes/restaurant";
 
     public static synchronized SingletonFoodly getInstance(Context context) {
         if (instance == null)
@@ -85,22 +86,39 @@ public class SingletonFoodly {
     }
 
     //region API
-    public void loginAPI(final String email, final String password, final Context context) {
-        JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, mUrlAPILogin, null, new Response.Listener<JSONObject>() {
+    public void loginAPI(final String username, final String password, final Context context) {
+        if (!GenericUtils.isConnectionInternet(context)) {
+            Toast.makeText(context, "Não há internet", Toast.LENGTH_SHORT).show();
+
+            if (loginListener != null)
+                loginListener.onValidateLogin(false, "");
+        }
+        StringRequest req = new StringRequest(Request.Method.POST, mUrlAPILogin, new Response.Listener<String>() {
             @Override
-            public void onResponse(JSONObject response) {
-                ProfileJsonParser.parserJsonProfiles(response);
+            public void onResponse(String response) {
+                try {
+                    JSONObject profileResponse = new JSONObject(response);
+                    if(profileResponse.getInt("id") >= 0){
+                        setProfile(ProfileJsonParser.parserJsonProfiles(profileResponse));
+                        loginListener.onValidateLogin(true, profileResponse.getString("username"));
+                    }
+                    else{
+                        loginListener.onValidateLogin(false, "");
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+                System.out.println(error.getMessage());
             }
         }) {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("email", email);
+                params.put("username", username);
                 params.put("password", password);
                 return params;
             }

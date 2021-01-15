@@ -33,6 +33,8 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        SingletonFoodly.getInstance(getApplicationContext()).setLoginListener(this);
+
         etUsername = findViewById(R.id.editTextUsername);
         etPassword = findViewById(R.id.editTextPassword);
         tvRegistar = findViewById(R.id.textViewRegistar);
@@ -57,10 +59,6 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
         if(password != null){
             SingletonFoodly.getInstance(getApplicationContext()).loginAPI(username, password, getApplicationContext());
         }
-
-        Intent intent = new Intent(this, MenuMainActivity.class);
-        intent.putExtra("USERNAME", username);
-        startActivity(intent);
     }
 
     private boolean isUsernameValido(String username) {
@@ -95,7 +93,16 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
     }
 
     @Override
-    public void onValidateLogin(String token, String email) {
+    public void onValidateLogin(boolean canLogin, String username) {
+        if(canLogin){
+            Intent intent = new Intent(this, MenuMainActivity.class);
+            intent.putExtra("USERNAME", username);
+            startActivity(intent);
+        }else{
+            Toast.makeText(this, "Login Invalida", Toast.LENGTH_SHORT).show();
+        }
+
+/*
         if (token != null) {
             SharedPreferences sharedPrefUser = getSharedPreferences(MenuMainActivity.USER, Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPrefUser.edit();
@@ -107,6 +114,7 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
             startActivity(intent);
             finish();
         } else
-            Toast.makeText(this, "Login inválido", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Login inválido", Toast.LENGTH_SHORT).show();\
+ */
     }
 }
