@@ -38,8 +38,6 @@ public class PerfilFragment extends Fragment {
     private ChipNavigationBar bottomNav;
     private FragmentManager fragmentManager;
     private static final String TAG = PerfilFragment.class.getSimpleName();
-    private TextInputEditText editTextUsername, editTextIdadeProfile, editTextNomeAlergiaProfile,
-            editTextGeneroProfile,editTextNomeContactoProfile, editTextNomeMoradaProfile, editTextEmailProfile, editTextNomeCompletoProfile;
 
     public PerfilFragment(Context context) {
         this.context = context;
@@ -48,19 +46,6 @@ public class PerfilFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_perfil, container, false);
-
-        Profile profile = SingletonFoodly.getInstance(context).getProfile();
-        Toast.makeText(context, "Profile: "  + profile.toString(), Toast.LENGTH_SHORT).show();
-        editTextIdadeProfile = view.findViewById(R.id.editTextIdadeProfile);
-        editTextNomeAlergiaProfile = view.findViewById(R.id.editTextNomeAlergiaProfile);
-        editTextGeneroProfile = view.findViewById(R.id.editTextGeneroProfile);
-        editTextNomeContactoProfile = view.findViewById(R.id.editTextNomeContactoProfile);
-        editTextNomeMoradaProfile = view.findViewById(R.id.editTextNomeMoradaProfile);
-        editTextNomeCompletoProfile = view.findViewById(R.id.editTextNomeCompletoProfile);
-        editTextUsername = view.findViewById(R.id.editTextUsernameProfile);
-        editTextEmailProfile = view.findViewById(R.id.editTextEmailProfile);
-
-
 
         //region Bottom Navigation
         bottomNav = view.findViewById(R.id.bottom_nav);
@@ -101,18 +86,6 @@ public class PerfilFragment extends Fragment {
             }
         });
         //endregion
-
-
-        if(profile != null){
-            //editTextUsername.setText(profile.getUsername());
-            editTextEmailProfile.setText(profile.getEmail());
-            editTextIdadeProfile.setText(profile.getAge());
-            editTextNomeAlergiaProfile.setText(profile.getAlergias());
-            editTextGeneroProfile.setText(profile.getGenero());
-            editTextNomeContactoProfile.setText(profile.getTelefone());
-            editTextNomeMoradaProfile.setText(profile.getMorada());
-            editTextNomeCompletoProfile.setText(profile.getFullname());
-        }
 
         Button btnEditar = view.findViewById(R.id.buttonEditar);
         btnEditar.setOnClickListener(new View.OnClickListener() {
