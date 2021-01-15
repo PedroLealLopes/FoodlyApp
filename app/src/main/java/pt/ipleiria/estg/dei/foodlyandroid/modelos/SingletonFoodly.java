@@ -85,11 +85,12 @@ public class SingletonFoodly {
     }
 
     //region API
-    public void loginAPI(final String email, final String password, final Context context) {
-        JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, mUrlAPILogin, null, new Response.Listener<JSONObject>() {
+    public void loginAPI(final String username, final String password, final Context context) {
+        StringRequest req = new StringRequest(Request.Method.POST, mUrlAPILogin, new Response.Listener<String>() {
             @Override
-            public void onResponse(JSONObject response) {
-                ProfileJsonParser.parserJsonProfiles(response);
+            public void onResponse(String response) {
+
+                System.out.println("Login --->" + response);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -100,7 +101,7 @@ public class SingletonFoodly {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("email", email);
+                params.put("username", username);
                 params.put("password", password);
                 return params;
             }
