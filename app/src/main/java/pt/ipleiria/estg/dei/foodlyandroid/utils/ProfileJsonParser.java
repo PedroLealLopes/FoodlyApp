@@ -16,6 +16,7 @@ public class ProfileJsonParser {
         Profile profile = new Profile(0, "", "","", "","", "","", "", "");
         if (response != null) {
             try {
+
                 profile.setProfileId(response.getInt("id"));
                 profile.setFullname(response.getString("fullname"));
                 profile.setAge(response.getString("age"));

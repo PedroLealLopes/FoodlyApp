@@ -17,6 +17,22 @@ public class Profile {
         this.image = image;
     }
 
+    @Override
+    public String toString() {
+        return "Profile{" +
+                "username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", fullname='" + fullname + '\'' +
+                ", age='" + age + '\'' +
+                ", alergias='" + alergias + '\'' +
+                ", genero='" + genero + '\'' +
+                ", telefone='" + telefone + '\'' +
+                ", morada='" + morada + '\'' +
+                ", image='" + image + '\'' +
+                ", profileId=" + profileId +
+                '}';
+    }
+
     public String getImage() {
         return image;
     }
