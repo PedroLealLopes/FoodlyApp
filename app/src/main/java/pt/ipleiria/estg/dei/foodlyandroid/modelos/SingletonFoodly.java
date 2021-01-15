@@ -1,7 +1,6 @@
 package pt.ipleiria.estg.dei.foodlyandroid.modelos;
 
 import android.content.Context;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -46,8 +45,7 @@ public class SingletonFoodly {
     private static final String IP_MiiTU = "192.168.1.8";
     private static final String IP_Luckdude = "192.168.1.229";
     private static final String IP_Johnny = "";
-    private static final String mUrlAPIResturantes = "http://"+ IP_Luckdude +"/FoodlyWeb/frontend/web/api/restaurants";
-    private static final String mUrlAPIEmentas = "http://" + IP_Luckdude + "/FoodlyWeb/frontend/web/api/dishes/restaurant";
+    private static final String mUrlAPI = "http://"+ IP_MiiTU +"/FoodlyWeb/frontend/web/api";
 
     public static synchronized SingletonFoodly getInstance(Context context) {
         if (instance == null)
@@ -68,7 +66,6 @@ public class SingletonFoodly {
         this.loginListener = loginListener;
     }
 
-
     public void setProfile(Profile profile){
         this.profile = profile;
     }
@@ -78,10 +75,14 @@ public class SingletonFoodly {
     }
 
     public int getProfileId(){
-        return getProfile().getProfileId();
+        return getProfile().getProfileId() + 1;
     }
 
-    //region API
+    public String getUrlAPI(){
+        return mUrlAPI;
+    }
+
+    //region LOGIN_API
     public void loginAPI(final String email, final String password, final Context context) {
         StringRequest req = new StringRequest(Request.Method.POST, mUrlAPILogin, new Response.Listener<String>() {
             @Override
@@ -106,7 +107,7 @@ public class SingletonFoodly {
             }
         };
         volleyQueue.add(req);
-    }//endregion
+    }
     //endregion
 
     //region RESTAURANTES
@@ -121,7 +122,7 @@ public class SingletonFoodly {
         return null;
     }
 
-    //region API
+    //region RESTAURANTES_API
     public void getAllRestaurantesAPI(final Context context) {
         if (!GenericUtils.isConnectionInternet(context)) {
             Toast.makeText(context, "Não há internet", Toast.LENGTH_SHORT).show();
@@ -130,7 +131,7 @@ public class SingletonFoodly {
                 restaurantesListener.onRefreshListaRestaurantes(foodlyBDHelper.getAllRestaurantesDB());
 
         } else {
-            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlAPIResturantes, null, new Response.Listener<JSONArray>() {
+            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlAPI + "/restaurants", null, new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {
                     restaurantes = RestauranteJsonParser.parserJsonRestaurantes(response);
@@ -150,7 +151,7 @@ public class SingletonFoodly {
     }
     //endregion
 
-    //region BDHelper
+    //region RESTAURANTES_BDHelper
     public ArrayList<Restaurante> getRestaurantesBD() {
         restaurantes = foodlyBDHelper.getAllRestaurantesDB();
         return restaurantes;
@@ -189,13 +190,13 @@ public class SingletonFoodly {
         return foo;
     }
 
-    //region API
+    //region EMENTA_API
     public void getAllEmentasAPI(final int restaurantId, final Context context) {
 
         if (!GenericUtils.isConnectionInternet(context)) {
             Toast.makeText(context, "Não há internet", Toast.LENGTH_SHORT).show();
         } else {
-            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlAPIEmentas + "/" + restaurantId, null, new Response.Listener<JSONArray>() {
+            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlAPI + "/dishes/restaurant/" + restaurantId, null, new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {
                     ementas = EmentaJsonParser.parserJsonEmentas(response, restaurantId);
@@ -213,5 +214,30 @@ public class SingletonFoodly {
         }
     }
     //endregion
+    //endregion
+
+    //region FAVORITOS
+    public void getAllFavoritosAPI(final Context context) {
+
+        if (!GenericUtils.isConnectionInternet(context)) {
+            Toast.makeText(context, "Não há internet", Toast.LENGTH_SHORT).show();
+        } else {
+            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlAPI + "/restaurants", null, new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray response) {
+                    restaurantes = RestauranteJsonParser.parserJsonRestaurantes(response);
+
+                    if (restaurantesListener != null)
+                        restaurantesListener.onRefreshListaRestaurantes(restaurantes);
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+            volleyQueue.add(req);
+        }
+    }
     //endregion
 }
