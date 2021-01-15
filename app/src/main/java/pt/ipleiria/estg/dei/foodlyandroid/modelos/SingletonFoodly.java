@@ -1,6 +1,7 @@
 package pt.ipleiria.estg.dei.foodlyandroid.modelos;
 
 import android.content.Context;
+import android.speech.RecognitionService;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -12,6 +13,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,12 +43,13 @@ public class SingletonFoodly {
     private RestaurantesListener restaurantesListener;
     private EmentasListener ementasListener;
     private LoginListener loginListener;
+    private ArrayList<Restaurante> favRestaurants;
 
     private static final String mUrlAPILogin = "";
     private static final String IP_MiiTU = "192.168.1.8";
     private static final String IP_Luckdude = "192.168.1.229";
     private static final String IP_Johnny = "";
-    private static final String mUrlAPI = "http://"+ IP_MiiTU +"/FoodlyWeb/frontend/web/api";
+    private static final String mUrlAPI = "http://"+ IP_Luckdude +"/FoodlyWeb/frontend/web/api";
 
     public static synchronized SingletonFoodly getInstance(Context context) {
         if (instance == null)
@@ -75,7 +79,7 @@ public class SingletonFoodly {
     }
 
     public int getProfileId(){
-        return getProfile().getProfileId() + 1;
+        return getProfile().getProfileId();
     }
 
     public String getUrlAPI(){
@@ -190,6 +194,14 @@ public class SingletonFoodly {
         return foo;
     }
 
+    public void setFavRestaurants(ArrayList<Restaurante> restaurants){
+        this.favRestaurants = restaurants;
+    }
+
+    public ArrayList<Restaurante> getFavRestaurants(){
+        return this.favRestaurants;
+    }
+
     //region EMENTA_API
     public void getAllEmentasAPI(final int restaurantId, final Context context) {
 
@@ -222,11 +234,22 @@ public class SingletonFoodly {
         if (!GenericUtils.isConnectionInternet(context)) {
             Toast.makeText(context, "Não há internet", Toast.LENGTH_SHORT).show();
         } else {
-            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlAPI + "/restaurants", null, new Response.Listener<JSONArray>() {
+            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlAPI + "/profile-restaurant-favorites/user/1", null, new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {
-                    restaurantes = RestauranteJsonParser.parserJsonRestaurantes(response);
+                    ArrayList<Restaurante> restaurantesfavoritos = new ArrayList<>();
 
+                    for( int i = 0 ; i < response.length(); i++)
+                    {
+                        try {
+                            JSONObject restaurante = (JSONObject) response.get(i);
+                            restaurantesfavoritos.add(SingletonFoodly.getInstance(context).getRestaurante(restaurante.getInt("restaurant_restaurantId")));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    setFavRestaurants(restaurantesfavoritos);
                     if (restaurantesListener != null)
                         restaurantesListener.onRefreshListaRestaurantes(restaurantes);
                 }

@@ -47,16 +47,7 @@ public class PerfilTabFavFragment extends Fragment implements RestaurantesListen
     @Override
     public void onRefreshListaRestaurantes(ArrayList<Restaurante> restaurantes) {
 
-        int i = 0;
-        int[] idFavoritos = new int[] {1, 3};
-        Restaurante restaurante = SingletonFoodly.getInstance(getContext()).getRestaurante(1);
-        ArrayList<Restaurante> restaurantesfavoritos = new ArrayList<>();
-
-        for( i = 0 ; i < idFavoritos.length - 1; i++)
-        {
-
-        }
-
+        ArrayList<Restaurante> restaurantesfavoritos = SingletonFoodly.getInstance(getContext()).getFavRestaurants();
 
         lvListaFavoritos.setAdapter(new ListaRestauranteAdaptador(getContext(), restaurantesfavoritos));
     }
