@@ -62,16 +62,6 @@ public class PerfilFragment extends Fragment {
 
 
 
-        if(profile != null){
-            //editTextUsername.setText(profile.getUsername());
-            editTextEmailProfile.setText(profile.getEmail());
-            editTextIdadeProfile.setText(profile.getAge());
-            editTextNomeAlergiaProfile.setText(profile.getAlergias());
-            editTextGeneroProfile.setText(profile.getGenero());
-            editTextNomeContactoProfile.setText(profile.getTelefone());
-            editTextNomeMoradaProfile.setText(profile.getMorada());
-            editTextNomeCompletoProfile.setText(profile.getFullname());
-        }
         //region Bottom Navigation
         bottomNav = view.findViewById(R.id.bottom_nav);
 
@@ -111,6 +101,18 @@ public class PerfilFragment extends Fragment {
             }
         });
         //endregion
+
+
+        if(profile != null){
+            //editTextUsername.setText(profile.getUsername());
+            editTextEmailProfile.setText(profile.getEmail());
+            editTextIdadeProfile.setText(profile.getAge());
+            editTextNomeAlergiaProfile.setText(profile.getAlergias());
+            editTextGeneroProfile.setText(profile.getGenero());
+            editTextNomeContactoProfile.setText(profile.getTelefone());
+            editTextNomeMoradaProfile.setText(profile.getMorada());
+            editTextNomeCompletoProfile.setText(profile.getFullname());
+        }
 
         Button btnEditar = view.findViewById(R.id.buttonEditar);
         btnEditar.setOnClickListener(new View.OnClickListener() {

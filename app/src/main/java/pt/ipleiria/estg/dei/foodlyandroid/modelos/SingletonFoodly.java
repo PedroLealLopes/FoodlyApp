@@ -87,7 +87,6 @@ public class SingletonFoodly {
 
     //region API
     public void loginAPI(final String username, final String password, final Context context) {
-<<<<<<< HEAD
         if (!GenericUtils.isConnectionInternet(context)) {
             Toast.makeText(context, "Não há internet", Toast.LENGTH_SHORT).show();
 
