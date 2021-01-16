@@ -9,6 +9,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -26,6 +27,7 @@ import pt.ipleiria.estg.dei.foodlyandroid.listeners.RestaurantesListener;
 import pt.ipleiria.estg.dei.foodlyandroid.listeners.ReviewsListener;
 import pt.ipleiria.estg.dei.foodlyandroid.utils.EmentaJsonParser;
 import pt.ipleiria.estg.dei.foodlyandroid.utils.GenericUtils;
+import pt.ipleiria.estg.dei.foodlyandroid.utils.ProfileJsonParser;
 import pt.ipleiria.estg.dei.foodlyandroid.utils.RestauranteJsonParser;
 import pt.ipleiria.estg.dei.foodlyandroid.utils.ReviewJsonParser;
 
@@ -50,11 +52,11 @@ public class SingletonFoodly {
     private LoginListener loginListener;
     private ReviewsListener reviewsListener;
 
-    private static final String mUrlAPILogin = "";
     private static final String IP_MiiTU = "192.168.1.8";
     private static final String IP_Luckdude = "192.168.1.229";
-    private static final String IP_Johnny = "";
+    private static final String IP_Johnny = "192.168.1.253";
     private static final String mUrlAPI = "http://"+ IP_MiiTU +"/FoodlyWeb/frontend/web/api";
+    private static final String mUrlAPILogin = "http://"+ IP_MiiTU +"/FoodlyWeb/frontend/web/api/users/login";
 
     public static synchronized SingletonFoodly getInstance(Context context) {
         if (instance == null)
@@ -93,35 +95,34 @@ public class SingletonFoodly {
         return getProfile().getProfileId();
     }
 
-    /*public String getProfilePic(){
-        return getProfile().getImage();
-    }
-
-    public String getProfileUsername(){
-        return getProfile().getUsername();
-    }*/
-    //endregion
-
     //region LOGIN_API
-    public void loginAPI(final String email, final String password, final Context context) {
+    public void loginAPI(final String username, final String password, final Context context) {
         StringRequest req = new StringRequest(Request.Method.POST, mUrlAPILogin, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                String token = GenericUtils.parserJsonLogin(response);
-
-                if (loginListener != null)
-                    loginListener.onValidateLogin(token, email);
+                try {
+                    JSONObject profileResponse = new JSONObject(response);
+                    if(profileResponse.getInt("id") >= 0){
+                        setProfile(ProfileJsonParser.parserJsonProfiles(profileResponse));
+                        loginListener.onValidateLogin(true, profileResponse.getString("username"));
+                    }
+                    else{
+                        loginListener.onValidateLogin(false, "");
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+                System.out.println(error.getMessage());
             }
         }) {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("email", email);
+                params.put("username", username);
                 params.put("password", password);
                 return params;
             }

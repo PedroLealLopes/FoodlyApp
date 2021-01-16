@@ -38,22 +38,15 @@ public class PerfilFragment extends Fragment {
     private ChipNavigationBar bottomNav;
     private FragmentManager fragmentManager;
     private static final String TAG = PerfilFragment.class.getSimpleName();
-    private static RequestQueue volleyQueue;
-    private TextInputEditText editTextUsername, editTextIdadeProfile, editTextNomeAlergiaProfile,
-            editTextGeneroProfile,editTextNomeContactoProfile, editTextNomeMoradaProfile, editTextEmailProfile, editTextNomeCompletoProfile;
 
     public PerfilFragment(Context context) {
         this.context = context;
-        volleyQueue = Volley.newRequestQueue(context);
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_perfil, container, false);
 
-        getProfileAPI(getContext());
-        getUserAPI(getContext());
         //region Bottom Navigation
         bottomNav = view.findViewById(R.id.bottom_nav);
 
@@ -104,83 +97,5 @@ public class PerfilFragment extends Fragment {
         });
 
         return view;
-    }
-
-    public void getProfileAPI(final Context context) {
-
-        String mUrlProfile = SingletonFoodly.getInstance(getContext()).getUrlAPI() + "/profiles/1";
-
-        if (!GenericUtils.isConnectionInternet(context)) {
-            Toast.makeText(context, "Não há internet", Toast.LENGTH_SHORT).show();
-        } else {
-            JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, mUrlProfile, null, new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject response) {
-                    Profile profile = ProfileJsonParser.parserJsonProfiles(response);
-                    SingletonFoodly.getInstance(getContext()).setProfile(profile);
-
-
-                    editTextIdadeProfile = getView().findViewById(R.id.editTextIdadeProfile);
-                    editTextNomeAlergiaProfile = getView().findViewById(R.id.editTextNomeAlergiaProfile);
-                    editTextGeneroProfile = getView().findViewById(R.id.editTextGeneroProfile);
-                    editTextNomeContactoProfile = getView().findViewById(R.id.editTextNomeContactoProfile);
-                    editTextNomeMoradaProfile = getView().findViewById(R.id.editTextNomeMoradaProfile);
-                    editTextNomeCompletoProfile = getView().findViewById(R.id.editTextNomeCompletoProfile);
-
-
-                    editTextIdadeProfile.setText(profile.getAge());
-                    editTextNomeAlergiaProfile.setText(profile.getAlergias());
-                    editTextGeneroProfile.setText(profile.getGenero());
-                    editTextNomeContactoProfile.setText(profile.getTelefone());
-                    editTextNomeMoradaProfile.setText(profile.getMorada());
-                    editTextNomeCompletoProfile.setText(profile.getFullname());
-
-
-                }}, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
-            volleyQueue.add(req);
-        }
-    }
-
-
-    public void getUserAPI(final Context context) {
-
-        String mUrlUser = SingletonFoodly.getInstance(getContext()).getUrlAPI() + "/users/1";
-
-        if (!GenericUtils.isConnectionInternet(context)) {
-            Toast.makeText(context, "Não há internet", Toast.LENGTH_SHORT).show();
-        } else {
-            JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, mUrlUser, null, new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject response) {
-                    try {
-                        String username = response.getString("username");
-                        String email = response.getString("email");
-
-
-
-                        editTextUsername = getView().findViewById(R.id.editTextUsernameProfile);
-                        editTextEmailProfile = getView().findViewById(R.id.editTextEmailProfile);
-
-                        editTextUsername.setText(username);
-                        editTextEmailProfile.setText(email);
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-
-                }}, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    //Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
-            volleyQueue.add(req);
-        }
     }
 }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -15,8 +16,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.io.UnsupportedEncodingException;
+
 import pt.ipleiria.estg.dei.foodlyandroid.R;
 import pt.ipleiria.estg.dei.foodlyandroid.listeners.LoginListener;
+import pt.ipleiria.estg.dei.foodlyandroid.modelos.SingletonFoodly;
 
 public class LoginActivity extends AppCompatActivity implements LoginListener {
 
@@ -28,6 +32,8 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        SingletonFoodly.getInstance(getApplicationContext()).setLoginListener(this);
 
         etUsername = findViewById(R.id.editTextUsername);
         etPassword = findViewById(R.id.editTextPassword);
@@ -49,9 +55,10 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
             return;
         }
 
-        Intent intent = new Intent(this, MenuMainActivity.class);
-        intent.putExtra("USERNAME", username);
-        startActivity(intent);
+        password = encodePassword(password);
+        if(password != null){
+            SingletonFoodly.getInstance(getApplicationContext()).loginAPI(username, password, getApplicationContext());
+        }
     }
 
     private boolean isUsernameValido(String username) {
@@ -68,13 +75,34 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
         return password.length() >= 4;
     }
 
+    private String encodePassword(String password){
+        byte[] data = new byte[0];
+        try {
+            data = password.getBytes("UTF-8");
+            String base64 = Base64.encodeToString(data, Base64.DEFAULT);
+            return base64;
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public void onClickRegistar(View view) {
         Intent intent = new Intent(this, RegistarActivity.class);
         startActivity(intent);
     }
 
     @Override
-    public void onValidateLogin(String token, String email) {
+    public void onValidateLogin(boolean canLogin, String username) {
+        if(canLogin){
+            Intent intent = new Intent(this, MenuMainActivity.class);
+            intent.putExtra("USERNAME", username);
+            startActivity(intent);
+        }else{
+            Toast.makeText(this, "Login Invalida", Toast.LENGTH_SHORT).show();
+        }
+
+/*
         if (token != null) {
             SharedPreferences sharedPrefUser = getSharedPreferences(MenuMainActivity.USER, Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPrefUser.edit();
@@ -86,6 +114,7 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
             startActivity(intent);
             finish();
         } else
-            Toast.makeText(this, "Login inválido", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Login inválido", Toast.LENGTH_SHORT).show();\
+ */
     }
 }
