@@ -14,6 +14,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 import pt.ipleiria.estg.dei.foodlyandroid.R;
@@ -29,7 +31,7 @@ public class RestauranteReviewFragment extends Fragment implements ReviewsListen
     private ListView lvListaReviews;
     private Button btnAdicionar;
     public static final String ID_RESTAURANTE = "ID_RESTAURANTE";
-    private TextView tvTotalPessoas;
+    private TextView tvTotalPessoas, tvMedia;
 
     public RestauranteReviewFragment() {
     }
@@ -42,6 +44,7 @@ public class RestauranteReviewFragment extends Fragment implements ReviewsListen
 
         lvListaReviews = view.findViewById(R.id.listViewReviews);
         tvTotalPessoas = view.findViewById(R.id.textViewPessoas);
+        tvMedia = view.findViewById(R.id.textViewClassificacao);
 
         lvListaReviews.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -73,17 +76,29 @@ public class RestauranteReviewFragment extends Fragment implements ReviewsListen
         SingletonFoodly.getInstance(getContext()).setReviewsListener(this);
         SingletonFoodly.getInstance(getContext()).getAllReviewsAPI(restaurantId, getContext());
 
-        /*for(int i = 0; i< lvListaReviews.getCount(); i++){
-            SingletonFoodly.getInstance(getContext()).getReview(i).getStars();
-        }*/
-        //System.out.println("--> c" + lvListaReviews.getCount());
+
         return view;
     }
 
     @Override
     public void onRefreshListaReviews(ArrayList<Review> reviews) {
+        double summ;
+        double media = 0;
+        int i = 0;
+
         if (reviews != null)
             lvListaReviews.setAdapter(new ListaReviewAdaptador(getContext(), reviews));
+
+
+        tvTotalPessoas.setText(reviews.size()+"");
+        for(Review review : reviews){
+            System.out.println("--> r" + review.getStars());
+            summ = review.getStars();
+            media = media + summ;
+            i++;
+        }
+
+        tvMedia.setText((double) (media / i) + "");
     }
 
     @Override
