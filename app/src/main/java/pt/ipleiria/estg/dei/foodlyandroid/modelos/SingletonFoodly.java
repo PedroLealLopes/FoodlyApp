@@ -235,7 +235,7 @@ public class SingletonFoodly {
 
 
     public void adicionarImagemApi(final String image, final Context context){
-        StringRequest req = new StringRequest(Request.Method.POST, mUrlAPIProfile + profile.getProfileId(), new Response.Listener<String>() {
+        StringRequest req = new StringRequest(Request.Method.PUT, mUrlAPIProfile + profile.getProfileId() + "/upload", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 //profile.setImage(image);

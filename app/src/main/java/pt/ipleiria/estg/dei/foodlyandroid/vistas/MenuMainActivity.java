@@ -24,6 +24,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.Base64;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 import pt.ipleiria.estg.dei.foodlyandroid.R;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.SingletonFoodly;
@@ -79,8 +81,10 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
         tvEmail.setText(username);
 
         profile_image = hView.findViewById(R.id.profile_image);
+
+        byte[] image = Base64.getDecoder().decode(SingletonFoodly.getInstance(getApplicationContext()).getProfile().getImage());
         Glide.with(this)
-                .load(SingletonFoodly.getInstance(getApplicationContext()).getProfile().getImage())
+                .load(image)
                 .placeholder(R.drawable.gordon)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(profile_image);

@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -16,6 +17,8 @@ import androidx.fragment.app.FragmentManager;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
+
+import java.util.Base64;
 
 import pt.ipleiria.estg.dei.foodlyandroid.R;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.Profile;
@@ -89,8 +92,10 @@ public class PerfilFragment extends Fragment {
 
         imageViewProfilePic = view.findViewById(R.id.imageViewProfilePic);
 
+
+        byte[] image = Base64.getDecoder().decode(SingletonFoodly.getInstance(context).getProfile().getImage());
         Glide.with(this)
-                .load(SingletonFoodly.getInstance(context).getProfile().getImage())
+                .load(image)
                 .placeholder(R.drawable.gordon)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(imageViewProfilePic);
