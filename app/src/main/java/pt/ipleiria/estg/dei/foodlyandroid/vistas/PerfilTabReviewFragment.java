@@ -47,10 +47,9 @@ public class PerfilTabReviewFragment extends Fragment implements ReviewsListener
     }
 
     @Override
-    public void onRefreshListaReviews(ArrayList<Review> listaReviews) {
-        ArrayList<Review> reviewsUsers = SingletonFoodly.getInstance(getContext()).getReviewsUsers();
-
-        lvListaReviewsUser.setAdapter(new ListaReviewUserAdaptador(getContext(), reviewsUsers));
+    public void onRefreshListaReviews(ArrayList<Review> reviews) {
+        if (reviews != null)
+            lvListaReviewsUser.setAdapter(new ListaReviewUserAdaptador(getContext(), reviews));
     }
 
     @Override

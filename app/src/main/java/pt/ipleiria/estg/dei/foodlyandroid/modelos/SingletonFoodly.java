@@ -254,7 +254,7 @@ public class SingletonFoodly {
         if (!GenericUtils.isConnectionInternet(context)) {
             Toast.makeText(context, "Não há internet", Toast.LENGTH_SHORT).show();
         } else {
-            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlAPI + "/profile-restaurant-favorites/user/1", null, new Response.Listener<JSONArray>() {
+            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlAPI + "/profile-restaurant-favorites/user/" + getProfileId(), null, new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {
                     ArrayList<Restaurante> restaurantesfavoritos = new ArrayList<>();
@@ -322,36 +322,16 @@ public class SingletonFoodly {
     //endregion
 
     //region REVIEWS_USER
-
-    public void setReviewsUsers(ArrayList<Review> reviews){
-        this.reviewsUsers = reviews;
-    }
-
-    public ArrayList<Review> getReviewsUsers(){
-        return this.reviewsUsers;
-    }
-
     public void getAllReviewsUsersAPI(final Context context) {
 
         if (!GenericUtils.isConnectionInternet(context)) {
             Toast.makeText(context, "Não há internet", Toast.LENGTH_SHORT).show();
         } else {
-            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlAPI + "/restaurant-reviews/user/2", null, new Response.Listener<JSONArray>() {
+            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlAPI + "/restaurant-reviews/user/" + getProfileId(), null, new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {
-                    ArrayList<Review> reviews_users = new ArrayList<>();
+                    reviews = ReviewJsonParser.parserJsonReviews(response);
 
-                    for( int i = 0 ; i < response.length(); i++)
-                    {
-                        try {
-                            JSONObject review = (JSONObject) response.get(i);
-                            reviews_users.add(SingletonFoodly.getInstance(context).getReview(review.getInt("restaurant_restaurantId")));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    setReviewsUsers(reviews_users);
                     if (reviewsListener != null)
                         reviewsListener.onRefreshListaReviews(reviews);
                 }
@@ -364,5 +344,6 @@ public class SingletonFoodly {
             volleyQueue.add(req);
         }
     }
+    //en
     //endregion
 }

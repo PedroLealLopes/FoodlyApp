@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import pt.ipleiria.estg.dei.foodlyandroid.R;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.Review;
+import pt.ipleiria.estg.dei.foodlyandroid.modelos.SingletonFoodly;
 
 public class ListaReviewUserAdaptador extends BaseAdapter {
 
@@ -58,7 +59,7 @@ public class ListaReviewUserAdaptador extends BaseAdapter {
         return convertView;
     }
 
-    private static class ViewHolderLista {
+    private class ViewHolderLista {
         private final TextView tvRestauranteNome, tvRestauranteMorada, tvClassificacao, tvDataCriacao, tvComentario;
 
         public ViewHolderLista(View view) {
@@ -70,11 +71,11 @@ public class ListaReviewUserAdaptador extends BaseAdapter {
         }
 
         public void update(Review review) {
-            //String profileUsername = SingletonFoodly.getInstance(context).getProfileUsername();
-            //String profilePic = SingletonFoodly.getInstance(context).getProfilePic();
+            String restaurantName = SingletonFoodly.getInstance(context).getRestaurante(review.getRestaurantId()).getName();
+            String restaurantLocation = SingletonFoodly.getInstance(context).getRestaurante(review.getRestaurantId()).getLocation();
 
-            tvRestauranteNome.setText("profileUsername");
-            tvRestauranteMorada.setText("morada");
+            tvRestauranteNome.setText(restaurantName);
+            tvRestauranteMorada.setText(restaurantLocation);
             tvClassificacao.setText(review.getStars() + "");
             tvDataCriacao.setText(review.getCreation_date());
             tvComentario.setText(review.getComment());

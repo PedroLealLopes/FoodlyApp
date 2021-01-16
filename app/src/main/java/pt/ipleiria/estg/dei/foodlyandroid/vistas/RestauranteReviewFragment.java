@@ -73,6 +73,10 @@ public class RestauranteReviewFragment extends Fragment implements ReviewsListen
         SingletonFoodly.getInstance(getContext()).setReviewsListener(this);
         SingletonFoodly.getInstance(getContext()).getAllReviewsAPI(restaurantId, getContext());
 
+        /*for(int i = 0; i< lvListaReviews.getCount(); i++){
+            SingletonFoodly.getInstance(getContext()).getReview(i).getStars();
+        }*/
+        //System.out.println("--> c" + lvListaReviews.getCount());
         return view;
     }
 

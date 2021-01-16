@@ -22,8 +22,10 @@ public class ReviewJsonParser {
                     double stars = review.getDouble("stars");
                     String comment = review.getString("comment");
                     String creation_date = review.getString("creation_date");
+                    String username = review.getString("username");
+                    String image = review.getString("image");
 
-                    Review r = new Review(restaurantId, profileId, stars, comment, creation_date);
+                    Review r = new Review(restaurantId, profileId, stars, comment, creation_date, username, image);
                     reviews.add(r);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -43,8 +45,10 @@ public class ReviewJsonParser {
             double stars = review.getDouble("stars");
             String comment = review.getString("comment");
             String creation_date = review.getString("creation_date");
+            String username = review.getString("username");
+            String image = review.getString("image");
 
-            auxReview = new Review(restaurantId, profileId, stars, comment, creation_date);
+            auxReview = new Review(restaurantId, profileId, stars, comment, creation_date, username, image);
         } catch (JSONException e) {
             e.printStackTrace();
         }

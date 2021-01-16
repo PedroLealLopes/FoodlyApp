@@ -40,7 +40,7 @@ public class ListaReviewAdaptador extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return reviews.get(position).getProfileId();
+        return reviews.get(position).getRestaurantId();
     }
 
     @Override
@@ -76,15 +76,13 @@ public class ListaReviewAdaptador extends BaseAdapter {
         }
 
         public void update(Review review) {
-            //String profileUsername = SingletonFoodly.getInstance(context).getProfileUsername();
-            //String profilePic = SingletonFoodly.getInstance(context).getProfilePic();
-
-            tvUsername.setText("profileUsername");
+            System.out.println("--> review " + review.toString());
+            tvUsername.setText(review.getUsername());
             tvData.setText(review.getCreation_date());
             tvClassificacao.setText(review.getStars() + "");
             tvComentario.setText(review.getComment());
             Glide.with(context)
-                    .load(R.drawable.gordon)
+                    .load(review.getImage())
                     .placeholder(R.drawable.gordon)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(ivPic);
