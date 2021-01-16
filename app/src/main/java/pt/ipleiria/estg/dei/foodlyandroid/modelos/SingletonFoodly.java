@@ -17,6 +17,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -52,6 +53,7 @@ public class SingletonFoodly {
     private static final String mUrlAPILogin = "http://"+ IP_Luckdude +"/FoodlyWeb/frontend/web/api/users/login";
     private static final String mUrlAPIResturantes = "http://"+ IP_Luckdude +"/FoodlyWeb/frontend/web/api/restaurants";
     private static final String mUrlAPIEmentas = "http://" + IP_Luckdude + "/FoodlyWeb/frontend/web/api/dishes/restaurant";
+    private static final String mUrlAPIProfile = "http://" + IP_Luckdude + "/FoodlyWeb/frontend/web/api/profiles/";
 
     public static synchronized SingletonFoodly getInstance(Context context) {
         if (instance == null)
@@ -230,6 +232,30 @@ public class SingletonFoodly {
             volleyQueue.add(req);
         }
     }
+
+
+    public void adicionarImagemApi(final String image, final Context context){
+        StringRequest req = new StringRequest(Request.Method.POST, mUrlAPIProfile + profile.getProfileId(), new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                //profile.setImage(image);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("image", image);
+                return params;
+            }
+        };
+        volleyQueue.add(req);
+    }
+
     //endregion
     //endregion
 }

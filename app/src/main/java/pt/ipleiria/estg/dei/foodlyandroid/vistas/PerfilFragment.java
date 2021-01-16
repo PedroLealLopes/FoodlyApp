@@ -8,29 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
+import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.google.android.material.textfield.TextInputEditText;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import pt.ipleiria.estg.dei.foodlyandroid.R;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.Profile;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.SingletonFoodly;
-import pt.ipleiria.estg.dei.foodlyandroid.utils.GenericUtils;
-import pt.ipleiria.estg.dei.foodlyandroid.utils.ProfileJsonParser;
 
 public class PerfilFragment extends Fragment {
 
@@ -38,6 +27,7 @@ public class PerfilFragment extends Fragment {
     private ChipNavigationBar bottomNav;
     private FragmentManager fragmentManager;
     private static final String TAG = PerfilFragment.class.getSimpleName();
+    private ImageView imageViewProfilePic;
 
     public PerfilFragment(Context context) {
         this.context = context;
@@ -46,6 +36,7 @@ public class PerfilFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_perfil, container, false);
+        System.out.println("--> onCreateView PerfilFragment");
 
         //region Bottom Navigation
         bottomNav = view.findViewById(R.id.bottom_nav);
@@ -95,6 +86,14 @@ public class PerfilFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        imageViewProfilePic = view.findViewById(R.id.imageViewProfilePic);
+
+        Glide.with(this)
+                .load(SingletonFoodly.getInstance(context).getProfile().getImage())
+                .placeholder(R.drawable.gordon)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(imageViewProfilePic);
 
         return view;
     }

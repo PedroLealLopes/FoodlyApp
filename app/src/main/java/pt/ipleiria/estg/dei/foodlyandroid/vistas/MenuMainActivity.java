@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -19,9 +20,13 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.material.navigation.NavigationView;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import pt.ipleiria.estg.dei.foodlyandroid.R;
+import pt.ipleiria.estg.dei.foodlyandroid.modelos.SingletonFoodly;
 
 public class MenuMainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -32,6 +37,7 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
     private NavigationView navigationView;
     private DrawerLayout drawer;
     private FragmentManager fragmentManager;
+    private CircleImageView profile_image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +58,7 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
         carregarCabecalho();
         navigationView.setNavigationItemSelectedListener(this);
 
+
         carregarFragmentoInicial();
     }
 
@@ -70,6 +77,13 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
         View hView = navigationView.getHeaderView(0);
         TextView tvEmail = hView.findViewById(R.id.nav_header_nome);
         tvEmail.setText(username);
+
+        profile_image = hView.findViewById(R.id.profile_image);
+        Glide.with(this)
+                .load(SingletonFoodly.getInstance(getApplicationContext()).getProfile().getImage())
+                .placeholder(R.drawable.gordon)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(profile_image);
     }
 
     private void carregarFragmentoInicial() {
