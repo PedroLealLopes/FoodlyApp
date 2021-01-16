@@ -1,64 +1,55 @@
 package pt.ipleiria.estg.dei.foodlyandroid.modelos;
 
 public class Review {
-    private int id, profilePic;
-    private double classificacao;
-    private String comentario, username, dataCriacao;
+    private int restaurantId, profileId;
+    private double stars;
+    private String comment, creation_date;
 
-    public Review(int id, int profilePic, double classificacao, String comentario, String username, String dataCriacao) {
-        this.id = id;
-        this.profilePic = profilePic;
-        this.classificacao = classificacao;
-        this.comentario = comentario;
-        this.username = username;
-        this.dataCriacao = dataCriacao;
+    public Review(int restaurantId, int profileId, double stars, String comment, String creation_date) {
+        this.restaurantId = restaurantId;
+        this.profileId = profileId;
+        this.stars = stars;
+        this.comment = comment;
+        this.creation_date = creation_date;
     }
 
-    public int getId() {
-        return id;
+    public int getRestaurantId() {
+        return restaurantId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setRestaurantId(int restaurantId) {
+        this.restaurantId = restaurantId;
     }
 
-    public int getProfilePic() {
-        return profilePic;
+    public int getProfileId() {
+        return profileId;
     }
 
-    public void setProfilePic(int profilePic) {
-        this.profilePic = profilePic;
+    public void setProfileId(int profileId) {
+        this.profileId = profileId;
     }
 
-    public double getClassificacao() {
-        return classificacao;
+    public double getStars() {
+        return stars;
     }
 
-    public void setClassificacao(double classificacao) {
-        this.classificacao = classificacao;
+    public void setStars(double stars) {
+        this.stars = stars;
     }
 
-    public String getComentario() {
-        return comentario;
+    public String getComment() {
+        return comment;
     }
 
-    public void setComentario(String comentario) {
-        this.comentario = comentario;
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
-    public String getUsername() {
-        return username;
+    public String getCreation_date() {
+        return creation_date;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getDataCriacao() {
-        return dataCriacao;
-    }
-
-    public void setDataCriacao(String dataCriacao) {
-        this.dataCriacao = dataCriacao;
+    public void setCreation_date(String creation_date) {
+        this.creation_date = creation_date;
     }
 }

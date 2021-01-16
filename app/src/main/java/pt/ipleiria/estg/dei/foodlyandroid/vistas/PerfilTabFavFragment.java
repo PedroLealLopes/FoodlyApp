@@ -1,5 +1,6 @@
 package pt.ipleiria.estg.dei.foodlyandroid.vistas;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,7 +35,11 @@ public class PerfilTabFavFragment extends Fragment implements RestaurantesListen
         lvListaFavoritos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //dialog
+                Intent intent = new Intent(getContext(), DetalhesRestauranteActivity.class);
+                intent.putExtra(RestauranteInfoFragment.ID, (int) id);
+                intent.putExtra(RestauranteEmentaFragment.ID_RESTAURANTE, (int) id);
+                intent.putExtra(RestauranteReviewFragment.ID_RESTAURANTE, (int) id);
+                startActivity(intent);
             }
         });
 

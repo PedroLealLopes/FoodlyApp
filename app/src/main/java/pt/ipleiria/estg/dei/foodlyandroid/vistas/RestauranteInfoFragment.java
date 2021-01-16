@@ -97,6 +97,8 @@ public class RestauranteInfoFragment extends Fragment implements RestaurantesLis
             if(restaurante.getWifiPassword() != null){
                 tvWifiPassword.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_task_true, 0, 0, 0);
                 tvWifiPasswordText.setText(restaurante.getWifiPassword());
+            }else{
+                //TODO: QUANDO O WIFI VEM A NULL -> TASK FALSE
             }
             if(restaurante.getVegan() != 0)
                 tvHasVegan.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_task_true, 0, 0, 0);

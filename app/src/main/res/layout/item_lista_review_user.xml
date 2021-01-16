@@ -27,39 +27,14 @@
         android:layout_marginStart="15dp"
         android:orientation="horizontal">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imageViewProfilePic"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="15dp"
-            android:src="@drawable/gordon" />
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/textViewDataCriacao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="15dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textViewUsername"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat_semi_bold"
-                android:text="Username"
-                android:textColor="@color/cinza"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/textViewDataCriacao"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat_regular"
-                android:text="29/11/2020"
-                android:textColor="@color/cinza"
-                android:textSize="18sp" />
-        </LinearLayout>
+            android:fontFamily="@font/montserrat_regular"
+            android:text="29/11/2020"
+            android:textColor="@color/cinza"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/textViewClassificacao"

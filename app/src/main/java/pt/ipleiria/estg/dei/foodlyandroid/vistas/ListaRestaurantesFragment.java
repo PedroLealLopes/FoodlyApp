@@ -50,6 +50,7 @@ public class ListaRestaurantesFragment extends Fragment implements SwipeRefreshL
                 Intent intent = new Intent(getContext(), DetalhesRestauranteActivity.class);
                 intent.putExtra(RestauranteInfoFragment.ID, (int) id);
                 intent.putExtra(RestauranteEmentaFragment.ID_RESTAURANTE, (int) id);
+                intent.putExtra(RestauranteReviewFragment.ID_RESTAURANTE, (int) id);
                 startActivity(intent);
             }
         });

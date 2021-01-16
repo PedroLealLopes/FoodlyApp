@@ -15,15 +15,14 @@ import java.util.ArrayList;
 
 import pt.ipleiria.estg.dei.foodlyandroid.R;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.Review;
-import pt.ipleiria.estg.dei.foodlyandroid.modelos.SingletonFoodly;
 
-public class ListaReviewAdaptador extends BaseAdapter {
+public class ListaReviewUserAdaptador extends BaseAdapter {
 
     private Context context;
     private LayoutInflater inflater;
     private ArrayList<Review> reviews;
 
-    public ListaReviewAdaptador(Context context, ArrayList<Review> reviews) {
+    public ListaReviewUserAdaptador(Context context, ArrayList<Review> reviews) {
         this.context = context;
         this.reviews = reviews;
     }

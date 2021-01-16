@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
@@ -16,14 +17,20 @@ import androidx.fragment.app.Fragment;
 import java.util.ArrayList;
 
 import pt.ipleiria.estg.dei.foodlyandroid.R;
+import pt.ipleiria.estg.dei.foodlyandroid.adaptadores.ListaEmentaAdaptador;
 import pt.ipleiria.estg.dei.foodlyandroid.adaptadores.ListaReviewAdaptador;
+import pt.ipleiria.estg.dei.foodlyandroid.listeners.ReviewsListener;
+import pt.ipleiria.estg.dei.foodlyandroid.modelos.Ementa;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.Review;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.SingletonFoodly;
+import pt.ipleiria.estg.dei.foodlyandroid.utils.GenericUtils;
 
-public class RestauranteReviewFragment extends Fragment {
+public class RestauranteReviewFragment extends Fragment implements ReviewsListener {
     private ListView lvListaReviews;
-    private ArrayList<Review> listaReviews;
     private Button btnAdicionar;
+    public static final String ID_RESTAURANTE = "ID_RESTAURANTE";
+    private TextView tvTotalComments;
+    private int totalComments = 0;
 
     public RestauranteReviewFragment() {
     }
@@ -32,14 +39,14 @@ public class RestauranteReviewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_restaurante_review, container, false);
 
-        //listaReviews = SingletonFoodly.getInstance(getContext()).getReviews();
+        int restaurantId = getActivity().getIntent().getIntExtra(ID_RESTAURANTE, -1);
+
         lvListaReviews = view.findViewById(R.id.listViewReviews);
-        lvListaReviews.setAdapter(new ListaReviewAdaptador(getContext(), listaReviews));
 
         lvListaReviews.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //String comentario = SingletonFoodly.getInstance(getContext()).getReview(position + 1).getComentario();
+                //String comentario = SingletonFoodly.getInstance(getContext()).getReviewComment();
 
                 AlertDialog.Builder builder;
                 builder = new AlertDialog.Builder(view.getContext());
@@ -63,6 +70,20 @@ public class RestauranteReviewFragment extends Fragment {
             }
         });
 
+        SingletonFoodly.getInstance(getContext()).setReviewsListener(this);
+        SingletonFoodly.getInstance(getContext()).getAllReviewsAPI(restaurantId, getContext());
+
         return view;
+    }
+
+    @Override
+    public void onRefreshListaReviews(ArrayList<Review> reviews) {
+        if (reviews != null)
+            lvListaReviews.setAdapter(new ListaReviewAdaptador(getContext(), reviews));
+    }
+
+    @Override
+    public void onRefreshDetalhes() {
+
     }
 }
