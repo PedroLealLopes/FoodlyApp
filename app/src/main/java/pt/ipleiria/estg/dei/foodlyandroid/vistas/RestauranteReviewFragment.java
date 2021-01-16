@@ -29,8 +29,7 @@ public class RestauranteReviewFragment extends Fragment implements ReviewsListen
     private ListView lvListaReviews;
     private Button btnAdicionar;
     public static final String ID_RESTAURANTE = "ID_RESTAURANTE";
-    private TextView tvTotalComments;
-    private int totalComments = 0;
+    private TextView tvTotalPessoas;
 
     public RestauranteReviewFragment() {
     }
@@ -42,6 +41,7 @@ public class RestauranteReviewFragment extends Fragment implements ReviewsListen
         int restaurantId = getActivity().getIntent().getIntExtra(ID_RESTAURANTE, -1);
 
         lvListaReviews = view.findViewById(R.id.listViewReviews);
+        tvTotalPessoas = view.findViewById(R.id.textViewPessoas);
 
         lvListaReviews.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

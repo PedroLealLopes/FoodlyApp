@@ -5,11 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.ArrayList;
 
@@ -48,7 +44,7 @@ public class ListaReviewUserAdaptador extends BaseAdapter {
             inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         if (convertView == null)
-            convertView = inflater.inflate(R.layout.item_lista_review, null);
+            convertView = inflater.inflate(R.layout.item_lista_review_user, null);
 
         //OTIMIZAÇÃO
         ViewHolderLista viewHolderLista = (ViewHolderLista) convertView.getTag();
@@ -62,31 +58,26 @@ public class ListaReviewUserAdaptador extends BaseAdapter {
         return convertView;
     }
 
-    private class ViewHolderLista {
-        private TextView tvUsername, tvData, tvClassificacao, tvComentario;
-        private ImageView ivPic;
+    private static class ViewHolderLista {
+        private final TextView tvRestauranteNome, tvRestauranteMorada, tvClassificacao, tvDataCriacao, tvComentario;
 
         public ViewHolderLista(View view) {
-            tvUsername = view.findViewById(R.id.textViewUsername);
-            tvData = view.findViewById(R.id.textViewDataCriacao);
-            tvClassificacao = view.findViewById(R.id.textViewClassificacao);
-            tvComentario = view.findViewById(R.id.textViewComentario);
-            ivPic = view.findViewById(R.id.imageViewProfilePic);
+            tvRestauranteNome = view.findViewById(R.id.textViewRestauranteNomeRU);
+            tvRestauranteMorada = view.findViewById(R.id.textViewRestauranteMoradaRU);
+            tvClassificacao = view.findViewById(R.id.textViewClassificacaoRU);
+            tvDataCriacao = view.findViewById(R.id.textViewDataCriacaoRU);
+            tvComentario = view.findViewById(R.id.textViewComentarioRU);
         }
 
         public void update(Review review) {
             //String profileUsername = SingletonFoodly.getInstance(context).getProfileUsername();
             //String profilePic = SingletonFoodly.getInstance(context).getProfilePic();
 
-            tvUsername.setText("profileUsername");
-            tvData.setText(review.getCreation_date());
+            tvRestauranteNome.setText("profileUsername");
+            tvRestauranteMorada.setText("morada");
             tvClassificacao.setText(review.getStars() + "");
+            tvDataCriacao.setText(review.getCreation_date());
             tvComentario.setText(review.getComment());
-            Glide.with(context)
-                    .load(R.drawable.gordon)
-                    .placeholder(R.drawable.gordon)
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(ivPic);
         }
     }
 }
