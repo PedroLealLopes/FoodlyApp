@@ -319,6 +319,36 @@ public class SingletonFoodly {
             volleyQueue.add(req);
         }
     }
+
+    public void adicionarReviewAPI(final Review review, final int restaurantId, final Context context, final String token) {
+        StringRequest req = new StringRequest(Request.Method.POST, mUrlAPI + "/restaurant-reviews/restaurant/" + restaurantId, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if (reviewsListener != null)
+                    reviewsListener.onRefreshDetalhes();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("restaurant_restaurantId", restaurantId+"");
+                params.put("profiles_userId", getProfile()+"");
+                params.put("stars", review.getStars()+"");
+                params.put("comment", review.getComment()+"");
+                params.put("creation_date", review.getCreation_date());
+                params.put("username", review.getUsername());
+                params.put("image", review.getImage());
+                params.put("token", token);
+                return params;
+            }
+        };
+        volleyQueue.add(req);
+    }
     //endregion
 
     //region REVIEWS_USER
@@ -344,6 +374,22 @@ public class SingletonFoodly {
             volleyQueue.add(req);
         }
     }
-    //en
+
+    public void removerReviewUserAPI(Review review, final Context context) {
+        StringRequest req = new StringRequest(Request.Method.DELETE, mUrlAPI + "/restaurant-reviews/restaurant/" + getProfileId(), new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                if (reviewsListener != null)
+                    reviewsListener.onRefreshDetalhes();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        volleyQueue.add(req);
+    }
     //endregion
 }

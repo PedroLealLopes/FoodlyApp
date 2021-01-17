@@ -76,7 +76,6 @@ public class ListaReviewAdaptador extends BaseAdapter {
         }
 
         public void update(Review review) {
-            System.out.println("--> review " + review.toString());
             tvUsername.setText(review.getUsername());
             tvData.setText(review.getCreation_date());
             tvClassificacao.setText(review.getStars() + "");

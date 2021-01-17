@@ -31,7 +31,7 @@ import pt.ipleiria.estg.dei.foodlyandroid.modelos.SingletonFoodly;
 public class RestauranteInfoFragment extends Fragment implements RestaurantesListener {
 
     private ImageView ivFav;
-    public static final String ID = "ID";
+    public static final String ID_RESTAURANTE = "ID_RESTAURANTE";
 
     private Restaurante restaurante;
     private TextView tvCurrentPeople, tvMaxPeople, tvName, tvLocation, tvPhone, tvEmail, tvOpeningHour, tvClosingHour, tvDescription, tvWifiPassword, tvWifiPasswordText, tvHasVegan, tvAllowsPets;
@@ -46,8 +46,8 @@ public class RestauranteInfoFragment extends Fragment implements RestaurantesLis
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_restaurante_info, container, false);
 
-        int id = getActivity().getIntent().getIntExtra(ID, -1);
-        restaurante = SingletonFoodly.getInstance(getContext()).getRestaurante(id);
+        int restauranteId = getActivity().getIntent().getIntExtra(ID_RESTAURANTE, -1);
+        restaurante = SingletonFoodly.getInstance(getContext()).getRestaurante(restauranteId);
 
         SharedPreferences sharedPrefUser = getActivity().getSharedPreferences(MenuMainActivity.USER, Context.MODE_PRIVATE);
         token = sharedPrefUser.getString(MenuMainActivity.TOKEN, null);
