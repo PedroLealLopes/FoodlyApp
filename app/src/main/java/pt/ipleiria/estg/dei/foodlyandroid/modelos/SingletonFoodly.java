@@ -49,9 +49,9 @@ public class SingletonFoodly {
     private static final String IP_MiiTU = "192.168.1.8";
     private static final String IP_Luckdude = "192.168.1.229";
     private static final String IP_Johnny = "192.168.1.253";
-    private static final String mUrlAPILogin = "http://"+ IP_Luckdude +"/FoodlyWeb/frontend/web/api/users/login";
-    private static final String mUrlAPIResturantes = "http://"+ IP_Luckdude +"/FoodlyWeb/frontend/web/api/restaurants";
-    private static final String mUrlAPIEmentas = "http://" + IP_Luckdude + "/FoodlyWeb/frontend/web/api/dishes/restaurant";
+    private static final String mUrlAPILogin = "http://"+ IP_Johnny +"/FoodlyWeb/frontend/web/api/users/login";
+    private static final String mUrlAPIResturantes = "http://"+ IP_Johnny +"/FoodlyWeb/frontend/web/api/restaurants";
+    private static final String mUrlAPIEmentas = "http://" + IP_Johnny + "/FoodlyWeb/frontend/web/api/dishes/restaurant";
 
     public static synchronized SingletonFoodly getInstance(Context context) {
         if (instance == null)
@@ -91,7 +91,7 @@ public class SingletonFoodly {
             Toast.makeText(context, "Não há internet", Toast.LENGTH_SHORT).show();
 
             if (loginListener != null)
-                loginListener.onValidateLogin(false, "");
+                loginListener.onValidateLogin(false, null);
         }
         StringRequest req = new StringRequest(Request.Method.POST, mUrlAPILogin, new Response.Listener<String>() {
             @Override
@@ -100,10 +100,10 @@ public class SingletonFoodly {
                     JSONObject profileResponse = new JSONObject(response);
                     if(profileResponse.getInt("id") >= 0){
                         setProfile(ProfileJsonParser.parserJsonProfiles(profileResponse));
-                        loginListener.onValidateLogin(true, profileResponse.getString("username"));
+                        loginListener.onValidateLogin(true, profileResponse);
                     }
                     else{
-                        loginListener.onValidateLogin(false, "");
+                        loginListener.onValidateLogin(false, null);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
