@@ -22,14 +22,12 @@ import java.util.ArrayList;
 import pt.ipleiria.estg.dei.foodlyandroid.R;
 import pt.ipleiria.estg.dei.foodlyandroid.listeners.RestaurantesListener;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.Restaurante;
-import pt.ipleiria.estg.dei.foodlyandroid.modelos.RestauranteFavorito;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.SingletonFoodly;
 
 public class RestauranteInfoFragment extends Fragment implements RestaurantesListener {
 
     public static final String ID_RESTAURANTE = "ID_RESTAURANTE";
     private Restaurante restaurante;
-    private RestauranteFavorito restauranteFavorito;
     private TextView tvCurrentPeople, tvMaxPeople, tvName, tvLocation, tvPhone, tvEmail, tvOpeningHour, tvClosingHour, tvDescription, tvWifiPassword, tvWifiPasswordText, tvHasVegan, tvAllowsPets;
     private ImageView ivImage, ivFav;
     private ArrayList<Restaurante> restauranteArray;
@@ -44,6 +42,8 @@ public class RestauranteInfoFragment extends Fragment implements RestaurantesLis
 
         final int restauranteId = getActivity().getIntent().getIntExtra(ID_RESTAURANTE, -1);
         restaurante = SingletonFoodly.getInstance(getContext()).getRestaurante(restauranteId);
+
+
 
         tvCurrentPeople = view.findViewById(R.id.textViewRestaurantCurrentPeople);
         tvMaxPeople = view.findViewById(R.id.textViewRestaurantMaxPeople);
@@ -95,9 +95,6 @@ public class RestauranteInfoFragment extends Fragment implements RestaurantesLis
 
         if (restaurante != null) {
 
-            //System.out.println("---> profile ID: " + SingletonFoodly.getInstance(getContext()).getProfileId() + " restaurant ID: " + restauranteId);
-            //System.out.println("---> profile ID: " + restauranteArray.get().get + " restaurant ID: " + restauranteArray.get().getRestaurantId());
-
             tvCurrentPeople.setText(restaurante.getCurrentPeople() + "");
             tvMaxPeople.setText(restaurante.getMaxPeople() + "");
             tvName.setText(restaurante.getName());
@@ -134,8 +131,7 @@ public class RestauranteInfoFragment extends Fragment implements RestaurantesLis
                 .setPositiveButton(R.string.respostaSim, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        restauranteFavorito = new RestauranteFavorito(SingletonFoodly.getInstance(getContext()).getProfileId(), id);
-                        SingletonFoodly.getInstance(getContext()).adicionarFavoritoAPI(restauranteFavorito, getContext());
+                        SingletonFoodly.getInstance(getContext()).adicionarFavoritoAPI(SingletonFoodly.getInstance(getContext()).getProfileId(),id, getContext());
                         ivFav.setImageResource(R.drawable.ic_restaurante_fav_true);
                     }
                 })

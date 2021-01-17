@@ -68,8 +68,8 @@ public class AdicionarReviewActivity extends AppCompatActivity implements View.O
                                 total,
                                 etDescricao.getText().toString(),
                                 current_date,
-                                "",
-                                null);
+                                SingletonFoodly.getInstance(getApplicationContext()).getProfile().getUsername(),
+                                SingletonFoodly.getInstance(getApplicationContext()).getProfile().getImage());
                         System.out.println("---> review" + review.toString());
                         SingletonFoodly.getInstance(getApplicationContext()).adicionarReviewAPI(review, restaurantId, getApplicationContext());
                     }

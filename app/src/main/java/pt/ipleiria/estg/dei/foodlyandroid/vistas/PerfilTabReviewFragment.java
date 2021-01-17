@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -75,6 +76,7 @@ public class PerfilTabReviewFragment extends Fragment implements ReviewsListener
                 .setPositiveButton(R.string.respostaSim, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getContext(), "review: "+ review.toString(), Toast.LENGTH_SHORT).show();
                         SingletonFoodly.getInstance(getContext()).removerReviewUserAPI(review, getContext());
                     }
                 })

@@ -26,6 +26,7 @@ import pt.ipleiria.estg.dei.foodlyandroid.listeners.ReviewsListener;
 import pt.ipleiria.estg.dei.foodlyandroid.utils.EmentaJsonParser;
 import pt.ipleiria.estg.dei.foodlyandroid.utils.GenericUtils;
 import pt.ipleiria.estg.dei.foodlyandroid.utils.ProfileJsonParser;
+import pt.ipleiria.estg.dei.foodlyandroid.utils.RestauranteFavoritosJsonParser;
 import pt.ipleiria.estg.dei.foodlyandroid.utils.RestauranteJsonParser;
 import pt.ipleiria.estg.dei.foodlyandroid.utils.ReviewJsonParser;
 
@@ -157,6 +158,19 @@ public class SingletonFoodly {
                     restaurantes = RestauranteJsonParser.parserJsonRestaurantes(response);
                     adicionarRestaurantesBD(restaurantes);
 
+                    ArrayList<Restaurante> restaurantesfavoritos = new ArrayList<>();
+
+                    for (int i = 0; i < restaurantes.size(); i++) {
+                        try {
+                            JSONObject restaurante = (JSONObject) response.get(i);
+                            restaurantesfavoritos.add(SingletonFoodly.getInstance(context).getRestaurante(restaurante.getInt("restaurant_restaurantId")));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    setFavRestaurants(restaurantesfavoritos);
+
                     if (restaurantesListener != null)
                         restaurantesListener.onRefreshListaRestaurantes(restaurantes);
                 }
@@ -279,8 +293,8 @@ public class SingletonFoodly {
         }
     }
 
-    public void adicionarFavoritoAPI(final RestauranteFavorito restauranteFavorito, final Context context) {
-        StringRequest req = new StringRequest(Request.Method.POST, mUrlAPI + "/profile-restaurant-favorites/user/" + getProfileId(), new Response.Listener<String>() {
+    public void adicionarFavoritoAPI(final int profiles_userId, final int restaurant_restaurantId, final Context context) {
+        StringRequest req = new StringRequest(Request.Method.POST, mUrlAPI + "/profile-restaurant-favorites", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if (restaurantesListener != null)
@@ -295,8 +309,8 @@ public class SingletonFoodly {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("profiles_userId", restauranteFavorito.getProfiles_userId() + "");
-                params.put("restaurant_restaurantId", restauranteFavorito.getRestaurant_restaurantId() + "");
+                params.put("profiles_userId", profiles_userId + "");
+                params.put("restaurant_restaurantId", restaurant_restaurantId + "");
                 return params;
             }
         };
@@ -341,7 +355,7 @@ public class SingletonFoodly {
     }
 
     public void adicionarReviewAPI(final Review review, final int restaurantId, final Context context) {
-        StringRequest req = new StringRequest(Request.Method.POST, mUrlAPI + "/restaurant-reviews/restaurant/" + restaurantId, new Response.Listener<String>() {
+        StringRequest req = new StringRequest(Request.Method.POST, mUrlAPI + "/restaurant-reviews", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if (reviewsListener != null)
@@ -357,10 +371,9 @@ public class SingletonFoodly {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 params.put("restaurant_restaurantId", restaurantId + "");
-                params.put("profiles_userId", getProfile() + "");
+                params.put("profiles_userId", getProfileId() + "");
                 params.put("stars", review.getStars() + "");
-                params.put("comment", review.getComment() + "");
-                params.put("creation_date", review.getCreation_date());
+                params.put("comment", review.getComment());
                 return params;
             }
         };
@@ -393,9 +406,7 @@ public class SingletonFoodly {
     }
 
     public void removerReviewUserAPI(final Review review, final Context context) {
-        Toast.makeText(context, review.getComment(), Toast.LENGTH_SHORT).show();
-
-        StringRequest req = new StringRequest(Request.Method.DELETE, mUrlAPI + "/restaurant-reviews/user/" + getProfileId(), new Response.Listener<String>() {
+        StringRequest req = new StringRequest(Request.Method.POST, mUrlAPI + "/restaurant-reviews/delete", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if (reviewsListener != null)
@@ -410,11 +421,8 @@ public class SingletonFoodly {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.remove("restaurant_restaurantId", review.getRestaurantId() + "");
-                params.remove("profiles_userId", review.getProfileId() + "");
-                params.remove("stars", review.getStars() + "");
-                params.remove("comment", review.getComment() + "");
-                params.remove("creation_date", review.getCreation_date());
+                params.put("restaurant_id", review.getRestaurantId() + "");
+                params.put("profile_id", review.getProfileId() + "");
                 return params;
             }
         };
