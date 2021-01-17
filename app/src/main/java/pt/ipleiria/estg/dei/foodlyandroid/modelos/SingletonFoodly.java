@@ -238,7 +238,7 @@ public class SingletonFoodly {
         StringRequest req = new StringRequest(Request.Method.PUT, mUrlAPIProfile + profile.getProfileId() + "/upload", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                //profile.setImage(image);
+                profile.setImage(image);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -250,6 +250,33 @@ public class SingletonFoodly {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 params.put("image", image);
+                return params;
+            }
+        };
+        volleyQueue.add(req);
+    }
+
+    public void editProfileAPI(final String fullname, final String age, final String alergias, final String genero, final String telefone, final String morada, final Context context){
+        StringRequest req = new StringRequest(Request.Method.PUT, mUrlAPIProfile + profile.getProfileId(), new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("fullname", fullname);
+                params.put("age", age);
+                params.put("alergias", alergias);
+                params.put("genero", genero);
+                params.put("telefone", telefone);
+                params.put("morada", morada);
                 return params;
             }
         };

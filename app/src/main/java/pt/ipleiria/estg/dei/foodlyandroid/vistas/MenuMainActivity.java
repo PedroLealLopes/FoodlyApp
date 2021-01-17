@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -23,8 +24,6 @@ import androidx.fragment.app.FragmentManager;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.material.navigation.NavigationView;
-
-import java.util.Base64;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import pt.ipleiria.estg.dei.foodlyandroid.R;
@@ -82,9 +81,8 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
 
         profile_image = hView.findViewById(R.id.profile_image);
 
-        byte[] image = Base64.getDecoder().decode(SingletonFoodly.getInstance(getApplicationContext()).getProfile().getImage());
         Glide.with(this)
-                .load(image)
+                .load(android.util.Base64.decode(SingletonFoodly.getInstance(getApplicationContext()).getProfile().getImage(), Base64.DEFAULT))
                 .placeholder(R.drawable.gordon)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(profile_image);

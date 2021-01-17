@@ -2,7 +2,10 @@ package pt.ipleiria.estg.dei.foodlyandroid.vistas;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,18 +16,17 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
-import java.util.Base64;
-
 import pt.ipleiria.estg.dei.foodlyandroid.R;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.Profile;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.SingletonFoodly;
 
-public class PerfilFragment extends Fragment {
+public class PerfilFragment extends Fragment{
 
     private Context context;
     private ChipNavigationBar bottomNav;
@@ -39,7 +41,6 @@ public class PerfilFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_perfil, container, false);
-        System.out.println("--> onCreateView PerfilFragment");
 
         //region Bottom Navigation
         bottomNav = view.findViewById(R.id.bottom_nav);
@@ -92,13 +93,12 @@ public class PerfilFragment extends Fragment {
 
         imageViewProfilePic = view.findViewById(R.id.imageViewProfilePic);
 
-
-        byte[] image = Base64.getDecoder().decode(SingletonFoodly.getInstance(context).getProfile().getImage());
         Glide.with(this)
-                .load(image)
+                .load(Base64.decode(SingletonFoodly.getInstance(context).getProfile().getImage(), Base64.DEFAULT))
                 .placeholder(R.drawable.gordon)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(imageViewProfilePic);
+
 
         return view;
     }
