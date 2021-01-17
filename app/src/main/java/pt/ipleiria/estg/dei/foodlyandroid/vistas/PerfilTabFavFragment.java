@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import pt.ipleiria.estg.dei.foodlyandroid.R;
 import pt.ipleiria.estg.dei.foodlyandroid.adaptadores.ListaRestauranteAdaptador;
 import pt.ipleiria.estg.dei.foodlyandroid.listeners.RestaurantesListener;
-import pt.ipleiria.estg.dei.foodlyandroid.modelos.Ementa;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.Restaurante;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.SingletonFoodly;
 
@@ -51,9 +50,12 @@ public class PerfilTabFavFragment extends Fragment implements RestaurantesListen
 
     @Override
     public void onRefreshListaRestaurantes(ArrayList<Restaurante> restaurantes) {
-
         ArrayList<Restaurante> restaurantesfavoritos = SingletonFoodly.getInstance(getContext()).getFavRestaurants();
-
         lvListaFavoritos.setAdapter(new ListaRestauranteAdaptador(getContext(), restaurantesfavoritos));
+    }
+
+    @Override
+    public void onRefreshDetalhes() {
+
     }
 }

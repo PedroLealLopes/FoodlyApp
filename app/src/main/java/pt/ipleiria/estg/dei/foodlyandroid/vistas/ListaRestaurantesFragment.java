@@ -106,4 +106,9 @@ public class ListaRestaurantesFragment extends Fragment implements SwipeRefreshL
         if (restaurantes != null)
             lvListaRestaurantes.setAdapter(new ListaRestauranteAdaptador(getContext(), restaurantes));
     }
+
+    @Override
+    public void onRefreshDetalhes() {
+
+    }
 }

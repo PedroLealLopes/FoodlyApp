@@ -1,7 +1,6 @@
 package pt.ipleiria.estg.dei.foodlyandroid.modelos;
 
 import android.content.Context;
-import android.speech.RecognitionService;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -9,7 +8,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -56,8 +54,8 @@ public class SingletonFoodly {
     private static final String IP_MiiTU = "192.168.1.8";
     private static final String IP_Luckdude = "192.168.1.229";
     private static final String IP_Johnny = "192.168.1.253";
-    private static final String mUrlAPI = "http://"+ IP_Luckdude +"/FoodlyWeb/frontend/web/api";
-    private static final String mUrlAPILogin = "http://"+ IP_Luckdude +"/FoodlyWeb/frontend/web/api/users/login";
+    private static final String mUrlAPI = "http://" + IP_MiiTU + "/FoodlyWeb/frontend/web/api";
+    private static final String mUrlAPILogin = "http://" + IP_MiiTU + "/FoodlyWeb/frontend/web/api/users/login";
 
     public static synchronized SingletonFoodly getInstance(Context context) {
         if (instance == null)
@@ -76,7 +74,7 @@ public class SingletonFoodly {
         foodlyBDHelper = new FoodlyBDHelper(context);
     }
 
-    public String getUrlAPI(){
+    public String getUrlAPI() {
         return mUrlAPI;
     }
 
@@ -85,15 +83,15 @@ public class SingletonFoodly {
         this.loginListener = loginListener;
     }
 
-    public void setProfile(Profile profile){
+    public void setProfile(Profile profile) {
         this.profile = profile;
     }
 
-    public Profile getProfile(){
+    public Profile getProfile() {
         return this.profile;
     }
 
-    public int getProfileId(){
+    public int getProfileId() {
         return getProfile().getProfileId();
     }
 
@@ -104,11 +102,10 @@ public class SingletonFoodly {
             public void onResponse(String response) {
                 try {
                     JSONObject profileResponse = new JSONObject(response);
-                    if(profileResponse.getInt("id") >= 0){
+                    if (profileResponse.getInt("id") >= 0) {
                         setProfile(ProfileJsonParser.parserJsonProfiles(profileResponse));
                         loginListener.onValidateLogin(true, profileResponse.getString("username"));
-                    }
-                    else{
+                    } else {
                         loginListener.onValidateLogin(false, "");
                     }
                 } catch (JSONException e) {
@@ -206,8 +203,8 @@ public class SingletonFoodly {
 
     public ArrayList<Ementa> getEmentaType(int restaurantId) {
         ArrayList<Ementa> foo = new ArrayList<>();
-        for (Ementa e : ementas){
-            if(e.getRestaurantId() == restaurantId)
+        for (Ementa e : ementas) {
+            if (e.getRestaurantId() == restaurantId)
                 foo.add(e);
         }
         return foo;
@@ -241,11 +238,11 @@ public class SingletonFoodly {
 
     //region FAVORITOS
 
-    public void setFavRestaurants(ArrayList<Restaurante> restaurants){
+    public void setFavRestaurants(ArrayList<Restaurante> restaurants) {
         this.favRestaurants = restaurants;
     }
 
-    public ArrayList<Restaurante> getFavRestaurants(){
+    public ArrayList<Restaurante> getFavRestaurants() {
         return this.favRestaurants;
     }
 
@@ -259,8 +256,7 @@ public class SingletonFoodly {
                 public void onResponse(JSONArray response) {
                     ArrayList<Restaurante> restaurantesfavoritos = new ArrayList<>();
 
-                    for( int i = 0 ; i < response.length(); i++)
-                    {
+                    for (int i = 0; i < response.length(); i++) {
                         try {
                             JSONObject restaurante = (JSONObject) response.get(i);
                             restaurantesfavoritos.add(SingletonFoodly.getInstance(context).getRestaurante(restaurante.getInt("restaurant_restaurantId")));
@@ -281,6 +277,30 @@ public class SingletonFoodly {
             });
             volleyQueue.add(req);
         }
+    }
+
+    public void adicionarFavoritoAPI(final RestauranteFavorito restauranteFavorito, final Context context) {
+        StringRequest req = new StringRequest(Request.Method.POST, mUrlAPI + "/profile-restaurant-favorites/user/" + getProfileId(), new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if (restaurantesListener != null)
+                    restaurantesListener.onRefreshDetalhes();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("profiles_userId", restauranteFavorito.getProfiles_userId() + "");
+                params.put("restaurant_restaurantId", restauranteFavorito.getRestaurant_restaurantId() + "");
+                return params;
+            }
+        };
+        volleyQueue.add(req);
     }
     //endregion
 
@@ -320,7 +340,7 @@ public class SingletonFoodly {
         }
     }
 
-    public void adicionarReviewAPI(final Review review, final int restaurantId, final Context context, final String token) {
+    public void adicionarReviewAPI(final Review review, final int restaurantId, final Context context) {
         StringRequest req = new StringRequest(Request.Method.POST, mUrlAPI + "/restaurant-reviews/restaurant/" + restaurantId, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -336,10 +356,10 @@ public class SingletonFoodly {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("restaurant_restaurantId", restaurantId+"");
-                params.put("profiles_userId", getProfile()+"");
-                params.put("stars", review.getStars()+"");
-                params.put("comment", review.getComment()+"");
+                params.put("restaurant_restaurantId", restaurantId + "");
+                params.put("profiles_userId", getProfile() + "");
+                params.put("stars", review.getStars() + "");
+                params.put("comment", review.getComment() + "");
                 params.put("creation_date", review.getCreation_date());
                 return params;
             }
@@ -372,10 +392,10 @@ public class SingletonFoodly {
         }
     }
 
-    public void removerReviewUserAPI(Review review, final Context context) {
+    public void removerReviewUserAPI(final Review review, final Context context) {
         Toast.makeText(context, review.getComment(), Toast.LENGTH_SHORT).show();
-        /*
-        StringRequest req = new StringRequest(Request.Method.DELETE, mUrlAPI + "/restaurant-reviews/restaurant/" + getProfileId(), new Response.Listener<String>() {
+
+        StringRequest req = new StringRequest(Request.Method.DELETE, mUrlAPI + "/restaurant-reviews/user/" + getProfileId(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if (reviewsListener != null)
@@ -386,9 +406,20 @@ public class SingletonFoodly {
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
             }
-        });
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.remove("restaurant_restaurantId", review.getRestaurantId() + "");
+                params.remove("profiles_userId", review.getProfileId() + "");
+                params.remove("stars", review.getStars() + "");
+                params.remove("comment", review.getComment() + "");
+                params.remove("creation_date", review.getCreation_date());
+                return params;
+            }
+        };
         volleyQueue.add(req);
-         */
+
     }
     //endregion
 }

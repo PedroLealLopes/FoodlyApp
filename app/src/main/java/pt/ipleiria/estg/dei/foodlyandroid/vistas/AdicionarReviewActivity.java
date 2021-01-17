@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,7 +23,6 @@ public class AdicionarReviewActivity extends AppCompatActivity implements View.O
     private EditText etDescricao;
     private Button btnSubmit;
     private Review review;
-    private String token;
     private double total;
     public static final String ID_RESTAURANTE = "ID_RESTAURANTE";
 
@@ -39,22 +39,6 @@ public class AdicionarReviewActivity extends AppCompatActivity implements View.O
         etDescricao = findViewById(R.id.editTextDescricaoReview);
         btnSubmit = findViewById(R.id.buttonSubmeterReview);
 
-        int restaurantId = getIntent().getIntExtra(ID_RESTAURANTE, -1);
-
-        //region CURRENT DATE AND TIME
-        Calendar c = Calendar.getInstance();
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String current_date = df.format(c.getTime());
-        //endregion
-
-        review = new Review(restaurantId,
-                SingletonFoodly.getInstance(getApplicationContext()).getProfileId(),
-                total,
-                etDescricao.getText().toString(),
-                current_date,
-                "",
-                null);
-
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,17 +48,30 @@ public class AdicionarReviewActivity extends AppCompatActivity implements View.O
     }
 
     private void dialogAdicionar() {
+        final int restaurantId = getIntent().getIntExtra(ID_RESTAURANTE, -1);
 
-        final int restaurantId = SingletonFoodly.getInstance(getApplicationContext()).getReview(review.getRestaurantId()).getRestaurantId();
+        //region CURRENT DATE AND TIME
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        final String current_date = df.format(c.getTime());
+        //endregion
 
         AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(this);
         builder.setTitle("ADICIONAR REVIEW")
-                .setMessage("Deseja adcionar a review?" + restaurantId)
+                .setMessage("Deseja adcionar a review?")
                 .setPositiveButton(R.string.respostaSim, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        SingletonFoodly.getInstance(getApplicationContext()).adicionarReviewAPI(review, restaurantId, getApplicationContext(), token);
+                        review = new Review(restaurantId,
+                                SingletonFoodly.getInstance(getApplicationContext()).getProfileId(),
+                                total,
+                                etDescricao.getText().toString(),
+                                current_date,
+                                "",
+                                null);
+                        System.out.println("---> review" + review.toString());
+                        SingletonFoodly.getInstance(getApplicationContext()).adicionarReviewAPI(review, restaurantId, getApplicationContext());
                     }
                 })
                 .setNegativeButton(R.string.respostaNao, new DialogInterface.OnClickListener() {
