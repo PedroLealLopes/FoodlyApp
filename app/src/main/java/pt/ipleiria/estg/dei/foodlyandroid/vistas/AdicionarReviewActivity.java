@@ -52,8 +52,8 @@ public class AdicionarReviewActivity extends AppCompatActivity implements View.O
                 total,
                 etDescricao.getText().toString(),
                 current_date,
-                SingletonFoodly.getInstance(getApplicationContext()).getProfile().getUsername(),
-                SingletonFoodly.getInstance(getApplicationContext()).getProfile().getImage());
+                "",
+                null);
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override

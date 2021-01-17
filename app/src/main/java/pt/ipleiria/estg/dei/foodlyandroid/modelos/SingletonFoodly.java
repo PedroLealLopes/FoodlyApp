@@ -56,8 +56,8 @@ public class SingletonFoodly {
     private static final String IP_MiiTU = "192.168.1.8";
     private static final String IP_Luckdude = "192.168.1.229";
     private static final String IP_Johnny = "192.168.1.253";
-    private static final String mUrlAPI = "http://"+ IP_MiiTU +"/FoodlyWeb/frontend/web/api";
-    private static final String mUrlAPILogin = "http://"+ IP_MiiTU +"/FoodlyWeb/frontend/web/api/users/login";
+    private static final String mUrlAPI = "http://"+ IP_Luckdude +"/FoodlyWeb/frontend/web/api";
+    private static final String mUrlAPILogin = "http://"+ IP_Luckdude +"/FoodlyWeb/frontend/web/api/users/login";
 
     public static synchronized SingletonFoodly getInstance(Context context) {
         if (instance == null)
@@ -341,9 +341,6 @@ public class SingletonFoodly {
                 params.put("stars", review.getStars()+"");
                 params.put("comment", review.getComment()+"");
                 params.put("creation_date", review.getCreation_date());
-                params.put("username", review.getUsername());
-                params.put("image", review.getImage());
-                params.put("token", token);
                 return params;
             }
         };
@@ -376,10 +373,11 @@ public class SingletonFoodly {
     }
 
     public void removerReviewUserAPI(Review review, final Context context) {
+        Toast.makeText(context, review.getComment(), Toast.LENGTH_SHORT).show();
+        /*
         StringRequest req = new StringRequest(Request.Method.DELETE, mUrlAPI + "/restaurant-reviews/restaurant/" + getProfileId(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
                 if (reviewsListener != null)
                     reviewsListener.onRefreshDetalhes();
             }
@@ -390,6 +388,7 @@ public class SingletonFoodly {
             }
         });
         volleyQueue.add(req);
+         */
     }
     //endregion
 }

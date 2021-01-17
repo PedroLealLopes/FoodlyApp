@@ -40,7 +40,7 @@ public class PerfilTabReviewFragment extends Fragment implements ReviewsListener
         lvListaReviewsUser.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //dialogReview();
+                dialogReview(position);
             }
         });
 
@@ -64,18 +64,18 @@ public class PerfilTabReviewFragment extends Fragment implements ReviewsListener
 
     }
 
-    private void dialogReview() {
+    private void dialogReview(int id) {
 
-        int restaurantId = SingletonFoodly.getInstance(getContext()).getReview(reviewsArrayList.getRestaurantId()).getRestaurantId();
+        final Review review = reviewsArrayList.get(id);
 
         AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(getContext());
         builder.setTitle("ELIMINAR REVIEW")
-                .setMessage("Deseja eliminar a review?" + restaurantId)
+                .setMessage("Deseja eliminar a review?")
                 .setPositiveButton(R.string.respostaSim, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        SingletonFoodly.getInstance(getContext()).removerReviewUserAPI(restaurantId, getContext());
+                        SingletonFoodly.getInstance(getContext()).removerReviewUserAPI(review, getContext());
                     }
                 })
 
