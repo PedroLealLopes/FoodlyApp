@@ -101,8 +101,7 @@ public class EditarPerfilActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 SingletonFoodly.getInstance(getApplicationContext()).editProfileAPI(editTextNomeCompletoProfile.getText().toString(), editTextIdadeProfile.getText().toString(), editTextNomeAlergiaProfile.getText().toString(), editTextGenero.getText().toString(), editTextNomeContactoProfile.getText().toString(), editTextNomeMoradaProfile.getText().toString(), getApplicationContext() );
-                Intent intent = new Intent(getApplicationContext(), PerfilFragment.class);
-                startActivity(intent);
+                finish();
             }
 
 
