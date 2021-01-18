@@ -12,10 +12,11 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.textfield.TextInputEditText;
 
 import pt.ipleiria.estg.dei.foodlyandroid.R;
+import pt.ipleiria.estg.dei.foodlyandroid.listeners.ProfileListener;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.Profile;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.SingletonFoodly;
 
-public class PerfilTabInfoFragment extends Fragment {
+public class PerfilTabInfoFragment extends Fragment implements ProfileListener {
 
     private TextInputEditText editTextUsername, editTextIdadeProfile, editTextNomeAlergiaProfile,
             editTextGeneroProfile, editTextNomeContactoProfile, editTextNomeMoradaProfile, editTextEmailProfile, editTextNomeCompletoProfile;
@@ -46,5 +47,17 @@ public class PerfilTabInfoFragment extends Fragment {
         editTextNomeCompletoProfile.setText(profile.getFullname());
 
         return view;
+    }
+
+    @Override
+    public void onRefreshProfile(Profile profile) {
+        editTextUsername.setText(profile.getUsername());
+        editTextEmailProfile.setText(profile.getEmail());
+        editTextIdadeProfile.setText(profile.getAge());
+        editTextNomeAlergiaProfile.setText(profile.getAlergias());
+        editTextGeneroProfile.setText(profile.getGenero());
+        editTextNomeContactoProfile.setText(profile.getTelefone());
+        editTextNomeMoradaProfile.setText(profile.getMorada());
+        editTextNomeCompletoProfile.setText(profile.getFullname());
     }
 }
