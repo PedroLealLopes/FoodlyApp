@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -12,16 +14,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.UnsupportedEncodingException;
 
 import pt.ipleiria.estg.dei.foodlyandroid.R;
 import pt.ipleiria.estg.dei.foodlyandroid.listeners.LoginListener;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.SingletonFoodly;
+import pt.ipleiria.estg.dei.foodlyandroid.utils.ProfileJsonParser;
 
 public class LoginActivity extends AppCompatActivity implements LoginListener {
 
     private TextView tvEsquecer, tvRegistar;
     private TextInputEditText etUsername, etPassword;
+    private CheckBox cboxLembrarConta;
     private Button btnLogin;
 
     @Override
@@ -35,7 +42,20 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
         etPassword = findViewById(R.id.editTextPassword);
         tvRegistar = findViewById(R.id.textViewRegistar);
 
+        cboxLembrarConta = findViewById(R.id.checkBoxLembrarConta);
         btnLogin = findViewById(R.id.buttonLogin);
+
+
+        SharedPreferences sharedPrefUser = getSharedPreferences(MenuMainActivity.PROFILE, Context.MODE_PRIVATE);
+        String profile = sharedPrefUser.getString("Profile", "");
+        try {
+            System.out.println("profile --->" + profile);
+            JSONObject profileObject = new JSONObject(profile);
+            SingletonFoodly.getInstance(getApplicationContext()).setProfile(ProfileJsonParser.parserJsonProfiles(profileObject));
+            onValidateLogin(true, profileObject);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     public void onClickLogin(View view) {
@@ -89,10 +109,21 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
     }
 
     @Override
-    public void onValidateLogin(boolean canLogin, String username) {
-        if (canLogin) {
+
+    public void onValidateLogin(boolean canLogin, JSONObject profile) {
+        if(canLogin){
+            if(cboxLembrarConta.isChecked()) {
+                SharedPreferences sharedPrefUser = getSharedPreferences(MenuMainActivity.PROFILE, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPrefUser.edit();
+                editor.putString("Profile", profile + "");
+                editor.apply();
+            }
             Intent intent = new Intent(this, MenuMainActivity.class);
-            intent.putExtra("USERNAME", username);
+            try {
+                intent.putExtra("USERNAME", profile.getString("username"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             startActivity(intent);
             finish();
         } else {

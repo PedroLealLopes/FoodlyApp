@@ -97,6 +97,12 @@ public class SingletonFoodly {
 
     //region LOGIN_API
     public void loginAPI(final String username, final String password, final Context context) {
+        if (!GenericUtils.isConnectionInternet(context)) {
+            Toast.makeText(context, "Não há internet", Toast.LENGTH_SHORT).show();
+
+            if (loginListener != null)
+                loginListener.onValidateLogin(false, null);
+        }
         StringRequest req = new StringRequest(Request.Method.POST, mUrlAPILogin, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -104,9 +110,10 @@ public class SingletonFoodly {
                     JSONObject profileResponse = new JSONObject(response);
                     if (profileResponse.getInt("id") >= 0) {
                         setProfile(ProfileJsonParser.parserJsonProfiles(profileResponse));
-                        loginListener.onValidateLogin(true, profileResponse.getString("username"));
-                    } else {
-                        loginListener.onValidateLogin(false, "");
+                        loginListener.onValidateLogin(true, profileResponse);
+                    }
+                    else{
+                        loginListener.onValidateLogin(false, null);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
