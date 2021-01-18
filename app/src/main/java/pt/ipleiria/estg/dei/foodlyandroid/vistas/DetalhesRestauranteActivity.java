@@ -56,7 +56,7 @@ public class DetalhesRestauranteActivity extends AppCompatActivity {
                             .replace(R.id.fragment_container, fragment)
                             .commit();
                 } else {
-                    Log.e(TAG, "Erro ao criar fragmento");
+                    Log.e(TAG, getString(R.string.fragmentoErro));
                 }
             }
         });

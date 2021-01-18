@@ -19,7 +19,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
-                android:hint="Username">
+                android:hint="@string/username">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextUsernameProfile"
@@ -27,8 +27,7 @@
                     android:layout_height="wrap_content"
                     android:enabled="false"
                     android:fontFamily="@font/montserrat_regular"
-                    android:inputType="textPersonName"
-                    android:text="Pedro" />
+                    android:inputType="textPersonName"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -37,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
-                android:hint="Email">
+                android:hint="@string/email">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextEmailProfile"
@@ -54,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
-                android:hint="Nome Completo">
+                android:hint="@string/nome_completo">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextNomeCompletoProfile"
@@ -83,7 +82,7 @@
                         android:layout_height="wrap_content"
                         android:enabled="false"
                         android:fontFamily="@font/montserrat_regular"
-                        android:hint="Género"
+                        android:hint="@string/genero"
                         android:inputType="textPersonName" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -99,7 +98,7 @@
                         android:layout_height="match_parent"
                         android:enabled="false"
                         android:fontFamily="@font/montserrat_regular"
-                        android:hint="Idade"
+                        android:hint="@string/idade"
                         android:inputType="textPersonName" />
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
@@ -110,7 +109,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
-                android:hint="Contacto">
+                android:hint="@string/contacto">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextNomeContactoProfile"
@@ -128,7 +127,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
-                android:hint="Morada">
+                android:hint="@string/morada">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextNomeMoradaProfile"
@@ -145,7 +144,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
-                android:hint="Alergias">
+                android:hint="@string/alergias">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextNomeAlergiaProfile"

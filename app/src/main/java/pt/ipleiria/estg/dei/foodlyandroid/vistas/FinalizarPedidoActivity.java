@@ -13,6 +13,6 @@ public class FinalizarPedidoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finalizar_pedido);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setTitle("Finalizar Pedido");
+        setTitle(getString(R.string.finalizarPedido));
     }
 }

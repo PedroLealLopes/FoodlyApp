@@ -29,7 +29,7 @@ public class RegistarActivity extends AppCompatActivity implements DatePickerDia
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setTitle("Criar Conta");
+        setTitle(getString(R.string.criarContaTitulo));
 
         etIdade = findViewById(R.id.editTextIdade);
         etIdade.setInputType(0);

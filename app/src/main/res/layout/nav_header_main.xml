@@ -23,9 +23,8 @@
         android:id="@+id/nav_header_nome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
         android:fontFamily="@font/montserrat_bold"
-        android:text="Utilizador"
         android:textColor="@color/cinza"
         android:textSize="25sp" />
 </LinearLayout>

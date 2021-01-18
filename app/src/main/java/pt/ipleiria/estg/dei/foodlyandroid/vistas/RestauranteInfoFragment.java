@@ -72,7 +72,7 @@ public class RestauranteInfoFragment extends Fragment implements RestaurantesLis
                     //Adicionar aos Favoritos
                     SingletonFoodly.getInstance(getContext()).adicionarFavoritoAPI(SingletonFoodly.getInstance(getContext()).getProfileId(), restauranteId, getContext());
                     ivFav.setImageResource(R.drawable.ic_restaurante_fav_true);
-                    Toast.makeText(getContext(), "Restaurante adicionado aos favoritos", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), R.string.restauranteAdicionadoFavoritos, Toast.LENGTH_SHORT).show();
                 } else {
                     //Remover dos Favoritos
                     dialogRemoverFav(restauranteId);
@@ -126,14 +126,14 @@ public class RestauranteInfoFragment extends Fragment implements RestaurantesLis
     private void dialogRemoverFav(final int id) {
         AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("REMOVER")
-                .setMessage("Deseja remover este restaurante dos favoritos?")
+        builder.setTitle(R.string.removerTitulo)
+                .setMessage(R.string.removerFavoritoPergunta)
                 .setPositiveButton(R.string.respostaSim, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         SingletonFoodly.getInstance(getContext()).removerFavoritoAPI(id, getContext());
                         ivFav.setImageResource(R.drawable.ic_restaurante_fav_false);
-                        Toast.makeText(getContext(), "Restaurante removido dos favoritos", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), R.string.removidoFavoritos, Toast.LENGTH_SHORT).show();
                     }
                 })
                 .setNegativeButton(R.string.respostaNao, new DialogInterface.OnClickListener() {

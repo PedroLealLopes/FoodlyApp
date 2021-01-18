@@ -39,7 +39,7 @@
                     android:drawablePadding="12dp"
                     android:fontFamily="@font/montserrat_bold"
                     android:outlineSpotShadowColor="@color/branco"
-                    android:text="Adicionar Foto"
+                    android:text="@string/adicionar_foto"
                     android:textColor="@color/roxo"
                     android:textSize="20sp" />
 
@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
-                android:hint="Username">
+                android:hint="@string/username">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextUsername"
@@ -69,7 +69,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
-                android:hint="Email">
+                android:hint="@string/email">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextEmail"
@@ -86,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
-                android:hint="Password">
+                android:hint="@string/password">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextPassword"
@@ -102,7 +102,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
-                android:hint="Nome Completo">
+                android:hint="@string/nome_completo">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextNomeCompleto"
@@ -129,7 +129,7 @@
                         android:layout_width="165dp"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/montserrat_regular"
-                        android:hint="Género"
+                        android:hint="@string/genero"
                         android:inputType="textPersonName" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -155,7 +155,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
-                android:hint="Contacto">
+                android:hint="@string/contacto">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextNomeContacto"
@@ -172,7 +172,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
-                android:hint="Morada">
+                android:hint="@string/morada">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextNomeMorada"
@@ -188,7 +188,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
-                android:hint="Alergias">
+                android:hint="@string/alergias">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextNomeAlergia"

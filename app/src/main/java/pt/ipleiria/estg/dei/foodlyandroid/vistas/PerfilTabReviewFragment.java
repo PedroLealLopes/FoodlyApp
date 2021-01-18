@@ -67,16 +67,15 @@ public class PerfilTabReviewFragment extends Fragment implements ReviewsListener
 
         AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("ELIMINAR REVIEW")
-                .setMessage("Deseja eliminar a review?")
+        builder.setTitle(R.string.eliminarReviewTitulo)
+                .setMessage(R.string.eliminarReviewSair)
                 .setPositiveButton(R.string.respostaSim, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         SingletonFoodly.getInstance(getContext()).removerReviewUserAPI(review, getContext());
-                        Toast.makeText(getContext(), "Review removida com sucesso", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), R.string.reviewRemovidaSucesso, Toast.LENGTH_SHORT).show();
                     }
                 })
-
                 .setNegativeButton(R.string.respostaNao, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

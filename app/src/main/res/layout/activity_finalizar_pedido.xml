@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:fontFamily="@font/montserrat_bold"
-            android:text="Nome"
+            android:text="@string/nome"
             android:textColor="@color/cinza"
             android:textSize="20sp" />
 
@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="100dp"
             android:fontFamily="@font/montserrat_bold"
-            android:text="Qtd"
+            android:text="@string/qtd"
             android:textColor="@color/cinza"
             android:textSize="20sp" />
 
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:fontFamily="@font/montserrat_bold"
-            android:text="Preço"
+            android:text="@string/preco"
             android:textColor="@color/cinza"
             android:textSize="20sp" />
 
@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:fontFamily="@font/montserrat_bold"
-            android:text="Total"
+            android:text="@string/total"
             android:textColor="@color/cinza"
             android:textSize="20sp" />
     </LinearLayout>
@@ -89,7 +89,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/montserrat_bold"
-            android:text="TOTAL"
+            android:text="@string/total_caps"
             android:textColor="@color/cinza"
             android:textSize="22sp" />
 
@@ -100,7 +100,7 @@
             android:layout_marginStart="220dp"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/montserrat_bold"
-            android:text="10.5€"
+            android:text="@string/euro"
             android:textColor="@color/cinza"
             android:textSize="22sp" />
     </LinearLayout>
@@ -113,7 +113,7 @@
         android:layout_marginTop="40dp"
         android:background="@drawable/button_login"
         android:fontFamily="@font/montserrat_bold"
-        android:text="PEDIR"
+        android:text="@string/pedir"
         android:textColor="@color/branco"
         android:textSize="24sp" />
 </LinearLayout>

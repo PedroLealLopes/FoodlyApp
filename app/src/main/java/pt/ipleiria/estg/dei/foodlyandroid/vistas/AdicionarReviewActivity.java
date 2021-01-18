@@ -35,7 +35,7 @@ public class AdicionarReviewActivity extends AppCompatActivity implements View.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adicionar_review);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setTitle("Adicionar Review");
+        setTitle(getString(R.string.adicionarReviewTitulo));
 
         etDescricao = findViewById(R.id.editTextDescricaoReview);
         btnSubmit = findViewById(R.id.buttonSubmeterReview);
@@ -59,8 +59,8 @@ public class AdicionarReviewActivity extends AppCompatActivity implements View.O
 
         AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(this);
-        builder.setTitle("ADICIONAR REVIEW")
-                .setMessage("Deseja adcionar a review?")
+        builder.setTitle(R.string.adicionarReviewCaps)
+                .setMessage(R.string.perguntaAdicionarReview)
                 .setPositiveButton(R.string.respostaSim, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -75,7 +75,7 @@ public class AdicionarReviewActivity extends AppCompatActivity implements View.O
                         Intent intent = new Intent(AdicionarReviewActivity.this, MenuMainActivity.class);
                         startActivity(intent);
                         finish();
-                        Toast.makeText(AdicionarReviewActivity.this, "Review adicionada com sucesso", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AdicionarReviewActivity.this, R.string.reviewSucesso, Toast.LENGTH_SHORT).show();
                     }
                 })
                 .setNegativeButton(R.string.respostaNao, new DialogInterface.OnClickListener() {

@@ -74,7 +74,7 @@ public class EditarPerfilActivity extends AppCompatActivity implements ProfileLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setTitle("Editar Perfil");
+        setTitle(getString(R.string.editarPerfilTitulo));
         Profile profile = SingletonFoodly.getInstance(getApplicationContext()).getProfile();
 
         imageViewFoto = findViewById(R.id.imageViewFoto);
@@ -151,7 +151,7 @@ public class EditarPerfilActivity extends AppCompatActivity implements ProfileLi
 
     private void dialogUpload() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Selecione uma opção para carregar imagem:");
+        builder.setTitle(R.string.opcaoSelecionarImagem);
 
         String[] opcoes = {"Câmara", "Galeria"};
         builder.setItems(opcoes, new DialogInterface.OnClickListener() {
