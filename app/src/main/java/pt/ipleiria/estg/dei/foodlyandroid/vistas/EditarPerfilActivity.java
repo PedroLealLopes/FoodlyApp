@@ -21,7 +21,12 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.TextInputEditText;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -36,8 +41,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import pt.ipleiria.estg.dei.foodlyandroid.R;
+import pt.ipleiria.estg.dei.foodlyandroid.listeners.ProfileListener;
+import pt.ipleiria.estg.dei.foodlyandroid.modelos.FoodlyBDHelper;
+import pt.ipleiria.estg.dei.foodlyandroid.modelos.Profile;
+import pt.ipleiria.estg.dei.foodlyandroid.modelos.SingletonFoodly;
 
-public class EditarPerfilActivity extends AppCompatActivity {
+public class EditarPerfilActivity extends AppCompatActivity implements ProfileListener {
 
     private static final String[] GENEROS = new String[]{"M", "F"};
 
@@ -48,7 +57,14 @@ public class EditarPerfilActivity extends AppCompatActivity {
 
     private ImageView imageViewFoto;
     private Button buttonAdicionarFoto;
-    private TextInputLayout TextInputLayoutPassword;
+    private TextInputLayout TextInputLayoutPassword, TextInputLayoutUsername, TextInputLayoutEmail;
+
+    private FloatingActionButton fabCriarConta;
+
+
+    private TextInputEditText editTextUsername, editTextIdadeProfile, editTextNomeAlergiaProfile,editTextNomeContactoProfile, editTextNomeMoradaProfile, editTextEmailProfile, editTextNomeCompletoProfile;
+
+    private AutoCompleteTextView autoCompleteTextViewGenero;
 
 
     private String currentPhotoPath;
@@ -59,16 +75,39 @@ public class EditarPerfilActivity extends AppCompatActivity {
         setContentView(R.layout.activity_registar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("Editar Perfil");
+        Profile profile = SingletonFoodly.getInstance(getApplicationContext()).getProfile();
 
         imageViewFoto = findViewById(R.id.imageViewFoto);
         TextInputLayoutPassword = findViewById(R.id.TextInputLayoutPassword);
+        TextInputLayoutUsername = findViewById(R.id.TextInputLayoutUsername);
+        TextInputLayoutEmail = findViewById(R.id.TextInputLayoutEmail);
 
-        AutoCompleteTextView editTextGenero = findViewById(R.id.autoCompleteTextViewGenero);
+        editTextIdadeProfile = findViewById(R.id.editTextIdade);
+        editTextNomeAlergiaProfile = findViewById(R.id.editTextNomeAlergia);
+        editTextNomeContactoProfile = findViewById(R.id.editTextNomeContacto);
+        editTextNomeMoradaProfile = findViewById(R.id.editTextNomeMorada);
+        editTextNomeCompletoProfile = findViewById(R.id.editTextNomeCompleto);
+
+        final AutoCompleteTextView editTextGenero = findViewById(R.id.autoCompleteTextViewGenero);
         ArrayAdapter<String> adaptadorGenero = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, GENEROS);
+        editTextGenero.setText(profile.getGenero());
         editTextGenero.setAdapter(adaptadorGenero);
         editTextGenero.setInputType(0);
 
         TextInputLayoutPassword.setVisibility(View.GONE);
+        TextInputLayoutUsername.setVisibility(View.GONE);
+        TextInputLayoutEmail.setVisibility(View.GONE);
+
+        fabCriarConta = findViewById(R.id.fabCriarConta);
+        fabCriarConta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SingletonFoodly.getInstance(getApplicationContext()).editProfileAPI(editTextNomeCompletoProfile.getText().toString(), editTextIdadeProfile.getText().toString(), editTextNomeAlergiaProfile.getText().toString(), editTextGenero.getText().toString(), editTextNomeContactoProfile.getText().toString(), editTextNomeMoradaProfile.getText().toString(), getApplicationContext() );
+                finish();
+            }
+
+
+        });
 
 
         buttonAdicionarFoto = findViewById(R.id.buttonAdicionarFoto);
@@ -80,6 +119,20 @@ public class EditarPerfilActivity extends AppCompatActivity {
         });
 
 
+
+        editTextIdadeProfile.setText(profile.getAge());
+        editTextNomeAlergiaProfile.setText(profile.getAlergias());
+        editTextNomeContactoProfile.setText(profile.getTelefone());
+        editTextNomeMoradaProfile.setText(profile.getMorada());
+        editTextNomeCompletoProfile.setText(profile.getFullname());
+
+        SingletonFoodly.getInstance(getApplicationContext()).setProfileListener(this);
+
+        Glide.with(this)
+                .load(Base64.decode(SingletonFoodly.getInstance(getApplicationContext()).getProfile().getImage(), Base64.DEFAULT))
+                .placeholder(R.drawable.gordon)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(imageViewFoto);
     }
 
     @Override
@@ -199,7 +252,7 @@ public class EditarPerfilActivity extends AppCompatActivity {
                     String[] paths = new String[]{currentPhotoPath};
                     Bitmap bitmap = BitmapFactory.decodeFile(currentPhotoPath);
                     imageViewFoto.setImageBitmap(bitmap);
-                    //SingletonFoodly.getInstance(getApplicationContext()).adicionarImagemApi(getStringImage(bitmap), livro, getApplicationContext());
+                    SingletonFoodly.getInstance(getApplicationContext()).adicionarImagemApi(getStringImage(bitmap),getApplicationContext());
                     MediaScannerConnection.scanFile(this, paths, null, new
                             MediaScannerConnection.MediaScannerConnectionClient() {
 
@@ -221,7 +274,7 @@ public class EditarPerfilActivity extends AppCompatActivity {
                     try {
                         Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
                         imageViewFoto.setImageBitmap(bitmap);
-                        //SingletonGestorLivros.getInstance(getApplicationContext()).adicionarImagemApi(getStringImage(bitmap),livro,getApplicationContext());
+                        SingletonFoodly.getInstance(getApplicationContext()).adicionarImagemApi(getStringImage(bitmap),getApplicationContext());
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -232,11 +285,24 @@ public class EditarPerfilActivity extends AppCompatActivity {
     }
 
     public String getStringImage(Bitmap bmp) {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        byte[] imageBytes = baos.toByteArray();
-        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
-        return encodedImage;
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 10, byteArrayOutputStream);
+        byte[] byteArray = byteArrayOutputStream .toByteArray();
+
+        String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
+        return encoded;
     }
 
+    @Override
+    public void onRefreshProfile(Profile profile) {
+        if(profile != null){
+            imageViewFoto = findViewById(R.id.imageViewFoto);
+
+            Glide.with(getApplicationContext())
+                    .load(Base64.decode(profile.getImage(), Base64.DEFAULT))
+                    .placeholder(R.drawable.gordon)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(imageViewFoto);
+        }
+    }
 }

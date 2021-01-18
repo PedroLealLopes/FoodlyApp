@@ -15,12 +15,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import pt.ipleiria.estg.dei.foodlyandroid.listeners.EmentasListener;
 import pt.ipleiria.estg.dei.foodlyandroid.listeners.LoginListener;
+import pt.ipleiria.estg.dei.foodlyandroid.listeners.ProfileListener;
 import pt.ipleiria.estg.dei.foodlyandroid.listeners.RestaurantesListener;
 import pt.ipleiria.estg.dei.foodlyandroid.listeners.ReviewsListener;
 import pt.ipleiria.estg.dei.foodlyandroid.utils.EmentaJsonParser;
@@ -49,13 +51,15 @@ public class SingletonFoodly {
     private RestaurantesListener restaurantesListener;
     private EmentasListener ementasListener;
     private LoginListener loginListener;
+    private ProfileListener profileListener;
     private ReviewsListener reviewsListener;
 
     private static final String IP_MiiTU = "192.168.1.8";
     private static final String IP_Luckdude = "192.168.1.229";
     private static final String IP_Johnny = "192.168.1.253";
-    private static final String mUrlAPI = "http://" + IP_MiiTU + "/FoodlyWeb/frontend/web/api";
-    private static final String mUrlAPILogin = "http://" + IP_MiiTU + "/FoodlyWeb/frontend/web/api/users/login";
+    private static final String mUrlAPILogin = "http://"+ IP_Luckdude +"/FoodlyWeb/frontend/web/api/users/login";
+    private static final String mUrlAPIProfile = "http://" + IP_Luckdude + "/FoodlyWeb/frontend/web/api/profiles/";
+    private static final String mUrlAPI = "http://" + IP_Luckdude + "/FoodlyWeb/frontend/web/api";
 
     public static synchronized SingletonFoodly getInstance(Context context) {
         if (instance == null)
@@ -110,6 +114,9 @@ public class SingletonFoodly {
                     JSONObject profileResponse = new JSONObject(response);
                     if (profileResponse.getInt("id") >= 0) {
                         setProfile(ProfileJsonParser.parserJsonProfiles(profileResponse));
+                        if (profileListener != null)
+                            profileListener.onRefreshProfile(profile);
+
                         loginListener.onValidateLogin(true, profileResponse);
                     }
                     else{
@@ -191,10 +198,16 @@ public class SingletonFoodly {
         for (Restaurante r : restaurantes)
             adicionarRestauranteBD(r);
     }
+    //endregion
 
     //region EMENTA
     public void setEmentasListener(EmentasListener ementasListener) {
         this.ementasListener = ementasListener;
+    }
+
+    public void setProfileListener(ProfileListener profileListener) {
+        System.out.println("--> Entrou no listener");
+        this.profileListener = profileListener;
     }
 
     public Ementa getEmenta(int id) {
@@ -236,6 +249,68 @@ public class SingletonFoodly {
             volleyQueue.add(req);
         }
     }
+
+
+    public void adicionarImagemApi(final String image, final Context context){
+        StringRequest req = new StringRequest(Request.Method.PUT, mUrlAPIProfile + profile.getProfileId() + "/upload", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                profile.setImage(image);
+
+                if (profileListener != null)
+                    profileListener.onRefreshProfile(profile);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("image", image);
+                return params;
+            }
+        };
+        volleyQueue.add(req);
+    }
+
+    public void editProfileAPI(final String fullname, final String age, final String alergias, final String genero, final String telefone, final String morada, final Context context){
+        StringRequest req = new StringRequest(Request.Method.PUT, mUrlAPIProfile + profile.getProfileId(), new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                profile.setFullname(fullname);
+                profile.setAge(age);
+                profile.setAlergias(alergias);
+                profile.setGenero(genero);
+                profile.setTelefone(telefone);
+                profile.setMorada(morada);
+
+                if (profileListener != null)
+                    profileListener.onRefreshProfile(profile);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("fullname", fullname);
+                params.put("age", age);
+                params.put("alergias", alergias);
+                params.put("genero", genero);
+                params.put("telefone", telefone);
+                params.put("morada", morada);
+                return params;
+            }
+        };
+        volleyQueue.add(req);
+    }
+
     //endregion
 
     //region FAVORITOS

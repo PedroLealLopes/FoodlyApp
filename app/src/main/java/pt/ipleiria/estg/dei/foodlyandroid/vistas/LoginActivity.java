@@ -1,6 +1,8 @@
 package pt.ipleiria.estg.dei.foodlyandroid.vistas;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
