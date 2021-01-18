@@ -41,10 +41,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import pt.ipleiria.estg.dei.foodlyandroid.R;
+import pt.ipleiria.estg.dei.foodlyandroid.listeners.ProfileListener;
+import pt.ipleiria.estg.dei.foodlyandroid.modelos.FoodlyBDHelper;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.Profile;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.SingletonFoodly;
 
-public class EditarPerfilActivity extends AppCompatActivity {
+public class EditarPerfilActivity extends AppCompatActivity implements ProfileListener {
 
     private static final String[] GENEROS = new String[]{"M", "F"};
 
@@ -125,7 +127,7 @@ public class EditarPerfilActivity extends AppCompatActivity {
         editTextNomeMoradaProfile.setText(profile.getMorada());
         editTextNomeCompletoProfile.setText(profile.getFullname());
 
-
+        SingletonFoodly.getInstance(getApplicationContext()).setProfileListener(this);
 
         Glide.with(this)
                 .load(Base64.decode(SingletonFoodly.getInstance(getApplicationContext()).getProfile().getImage(), Base64.DEFAULT))
@@ -292,4 +294,16 @@ public class EditarPerfilActivity extends AppCompatActivity {
         return encoded;
     }
 
+    @Override
+    public void onRefreshProfile(Profile profile) {
+        if(profile != null){
+            imageViewFoto = findViewById(R.id.imageViewFoto);
+
+            Glide.with(getApplicationContext())
+                    .load(Base64.decode(profile.getImage(), Base64.DEFAULT))
+                    .placeholder(R.drawable.gordon)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(imageViewFoto);
+        }
+    }
 }

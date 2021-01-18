@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.MenuItem;
@@ -25,8 +27,12 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.material.navigation.NavigationView;
 
+import java.io.ByteArrayOutputStream;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 import pt.ipleiria.estg.dei.foodlyandroid.R;
+import pt.ipleiria.estg.dei.foodlyandroid.listeners.ProfileListener;
+import pt.ipleiria.estg.dei.foodlyandroid.modelos.Profile;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.SingletonFoodly;
 
 public class MenuMainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -45,23 +51,46 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_main);
 
+
+
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         navigationView = findViewById(R.id.nav_view);
         drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer,
-                toolbar, R.string.ndOpen, R.string.ndClose);
-        toggle.syncState();
+                toolbar, R.string.ndOpen, R.string.ndClose) {
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+            }
+
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+
+
+                profile_image = drawerView.findViewById(R.id.profile_image);
+
+                Glide.with(getApplicationContext())
+                    .load(android.util.Base64.decode(SingletonFoodly.getInstance(getApplicationContext()).getProfile().getImage(), Base64.DEFAULT))
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(profile_image);
+            }
+        };
         drawer.addDrawerListener(toggle);
+
+
 
         fragmentManager = getSupportFragmentManager();
 
         carregarCabecalho();
         navigationView.setNavigationItemSelectedListener(this);
-
-
+        toggle.syncState();
         carregarFragmentoInicial();
     }
+
+
+
+
 
     private void carregarCabecalho() {
         username = getIntent().getStringExtra(USERNAME);
@@ -78,14 +107,6 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
         View hView = navigationView.getHeaderView(0);
         TextView tvEmail = hView.findViewById(R.id.nav_header_nome);
         tvEmail.setText(username);
-
-        profile_image = hView.findViewById(R.id.profile_image);
-
-        Glide.with(this)
-                .load(android.util.Base64.decode(SingletonFoodly.getInstance(getApplicationContext()).getProfile().getImage(), Base64.DEFAULT))
-                .placeholder(R.drawable.gordon)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(profile_image);
     }
 
     private void carregarFragmentoInicial() {

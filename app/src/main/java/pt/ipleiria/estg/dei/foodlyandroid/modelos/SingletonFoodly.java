@@ -24,6 +24,7 @@ import java.util.Map;
 
 import pt.ipleiria.estg.dei.foodlyandroid.listeners.EmentasListener;
 import pt.ipleiria.estg.dei.foodlyandroid.listeners.LoginListener;
+import pt.ipleiria.estg.dei.foodlyandroid.listeners.ProfileListener;
 import pt.ipleiria.estg.dei.foodlyandroid.listeners.RestaurantesListener;
 import pt.ipleiria.estg.dei.foodlyandroid.utils.EmentaJsonParser;
 import pt.ipleiria.estg.dei.foodlyandroid.utils.GenericUtils;
@@ -46,6 +47,7 @@ public class SingletonFoodly {
     private RestaurantesListener restaurantesListener;
     private EmentasListener ementasListener;
     private LoginListener loginListener;
+    private ProfileListener profileListener;
 
     private static final String IP_MiiTU = "192.168.1.8";
     private static final String IP_Luckdude = "192.168.1.229";
@@ -94,6 +96,7 @@ public class SingletonFoodly {
 
             if (loginListener != null)
                 loginListener.onValidateLogin(false, "");
+
         }
         StringRequest req = new StringRequest(Request.Method.POST, mUrlAPILogin, new Response.Listener<String>() {
             @Override
@@ -102,6 +105,10 @@ public class SingletonFoodly {
                     JSONObject profileResponse = new JSONObject(response);
                     if(profileResponse.getInt("id") >= 0){
                         setProfile(ProfileJsonParser.parserJsonProfiles(profileResponse));
+
+                        if (profileListener != null)
+                            profileListener.onRefreshProfile(profile);
+
                         loginListener.onValidateLogin(true, profileResponse.getString("username"));
                     }
                     else{
@@ -186,11 +193,15 @@ public class SingletonFoodly {
             adicionarRestauranteBD(r);
     }
     //endregion
-    //endregion
 
     //region EMENTA
     public void setEmentasListener(EmentasListener ementasListener) {
         this.ementasListener = ementasListener;
+    }
+
+    public void setProfileListener(ProfileListener profileListener) {
+        System.out.println("--> Entrou no listener");
+        this.profileListener = profileListener;
     }
 
     public Ementa getEmenta(int id) {
@@ -239,6 +250,9 @@ public class SingletonFoodly {
             @Override
             public void onResponse(String response) {
                 profile.setImage(image);
+
+                if (profileListener != null)
+                    profileListener.onRefreshProfile(profile);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -261,6 +275,9 @@ public class SingletonFoodly {
             @Override
             public void onResponse(String response) {
 
+
+                if (profileListener != null)
+                    profileListener.onRefreshProfile(profile);
             }
         }, new Response.ErrorListener() {
             @Override
