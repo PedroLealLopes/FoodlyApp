@@ -18,7 +18,7 @@ import pt.ipleiria.estg.dei.foodlyandroid.modelos.SingletonFoodly;
 public class PerfilTabInfoFragment extends Fragment {
 
     private TextInputEditText editTextUsername, editTextIdadeProfile, editTextNomeAlergiaProfile,
-            editTextGeneroProfile,editTextNomeContactoProfile, editTextNomeMoradaProfile, editTextEmailProfile, editTextNomeCompletoProfile;
+            editTextGeneroProfile, editTextNomeContactoProfile, editTextNomeMoradaProfile, editTextEmailProfile, editTextNomeCompletoProfile;
 
     @Nullable
     @Override

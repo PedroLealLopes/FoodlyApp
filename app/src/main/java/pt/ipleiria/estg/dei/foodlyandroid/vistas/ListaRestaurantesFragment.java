@@ -48,8 +48,9 @@ public class ListaRestaurantesFragment extends Fragment implements SwipeRefreshL
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getContext(), DetalhesRestauranteActivity.class);
-                intent.putExtra(RestauranteInfoFragment.ID, (int) id);
+                intent.putExtra(RestauranteInfoFragment.ID_RESTAURANTE, (int) id);
                 intent.putExtra(RestauranteEmentaFragment.ID_RESTAURANTE, (int) id);
+                intent.putExtra(RestauranteReviewFragment.ID_RESTAURANTE, (int) id);
                 startActivity(intent);
             }
         });
@@ -104,5 +105,10 @@ public class ListaRestaurantesFragment extends Fragment implements SwipeRefreshL
     public void onRefreshListaRestaurantes(ArrayList<Restaurante> restaurantes) {
         if (restaurantes != null)
             lvListaRestaurantes.setAdapter(new ListaRestauranteAdaptador(getContext(), restaurantes));
+    }
+
+    @Override
+    public void onRefreshDetalhes() {
+
     }
 }

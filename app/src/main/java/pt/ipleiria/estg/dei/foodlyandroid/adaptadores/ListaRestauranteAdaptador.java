@@ -79,7 +79,7 @@ public class ListaRestauranteAdaptador extends BaseAdapter {
             tvLocalizacao.setText(restaurante.getLocation());
             Glide.with(context)
                     .load(restaurante.getImage())
-                    .placeholder(R.drawable.gordon)
+                    .placeholder(R.drawable.img_restaurante)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(ivCapa);
         }

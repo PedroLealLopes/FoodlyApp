@@ -1,11 +1,8 @@
 package pt.ipleiria.estg.dei.foodlyandroid.vistas;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Base64;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -75,7 +72,7 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
         }
 
         password = encodePassword(password);
-        if(password != null){
+        if (password != null) {
             SingletonFoodly.getInstance(getApplicationContext()).loginAPI(username, password, getApplicationContext());
         }
     }
@@ -94,7 +91,7 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
         return password.length() >= 4;
     }
 
-    private String encodePassword(String password){
+    private String encodePassword(String password) {
         byte[] data = new byte[0];
         try {
             data = password.getBytes("UTF-8");
@@ -112,6 +109,7 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
     }
 
     @Override
+
     public void onValidateLogin(boolean canLogin, JSONObject profile) {
         if(canLogin){
             if(cboxLembrarConta.isChecked()) {
@@ -127,7 +125,8 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
                 e.printStackTrace();
             }
             startActivity(intent);
-        }else{
+            finish();
+        } else {
             Toast.makeText(this, "Login Invalida", Toast.LENGTH_SHORT).show();
         }
 

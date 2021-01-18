@@ -66,7 +66,7 @@
             android:drawablePadding="12dp"
             android:fontFamily="@font/montserrat_regular"
             android:inputType="textEmailAddress"
-            android:text="username" />
+            android:text="admin" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -89,7 +89,7 @@
             android:drawablePadding="12dp"
             android:fontFamily="@font/montserrat_regular"
             android:inputType="textPassword"
-            android:text="12345" />
+            android:text="admin123" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView

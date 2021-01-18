@@ -4,7 +4,7 @@ public class Profile {
     private String username, email, fullname, age, alergias, genero, telefone, morada, image;
     private int profileId;
 
-    public Profile(int profileId,String username, String email, String fullname, String age, String alergias, String genero, String telefone, String morada, String image) {
+    public Profile(int profileId, String username, String email, String fullname, String age, String alergias, String genero, String telefone, String morada, String image) {
         this.profileId = profileId;
         this.username = username;
         this.email = email;

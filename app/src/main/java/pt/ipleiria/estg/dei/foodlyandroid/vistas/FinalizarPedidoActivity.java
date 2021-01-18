@@ -1,8 +1,8 @@
 package pt.ipleiria.estg.dei.foodlyandroid.vistas;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import pt.ipleiria.estg.dei.foodlyandroid.R;
 

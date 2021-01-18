@@ -5,24 +5,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.ArrayList;
 
 import pt.ipleiria.estg.dei.foodlyandroid.R;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.Review;
+import pt.ipleiria.estg.dei.foodlyandroid.modelos.SingletonFoodly;
 
-public class ListaReviewAdaptador extends BaseAdapter {
+public class ListaReviewUserAdaptador extends BaseAdapter {
 
     private Context context;
     private LayoutInflater inflater;
     private ArrayList<Review> reviews;
 
-    public ListaReviewAdaptador(Context context, ArrayList<Review> reviews) {
+    public ListaReviewUserAdaptador(Context context, ArrayList<Review> reviews) {
         this.context = context;
         this.reviews = reviews;
     }
@@ -39,7 +36,7 @@ public class ListaReviewAdaptador extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return reviews.get(position).getRestaurantId();
+        return reviews.get(position).getProfileId();
     }
 
     @Override
@@ -48,7 +45,7 @@ public class ListaReviewAdaptador extends BaseAdapter {
             inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         if (convertView == null)
-            convertView = inflater.inflate(R.layout.item_lista_review, null);
+            convertView = inflater.inflate(R.layout.item_lista_review_user, null);
 
         //OTIMIZAÇÃO
         ViewHolderLista viewHolderLista = (ViewHolderLista) convertView.getTag();
@@ -63,27 +60,25 @@ public class ListaReviewAdaptador extends BaseAdapter {
     }
 
     private class ViewHolderLista {
-        private TextView tvUsername, tvData, tvClassificacao, tvComentario;
-        private ImageView ivPic;
+        private final TextView tvRestauranteNome, tvRestauranteMorada, tvClassificacao, tvDataCriacao, tvComentario;
 
         public ViewHolderLista(View view) {
-            tvUsername = view.findViewById(R.id.textViewUsername);
-            tvData = view.findViewById(R.id.textViewDataCriacao);
-            tvClassificacao = view.findViewById(R.id.textViewClassificacao);
-            tvComentario = view.findViewById(R.id.textViewComentario);
-            ivPic = view.findViewById(R.id.imageViewProfilePic);
+            tvRestauranteNome = view.findViewById(R.id.textViewRestauranteNomeRU);
+            tvRestauranteMorada = view.findViewById(R.id.textViewRestauranteMoradaRU);
+            tvClassificacao = view.findViewById(R.id.textViewClassificacaoRU);
+            tvDataCriacao = view.findViewById(R.id.textViewDataCriacaoRU);
+            tvComentario = view.findViewById(R.id.textViewComentarioRU);
         }
 
         public void update(Review review) {
-            tvUsername.setText(review.getUsername());
-            tvData.setText(review.getCreation_date());
+            String restaurantName = SingletonFoodly.getInstance(context).getRestaurante(review.getRestaurantId()).getName();
+            String restaurantLocation = SingletonFoodly.getInstance(context).getRestaurante(review.getRestaurantId()).getLocation();
+
+            tvRestauranteNome.setText(restaurantName);
+            tvRestauranteMorada.setText(restaurantLocation);
             tvClassificacao.setText(review.getStars() + "");
+            tvDataCriacao.setText(review.getCreation_date());
             tvComentario.setText(review.getComment());
-            Glide.with(context)
-                    .load(review.getImage())
-                    .placeholder(R.drawable.gordon)
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(ivPic);
         }
     }
 }
