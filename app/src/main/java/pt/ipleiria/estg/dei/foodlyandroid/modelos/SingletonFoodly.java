@@ -199,7 +199,7 @@ public class SingletonFoodly {
             adicionarRestauranteBD(r);
     }
     //endregion
-    
+
     //region EMENTA
     public void setEmentasListener(EmentasListener ementasListener) {
         this.ementasListener = ementasListener;
