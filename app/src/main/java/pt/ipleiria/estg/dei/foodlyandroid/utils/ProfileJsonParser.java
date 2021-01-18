@@ -1,19 +1,14 @@
 package pt.ipleiria.estg.dei.foodlyandroid.utils;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-
-import pt.ipleiria.estg.dei.foodlyandroid.R;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.Profile;
-import pt.ipleiria.estg.dei.foodlyandroid.modelos.Restaurante;
 
 public class ProfileJsonParser {
 
     public static Profile parserJsonProfiles(JSONObject response) {
-        Profile profile = new Profile(0, "", "","", "","", "","", "", "");
+        Profile profile = new Profile(0, "", "", "", "", "", "", "", "", "");
         if (response != null) {
             try {
 

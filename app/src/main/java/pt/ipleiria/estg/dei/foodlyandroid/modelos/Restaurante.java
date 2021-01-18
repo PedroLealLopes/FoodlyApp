@@ -22,6 +22,26 @@ public class Restaurante {
         this.hasVegan = hasVegan;
     }
 
+    @Override
+    public String toString() {
+        return "Restaurante{" +
+                "restaurantId=" + restaurantId +
+                ", maxPeople=" + maxPeople +
+                ", currentPeople=" + currentPeople +
+                ", name='" + name + '\'' +
+                ", image='" + image + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", description='" + description + '\'' +
+                ", location='" + location + '\'' +
+                ", openingHour='" + openingHour + '\'' +
+                ", closingHour='" + closingHour + '\'' +
+                ", wifiPassword='" + wifiPassword + '\'' +
+                ", allowsPets=" + allowsPets +
+                ", hasVegan=" + hasVegan +
+                '}';
+    }
+
     public int getRestaurantId() {
         return restaurantId;
     }

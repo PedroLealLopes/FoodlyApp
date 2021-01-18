@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import pt.ipleiria.estg.dei.foodlyandroid.R;
 import pt.ipleiria.estg.dei.foodlyandroid.adaptadores.ListaFazerPedidoAdaptador;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.Ementa;
-import pt.ipleiria.estg.dei.foodlyandroid.utils.GenericUtils;
 
 public class FazerPedidoActivity extends AppCompatActivity {
 

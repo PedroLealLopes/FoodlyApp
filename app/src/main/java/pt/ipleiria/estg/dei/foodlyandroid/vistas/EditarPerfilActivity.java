@@ -1,10 +1,5 @@
 package pt.ipleiria.estg.dei.foodlyandroid.vistas;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.FileProvider;
-
 import android.Manifest;
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -32,6 +27,11 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.FileProvider;
+
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.ByteArrayOutputStream;
@@ -108,7 +108,6 @@ public class EditarPerfilActivity extends AppCompatActivity implements ProfileLi
 
 
         });
-
 
 
         buttonAdicionarFoto = findViewById(R.id.buttonAdicionarFoto);

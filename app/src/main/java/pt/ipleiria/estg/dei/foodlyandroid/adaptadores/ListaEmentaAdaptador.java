@@ -7,8 +7,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.google.android.material.textfield.TextInputEditText;
-
 import java.util.ArrayList;
 
 import pt.ipleiria.estg.dei.foodlyandroid.R;
@@ -70,7 +68,7 @@ public class ListaEmentaAdaptador extends BaseAdapter {
 
         public void update(Ementa ementa) {
             tvDishName.setText(ementa.getName());
-            tvDishPrice.setText(ementa.getPrice()+" €");
+            tvDishPrice.setText(ementa.getPrice() + " €");
         }
     }
 }

@@ -14,6 +14,7 @@ import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -36,6 +37,8 @@ public class PerfilFragment extends Fragment implements ProfileListener {
     private FragmentManager fragmentManager;
     private static final String TAG = PerfilFragment.class.getSimpleName();
     private ImageView imageViewProfilePic;
+    private TextView tvUsername;
+    private ImageView ivProfilePic;
 
     public PerfilFragment(Context context) {
         this.context = context;
@@ -49,6 +52,15 @@ public class PerfilFragment extends Fragment implements ProfileListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_perfil, container, false);
+
+        tvUsername = view.findViewById(R.id.textViewUsernamePerfil);
+        tvUsername.setText(SingletonFoodly.getInstance(getContext()).getProfile().getUsername());
+        ivProfilePic = view.findViewById(R.id.imageViewProfilePic);
+        Glide.with(this)
+                .load(SingletonFoodly.getInstance(getContext()).getProfile().getImage())
+                .placeholder(R.drawable.gordon)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(ivProfilePic);
 
         //region Bottom Navigation
         bottomNav = view.findViewById(R.id.bottom_nav);

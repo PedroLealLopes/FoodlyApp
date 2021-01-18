@@ -39,6 +39,7 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
 
     public static final String USERNAME = "USERNAME";
     public static final String USER = "USER_PREF";
+    public static final String PROFILE = "PROFILE";
     public static final String TOKEN = "TOKEN";
     private String username = "";
     private NavigationView navigationView;
@@ -152,6 +153,10 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
                 .setPositiveButton(R.string.respostaSim, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        SharedPreferences sharedPrefUser = getSharedPreferences(MenuMainActivity.PROFILE, Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPrefUser.edit();
+                        editor.clear();
+                        editor.apply();
                         Intent intent = new Intent(MenuMainActivity.this, LoginActivity.class);
                         startActivity(intent);
                         finish();
