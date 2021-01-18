@@ -20,7 +20,7 @@
             android:layout_marginStart="10dp"
             android:layout_weight="1"
             android:fontFamily="@font/montserrat_regular"
-            android:text="Nome"
+            android:text="@string/nome"
             android:textColor="@color/cinza"
             android:textSize="16sp" />
 
@@ -33,7 +33,6 @@
             android:gravity="end"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
-            android:text="5.00€"
             android:textColor="@color/cinza"
             android:textSize="16sp" />
     </LinearLayout>

@@ -1,6 +1,8 @@
 package pt.ipleiria.estg.dei.foodlyandroid.vistas;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
@@ -49,7 +51,6 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
         SharedPreferences sharedPrefUser = getSharedPreferences(MenuMainActivity.PROFILE, Context.MODE_PRIVATE);
         String profile = sharedPrefUser.getString("Profile", "");
         try {
-            System.out.println("profile --->" + profile);
             JSONObject profileObject = new JSONObject(profile);
             SingletonFoodly.getInstance(getApplicationContext()).setProfile(ProfileJsonParser.parserJsonProfiles(profileObject));
             onValidateLogin(true, profileObject);
@@ -127,7 +128,7 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
             startActivity(intent);
             finish();
         } else {
-            Toast.makeText(this, "Login Invalida", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Login Invalido", Toast.LENGTH_SHORT).show();
         }
 
 /*

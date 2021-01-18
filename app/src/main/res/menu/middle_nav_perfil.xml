@@ -5,18 +5,18 @@
     <item
         android:id="@+id/itemInformacao"
         android:icon="@drawable/ic_info"
-        android:title="Informação"
+        android:title="@string/informaco"
         app:cnb_iconColor="@color/roxo" />
 
     <item
         android:id="@+id/itemFav"
         android:icon="@drawable/ic_fav"
-        android:title="Favoritos"
+        android:title="@string/favoritos"
         app:cnb_iconColor="@color/roxo" />
 
     <item
         android:id="@+id/itemReviews"
         android:icon="@drawable/ic_review"
-        android:title="Reviews"
+        android:title="@string/reviews"
         app:cnb_iconColor="@color/roxo" />
 </menu>

@@ -76,7 +76,7 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
     private void carregarFragmentoInicial() {
         navigationView.setCheckedItem(R.id.nav_lista);
         Fragment fragment = new ListaRestaurantesFragment();
-        setTitle("Lista Restaurantes");
+        setTitle(getString(R.string.listaRestaurantesTitulo));
         fragmentManager.beginTransaction().replace(R.id.contentFragment, fragment).commit();
     }
 
@@ -111,8 +111,8 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
     private void dialogLogout() {
         AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(this);
-        builder.setTitle("Logout")
-                .setMessage("Deseja mesmo sair?")
+        builder.setTitle(R.string.logoutTitulo)
+                .setMessage(R.string.logoutPerguntaSair)
                 .setPositiveButton(R.string.respostaSim, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

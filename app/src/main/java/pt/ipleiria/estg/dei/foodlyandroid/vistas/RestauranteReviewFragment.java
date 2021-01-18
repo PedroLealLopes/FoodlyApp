@@ -60,7 +60,7 @@ public class RestauranteReviewFragment extends Fragment implements ReviewsListen
 
                 AlertDialog.Builder builder;
                 builder = new AlertDialog.Builder(view.getContext());
-                builder.setTitle("Comentário")
+                builder.setTitle(R.string.comentarioTitulo)
                         .setMessage(comentario)
                         .setNegativeButton(R.string.respostaVoltar, new DialogInterface.OnClickListener() {
                             @Override
@@ -98,11 +98,11 @@ public class RestauranteReviewFragment extends Fragment implements ReviewsListen
         tvTotalReviews.setText(reviews.size() + "");
 
         if (reviews.size() == 1) {
-            tv2.setText(" pessoa");
+            tv2.setText(R.string.pessoa);
         }
 
         if (reviews.size() == 0) {
-            tvRating.setText("Não existem reviews");
+            tvRating.setText(R.string.naoExistemReviews);
             tvRating.setTextColor(getResources().getColor(R.color.cinza));
             tv1.setVisibility(View.INVISIBLE);
             tv2.setVisibility(View.INVISIBLE);
@@ -123,7 +123,7 @@ public class RestauranteReviewFragment extends Fragment implements ReviewsListen
         }
 
         if (media / i > 0 && media / i < 1.5) {
-            tvRating.setText("Péssimo");
+            tvRating.setText(R.string.pessimo);
             tvRating.setTextColor(getResources().getColor(R.color.vermelho));
             ivOrange.setImageResource(R.drawable.retangulo_cinza);
             ivYellow.setImageResource(R.drawable.retangulo_cinza);
@@ -131,25 +131,25 @@ public class RestauranteReviewFragment extends Fragment implements ReviewsListen
             ivPurple.setImageResource(R.drawable.retangulo_cinza);
         }
         if (media / i >= 1.5 && media / i < 2.5) {
-            tvRating.setText("Mau");
+            tvRating.setText(R.string.mau);
             tvRating.setTextColor(getResources().getColor(R.color.laranja));
             ivYellow.setImageResource(R.drawable.retangulo_cinza);
             ivLightPurple.setImageResource(R.drawable.retangulo_cinza);
             ivPurple.setImageResource(R.drawable.retangulo_cinza);
         }
         if (media / i >= 2.5 && media / i < 3.5) {
-            tvRating.setText("Medíocre");
+            tvRating.setText(R.string.mediocre);
             tvRating.setTextColor(getResources().getColor(R.color.amarelo));
             ivLightPurple.setImageResource(R.drawable.retangulo_cinza);
             ivPurple.setImageResource(R.drawable.retangulo_cinza);
         }
         if (media / i >= 3.5 && media / i < 4.5) {
-            tvRating.setText("Bom");
+            tvRating.setText(R.string.bom);
             tvRating.setTextColor(getResources().getColor(R.color.roxo_claro));
             ivPurple.setImageResource(R.drawable.retangulo_cinza);
         }
         if (media / i >= 4.5) {
-            tvRating.setText("Excelente");
+            tvRating.setText(R.string.excelente);
             tvRating.setTextColor(getResources().getColor(R.color.roxo_escuro));
         }
         String result = String.format("%.1f", media / i);

@@ -58,7 +58,7 @@ public class EditarPerfilActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setTitle("Editar Perfil");
+        setTitle(getString(R.string.editarPerfilTitulo));
 
         imageViewFoto = findViewById(R.id.imageViewFoto);
         TextInputLayoutPassword = findViewById(R.id.TextInputLayoutPassword);
@@ -98,7 +98,7 @@ public class EditarPerfilActivity extends AppCompatActivity {
 
     private void dialogUpload() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Selecione uma opção para carregar imagem:");
+        builder.setTitle(R.string.opcaoSelecionarImagem);
 
         String[] opcoes = {"Câmara", "Galeria"};
         builder.setItems(opcoes, new DialogInterface.OnClickListener() {

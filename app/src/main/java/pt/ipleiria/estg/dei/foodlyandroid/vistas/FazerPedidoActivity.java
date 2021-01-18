@@ -26,7 +26,7 @@ public class FazerPedidoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fazer_pedido);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setTitle("Fazer Pedido");
+        setTitle(getString(R.string.fazerPedidoTitulo));
 
         lvListaEmentaEntrada = findViewById(R.id.listViewEmentaEntrada);
         lvListaEmentaPrincipal = findViewById(R.id.listViewEmentaSalada);

@@ -63,19 +63,17 @@ public class ListaRestauranteAdaptador extends BaseAdapter {
     }
 
     private class ViewHolderLista {
-        private TextView tvNome, tvClassificacao, tvLocalizacao;
+        private TextView tvNome, tvLocalizacao;
         private ImageView ivCapa;
 
         public ViewHolderLista(View view) {
             tvNome = view.findViewById(R.id.textViewUsername);
-            tvClassificacao = view.findViewById(R.id.textViewClass);
             tvLocalizacao = view.findViewById(R.id.textViewLocalizacao);
             ivCapa = view.findViewById(R.id.imageViewCapa);
         }
 
         public void update(Restaurante restaurante) {
             tvNome.setText(restaurante.getName());
-            tvClassificacao.setText("" + " / 5");
             tvLocalizacao.setText(restaurante.getLocation());
             Glide.with(context)
                     .load(restaurante.getImage())

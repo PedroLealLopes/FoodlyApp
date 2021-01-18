@@ -55,15 +55,15 @@ public class RestauranteEmentaFragment extends Fragment implements EmentasListen
         ArrayList<Ementa> desserts = new ArrayList<>();
 
         for (Ementa e : type) {
-            if (e.getType().equals("STARTERS"))
+            if (e.getType().equals(getString(R.string.STARTERS)))
                 starters.add(e);
-            if (e.getType().equals("SALADS"))
+            if (e.getType().equals(getString(R.string.SALADS)))
                 salads.add(e);
-            if (e.getType().equals("MAIN COURSE"))
+            if (e.getType().equals(getString(R.string.MAINCOURSE)))
                 mainCourse.add(e);
-            if (e.getType().equals("DRINKS"))
+            if (e.getType().equals(getString(R.string.DRINKS)))
                 drinks.add(e);
-            if (e.getType().equals("DESSERTS"))
+            if (e.getType().equals(getString(R.string.DESSERTS)))
                 desserts.add(e);
         }
 

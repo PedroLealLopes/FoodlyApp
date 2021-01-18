@@ -61,7 +61,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     android:fontFamily="@font/montserrat_bold"
-                    android:text="Nome do Restaurante"
+                    android:text="@string/nome_do_restaurante"
                     android:textColor="@color/cinza"
                     android:textSize="25sp" />
 
@@ -70,7 +70,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_regular"
-                    android:text="Morada"
+                    android:text="@string/morada"
                     android:textColor="@color/cinza"
                     android:textSize="18sp" />
 
@@ -85,7 +85,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/montserrat_regular"
-                        android:text="Telefone: "
+                        android:text="@string/telefone"
                         android:textColor="@color/roxo"
                         android:textSize="18sp" />
 
@@ -110,7 +110,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/montserrat_regular"
-                        android:text="Email: "
+                        android:text="@string/email_restaurante"
                         android:textColor="@color/roxo"
                         android:textSize="18sp" />
 
@@ -135,7 +135,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/montserrat_regular"
-                        android:text="Aberto - "
+                        android:text="@string/aberto_restaurante"
                         android:textColor="@color/roxo"
                         android:textSize="18sp" />
 
@@ -153,7 +153,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/montserrat_regular"
-                        android:text=" - "
+                        android:text="@string/espaco_hifen_espaco"
                         android:textColor="@color/cinza"
                         android:textSize="18sp" />
 
@@ -178,7 +178,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/montserrat_regular"
-                        android:text="Pessoas - "
+                        android:text="@string/pessoas_restaurante"
                         android:textColor="@color/roxo"
                         android:textSize="18sp" />
 
@@ -196,7 +196,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/montserrat_regular"
-                        android:text=" de "
+                        android:text="@string/espaco_de_espaco"
                         android:textColor="@color/cinza"
                         android:textSize="18sp" />
 
@@ -218,7 +218,7 @@
                     android:layout_marginTop="20dp"
                     android:background="@drawable/button_login"
                     android:fontFamily="@font/montserrat_bold"
-                    android:text="FAZER PEDIDO"
+                    android:text="@string/fazer_pedido"
                     android:textColor="@color/branco"
                     android:textSize="20sp" />
 
@@ -228,7 +228,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:fontFamily="@font/montserrat_regular"
-                    android:text="Descrição do restaurante"
+                    android:text="@string/descriao_do_restaurante"
                     android:textColor="@color/cinza"
                     android:textSize="16sp" />
 
@@ -243,7 +243,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/montserrat_regular"
-                        android:text=" Wi-Fi "
+                        android:text="@string/wi_fi"
                         android:textColor="@color/cinza"
                         android:textSize="16sp"
                         app:drawableLeftCompat="@drawable/ic_task_false" />
@@ -263,7 +263,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/montserrat_regular"
-                    android:text=" Vegetariano"
+                    android:text="@string/vegetariano"
                     android:textColor="@color/cinza"
                     android:textSize="16sp"
                     app:drawableLeftCompat="@drawable/ic_task_false" />
@@ -274,7 +274,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/montserrat_regular"
-                    android:text=" Animais"
+                    android:text="@string/animais"
                     android:textColor="@color/cinza"
                     android:textSize="16sp"
                     app:drawableLeftCompat="@drawable/ic_task_false" />
