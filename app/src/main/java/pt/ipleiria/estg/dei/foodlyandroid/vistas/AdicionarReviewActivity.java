@@ -1,6 +1,7 @@
 package pt.ipleiria.estg.dei.foodlyandroid.vistas;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -70,8 +71,11 @@ public class AdicionarReviewActivity extends AppCompatActivity implements View.O
                                 current_date,
                                 SingletonFoodly.getInstance(getApplicationContext()).getProfile().getUsername(),
                                 SingletonFoodly.getInstance(getApplicationContext()).getProfile().getImage());
-                        System.out.println("---> review" + review.toString());
                         SingletonFoodly.getInstance(getApplicationContext()).adicionarReviewAPI(review, restaurantId, getApplicationContext());
+                        Intent intent = new Intent(AdicionarReviewActivity.this, MenuMainActivity.class);
+                        startActivity(intent);
+                        finish();
+                        Toast.makeText(AdicionarReviewActivity.this, "Review adicionada com sucesso", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .setNegativeButton(R.string.respostaNao, new DialogInterface.OnClickListener() {
@@ -257,6 +261,7 @@ public class AdicionarReviewActivity extends AppCompatActivity implements View.O
                 ivEstrela_5.setImageResource(R.drawable.estrela_roxo_direita);
                 break;
             default:
+                total = 0;
                 break;
         }
     }

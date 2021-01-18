@@ -243,7 +243,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/montserrat_regular"
-                        android:text=" Wi-Fi - "
+                        android:text=" Wi-Fi "
                         android:textColor="@color/cinza"
                         android:textSize="16sp"
                         app:drawableLeftCompat="@drawable/ic_task_false" />

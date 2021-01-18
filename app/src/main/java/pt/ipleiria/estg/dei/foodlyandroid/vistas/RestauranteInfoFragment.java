@@ -70,7 +70,9 @@ public class RestauranteInfoFragment extends Fragment implements RestaurantesLis
             public void onClick(View v) {
                 if (ivFav.getDrawable().getConstantState() == ResourcesCompat.getDrawable(getResources(), R.drawable.ic_restaurante_fav_false, null).getConstantState()) {
                     //Adicionar aos Favoritos
-                    dialogAdicionarFav(restauranteId);
+                    SingletonFoodly.getInstance(getContext()).adicionarFavoritoAPI(SingletonFoodly.getInstance(getContext()).getProfileId(), restauranteId, getContext());
+                    ivFav.setImageResource(R.drawable.ic_restaurante_fav_true);
+                    Toast.makeText(getContext(), "Restaurante adicionado aos favoritos", Toast.LENGTH_SHORT).show();
                 } else {
                     //Remover dos Favoritos
                     dialogRemoverFav(restauranteId);
@@ -102,11 +104,12 @@ public class RestauranteInfoFragment extends Fragment implements RestaurantesLis
             tvOpeningHour.setText(restaurante.getOpeningHour());
             tvClosingHour.setText(restaurante.getClosingHour());
             tvDescription.setText(restaurante.getDescription());
-            if (restaurante.getWifiPassword() != null) {
+            if (!restaurante.getWifiPassword().equals("null")) {
                 tvWifiPassword.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_task_true, 0, 0, 0);
-                tvWifiPasswordText.setText(restaurante.getWifiPassword());
+                tvWifiPasswordText.setText("- " + restaurante.getWifiPassword());
             } else {
-                //TODO: QUANDO O WIFI VEM A NULL -> TASK FALSE
+                tvWifiPassword.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_task_false, 0, 0, 0);
+                tvWifiPasswordText.setText("");
             }
             if (restaurante.getVegan() != 0)
                 tvHasVegan.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_task_true, 0, 0, 0);
@@ -120,29 +123,6 @@ public class RestauranteInfoFragment extends Fragment implements RestaurantesLis
         }
     }
 
-    private void dialogAdicionarFav(final int id) {
-
-        AlertDialog.Builder builder;
-        builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("ADICIONAR")
-                .setMessage("Deseja adicionar este restaurante aos favoritos?")
-                .setPositiveButton(R.string.respostaSim, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        SingletonFoodly.getInstance(getContext()).adicionarFavoritoAPI(SingletonFoodly.getInstance(getContext()).getProfileId(), id, getContext());
-                        ivFav.setImageResource(R.drawable.ic_restaurante_fav_true);
-                    }
-                })
-                .setNegativeButton(R.string.respostaNao, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //Cancelar
-                    }
-                })
-                .setIcon(R.drawable.ic_adicionar)
-                .show();
-    }
-
     private void dialogRemoverFav(final int id) {
         AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(getContext());
@@ -153,6 +133,7 @@ public class RestauranteInfoFragment extends Fragment implements RestaurantesLis
                     public void onClick(DialogInterface dialog, int which) {
                         SingletonFoodly.getInstance(getContext()).removerFavoritoAPI(id, getContext());
                         ivFav.setImageResource(R.drawable.ic_restaurante_fav_false);
+                        Toast.makeText(getContext(), "Restaurante removido dos favoritos", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .setNegativeButton(R.string.respostaNao, new DialogInterface.OnClickListener() {
@@ -170,12 +151,11 @@ public class RestauranteInfoFragment extends Fragment implements RestaurantesLis
         ArrayList<Restaurante> restaurantesfavoritos = SingletonFoodly.getInstance(getContext()).getFavRestaurants();
         final int restauranteId = getActivity().getIntent().getIntExtra(ID_RESTAURANTE, -1);
 
-        for (int i = 0; i < restaurantesfavoritos.size() + 1; i++) {
+        for (int i = 0; i < restaurantesfavoritos.size(); i++) {
             if (restauranteId == restaurantesfavoritos.get(i).getRestaurantId()) {
                 ivFav.setImageResource(R.drawable.ic_restaurante_fav_true);
                 return;
-            } else
-                ivFav.setImageResource(R.drawable.ic_restaurante_fav_false);
+            }
         }
     }
 

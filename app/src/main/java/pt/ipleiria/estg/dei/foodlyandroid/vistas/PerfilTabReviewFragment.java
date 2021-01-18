@@ -1,7 +1,6 @@
 package pt.ipleiria.estg.dei.foodlyandroid.vistas;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,11 +17,8 @@ import androidx.fragment.app.Fragment;
 import java.util.ArrayList;
 
 import pt.ipleiria.estg.dei.foodlyandroid.R;
-import pt.ipleiria.estg.dei.foodlyandroid.adaptadores.ListaRestauranteAdaptador;
-import pt.ipleiria.estg.dei.foodlyandroid.adaptadores.ListaReviewAdaptador;
 import pt.ipleiria.estg.dei.foodlyandroid.adaptadores.ListaReviewUserAdaptador;
 import pt.ipleiria.estg.dei.foodlyandroid.listeners.ReviewsListener;
-import pt.ipleiria.estg.dei.foodlyandroid.modelos.Restaurante;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.Review;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.SingletonFoodly;
 
@@ -54,7 +50,7 @@ public class PerfilTabReviewFragment extends Fragment implements ReviewsListener
     @Override
     public void onRefreshListaReviews(ArrayList<Review> reviews) {
 
-        if (reviews != null){
+        if (reviews != null) {
             reviewsArrayList = reviews;
             lvListaReviewsUser.setAdapter(new ListaReviewUserAdaptador(getContext(), reviews));
         }
@@ -76,8 +72,8 @@ public class PerfilTabReviewFragment extends Fragment implements ReviewsListener
                 .setPositiveButton(R.string.respostaSim, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //Toast.makeText(getContext(), "review: "+ review.toString(), Toast.LENGTH_SHORT).show();
                         SingletonFoodly.getInstance(getContext()).removerReviewUserAPI(review, getContext());
+                        Toast.makeText(getContext(), "Review removida com sucesso", Toast.LENGTH_SHORT).show();
                     }
                 })
 

@@ -1,10 +1,5 @@
 package pt.ipleiria.estg.dei.foodlyandroid.vistas;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.FileProvider;
-
 import android.Manifest;
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -27,7 +22,11 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.google.android.material.textfield.TextInputEditText;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.FileProvider;
+
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.ByteArrayOutputStream;
@@ -37,7 +36,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import pt.ipleiria.estg.dei.foodlyandroid.R;
-import pt.ipleiria.estg.dei.foodlyandroid.modelos.SingletonFoodly;
 
 public class EditarPerfilActivity extends AppCompatActivity {
 
@@ -71,7 +69,6 @@ public class EditarPerfilActivity extends AppCompatActivity {
         editTextGenero.setInputType(0);
 
         TextInputLayoutPassword.setVisibility(View.GONE);
-
 
 
         buttonAdicionarFoto = findViewById(R.id.buttonAdicionarFoto);

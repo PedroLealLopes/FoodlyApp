@@ -1,6 +1,5 @@
 package pt.ipleiria.estg.dei.foodlyandroid.vistas;
 
-import android.os.BaseBundle;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,16 +54,16 @@ public class RestauranteEmentaFragment extends Fragment implements EmentasListen
         ArrayList<Ementa> drinks = new ArrayList<>();
         ArrayList<Ementa> desserts = new ArrayList<>();
 
-        for(Ementa e: type){
-            if(e.getType().equals("STARTERS"))
+        for (Ementa e : type) {
+            if (e.getType().equals("STARTERS"))
                 starters.add(e);
-            if(e.getType().equals("SALADS"))
+            if (e.getType().equals("SALADS"))
                 salads.add(e);
-            if(e.getType().equals("MAIN COURSE"))
+            if (e.getType().equals("MAIN COURSE"))
                 mainCourse.add(e);
-            if(e.getType().equals("DRINKS"))
+            if (e.getType().equals("DRINKS"))
                 drinks.add(e);
-            if(e.getType().equals("DESSERTS"))
+            if (e.getType().equals("DESSERTS"))
                 desserts.add(e);
         }
 

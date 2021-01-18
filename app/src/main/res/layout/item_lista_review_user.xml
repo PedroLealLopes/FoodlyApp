@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
     <ImageView
         android:id="@+id/imageViewV"
         android:layout_width="2dp"
@@ -24,8 +23,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
         android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -37,9 +36,9 @@
             <TextView
                 android:id="@+id/textViewRestauranteNomeRU"
                 android:layout_width="wrap_content"
-                android:singleLine="true"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_semi_bold"
+                android:singleLine="true"
                 android:text="Nome Restaurante"
                 android:textColor="@color/cinza"
                 android:textSize="20sp" />
@@ -50,8 +49,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="9dp"
                 android:fontFamily="@font/montserrat_regular"
-                android:text="Morada"
                 android:singleLine="true"
+                android:text="Morada"
                 android:textColor="@color/cinza"
                 android:textSize="18sp" />
         </LinearLayout>
@@ -60,9 +59,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="end"
+            android:orientation="vertical"
             android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:orientation="vertical">
+            android:paddingEnd="10dp">
 
             <LinearLayout
                 android:layout_width="wrap_content"

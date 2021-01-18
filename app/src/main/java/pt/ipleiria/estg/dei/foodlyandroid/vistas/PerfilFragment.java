@@ -10,32 +10,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.google.android.material.textfield.TextInputEditText;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.w3c.dom.Text;
-
 import pt.ipleiria.estg.dei.foodlyandroid.R;
-import pt.ipleiria.estg.dei.foodlyandroid.modelos.Profile;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.SingletonFoodly;
-import pt.ipleiria.estg.dei.foodlyandroid.utils.GenericUtils;
-import pt.ipleiria.estg.dei.foodlyandroid.utils.ProfileJsonParser;
 
 public class PerfilFragment extends Fragment {
 
