@@ -4,9 +4,8 @@ public class Restaurante {
     private int restaurantId, maxPeople, currentPeople;
     private String name, image, phone, email, description, location, openingHour, closingHour, wifiPassword;
     private int allowsPets, hasVegan;
-    private boolean isFav;
 
-    public Restaurante(int restaurantId, int maxPeople, int currentPeople, String name, String image, String phone, String email, String description, String location, String openingHour, String closingHour, String wifiPassword, int allowsPets, int hasVegan, boolean isFav) {
+    public Restaurante(int restaurantId, int maxPeople, int currentPeople, String name, String image, String phone, String email, String description, String location, String openingHour, String closingHour, String wifiPassword, int allowsPets, int hasVegan) {
         this.restaurantId = restaurantId;
         this.maxPeople = maxPeople;
         this.currentPeople = currentPeople;
@@ -21,7 +20,26 @@ public class Restaurante {
         this.wifiPassword = wifiPassword;
         this.allowsPets = allowsPets;
         this.hasVegan = hasVegan;
-        this.isFav = isFav;
+    }
+
+    @Override
+    public String toString() {
+        return "Restaurante{" +
+                "restaurantId=" + restaurantId +
+                ", maxPeople=" + maxPeople +
+                ", currentPeople=" + currentPeople +
+                ", name='" + name + '\'' +
+                ", image='" + image + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", description='" + description + '\'' +
+                ", location='" + location + '\'' +
+                ", openingHour='" + openingHour + '\'' +
+                ", closingHour='" + closingHour + '\'' +
+                ", wifiPassword='" + wifiPassword + '\'' +
+                ", allowsPets=" + allowsPets +
+                ", hasVegan=" + hasVegan +
+                '}';
     }
 
     public int getRestaurantId() {
@@ -134,13 +152,5 @@ public class Restaurante {
 
     public void setVegan(int hasVegan) {
         this.hasVegan = hasVegan;
-    }
-
-    public boolean isFav() {
-        return isFav;
-    }
-
-    public void setFav(boolean fav) {
-        isFav = fav;
     }
 }

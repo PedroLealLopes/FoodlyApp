@@ -98,6 +98,7 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
             Intent intent = new Intent(this, MenuMainActivity.class);
             intent.putExtra("USERNAME", username);
             startActivity(intent);
+            finish();
         }else{
             Toast.makeText(this, "Login Invalida", Toast.LENGTH_SHORT).show();
         }

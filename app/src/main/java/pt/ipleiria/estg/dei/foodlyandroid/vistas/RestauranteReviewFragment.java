@@ -118,7 +118,6 @@ public class RestauranteReviewFragment extends Fragment implements ReviewsListen
             for (Review review : reviews) {
                 summ = review.getStars();
                 media = media + summ;
-                System.out.println("--->Reviewssss: " + reviews);
                 i++;
             }
         }

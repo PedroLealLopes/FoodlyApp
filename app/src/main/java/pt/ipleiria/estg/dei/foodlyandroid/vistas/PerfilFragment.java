@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -20,11 +22,14 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.material.textfield.TextInputEditText;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import pt.ipleiria.estg.dei.foodlyandroid.R;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.Profile;
@@ -38,6 +43,8 @@ public class PerfilFragment extends Fragment {
     private ChipNavigationBar bottomNav;
     private FragmentManager fragmentManager;
     private static final String TAG = PerfilFragment.class.getSimpleName();
+    private TextView tvUsername;
+    private ImageView ivProfilePic;
 
     public PerfilFragment(Context context) {
         this.context = context;
@@ -46,6 +53,15 @@ public class PerfilFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_perfil, container, false);
+
+        tvUsername = view.findViewById(R.id.textViewUsernamePerfil);
+        tvUsername.setText(SingletonFoodly.getInstance(getContext()).getProfile().getUsername());
+        ivProfilePic = view.findViewById(R.id.imageViewProfilePic);
+        Glide.with(this)
+                .load(SingletonFoodly.getInstance(getContext()).getProfile().getImage())
+                .placeholder(R.drawable.gordon)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(ivProfilePic);
 
         //region Bottom Navigation
         bottomNav = view.findViewById(R.id.bottom_nav);

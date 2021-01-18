@@ -26,7 +26,6 @@ import pt.ipleiria.estg.dei.foodlyandroid.listeners.ReviewsListener;
 import pt.ipleiria.estg.dei.foodlyandroid.utils.EmentaJsonParser;
 import pt.ipleiria.estg.dei.foodlyandroid.utils.GenericUtils;
 import pt.ipleiria.estg.dei.foodlyandroid.utils.ProfileJsonParser;
-import pt.ipleiria.estg.dei.foodlyandroid.utils.RestauranteFavoritosJsonParser;
 import pt.ipleiria.estg.dei.foodlyandroid.utils.RestauranteJsonParser;
 import pt.ipleiria.estg.dei.foodlyandroid.utils.ReviewJsonParser;
 
@@ -143,7 +142,6 @@ public class SingletonFoodly {
         return null;
     }
 
-    //region RESTAURANTES_API
     public void getAllRestaurantesAPI(final Context context) {
         if (!GenericUtils.isConnectionInternet(context)) {
             Toast.makeText(context, "Não há internet", Toast.LENGTH_SHORT).show();
@@ -158,19 +156,6 @@ public class SingletonFoodly {
                     restaurantes = RestauranteJsonParser.parserJsonRestaurantes(response);
                     adicionarRestaurantesBD(restaurantes);
 
-                    ArrayList<Restaurante> restaurantesfavoritos = new ArrayList<>();
-
-                    for (int i = 0; i < restaurantes.size(); i++) {
-                        try {
-                            JSONObject restaurante = (JSONObject) response.get(i);
-                            restaurantesfavoritos.add(SingletonFoodly.getInstance(context).getRestaurante(restaurante.getInt("restaurant_restaurantId")));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    setFavRestaurants(restaurantesfavoritos);
-
                     if (restaurantesListener != null)
                         restaurantesListener.onRefreshListaRestaurantes(restaurantes);
                 }
@@ -183,9 +168,8 @@ public class SingletonFoodly {
             volleyQueue.add(req);
         }
     }
-    //endregion
 
-    //region RESTAURANTES_BDHelper
+    //BD HELPER
     public ArrayList<Restaurante> getRestaurantesBD() {
         restaurantes = foodlyBDHelper.getAllRestaurantesDB();
         return restaurantes;
@@ -200,8 +184,6 @@ public class SingletonFoodly {
         for (Restaurante r : restaurantes)
             adicionarRestauranteBD(r);
     }
-    //endregion
-    //endregion
 
     //region EMENTA
     public void setEmentasListener(EmentasListener ementasListener) {
@@ -224,7 +206,7 @@ public class SingletonFoodly {
         return foo;
     }
 
-    //region EMENTA_API
+    //EMENT API
     public void getAllEmentasAPI(final int restaurantId, final Context context) {
 
         if (!GenericUtils.isConnectionInternet(context)) {
@@ -248,10 +230,8 @@ public class SingletonFoodly {
         }
     }
     //endregion
-    //endregion
 
     //region FAVORITOS
-
     public void setFavRestaurants(ArrayList<Restaurante> restaurants) {
         this.favRestaurants = restaurants;
     }
@@ -261,25 +241,28 @@ public class SingletonFoodly {
     }
 
     public void getAllFavoritosAPI(final Context context) {
-
         if (!GenericUtils.isConnectionInternet(context)) {
             Toast.makeText(context, "Não há internet", Toast.LENGTH_SHORT).show();
         } else {
             JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlAPI + "/profile-restaurant-favorites/user/" + getProfileId(), null, new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {
-                    ArrayList<Restaurante> restaurantesfavoritos = new ArrayList<>();
 
-                    for (int i = 0; i < response.length(); i++) {
-                        try {
-                            JSONObject restaurante = (JSONObject) response.get(i);
-                            restaurantesfavoritos.add(SingletonFoodly.getInstance(context).getRestaurante(restaurante.getInt("restaurant_restaurantId")));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                    try {
+                        ArrayList<Restaurante> restaurantesfavoritos = new ArrayList<>();
+                        for (int i = 0; i < response.length(); i++) {
+                            try {
+                                JSONObject restaurante = (JSONObject) response.get(i);
+                                restaurantesfavoritos.add(SingletonFoodly.getInstance(context).getRestaurante(restaurante.getInt("restaurant_restaurantId")));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
+                        setFavRestaurants(restaurantesfavoritos);
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
 
-                    setFavRestaurants(restaurantesfavoritos);
                     if (restaurantesListener != null)
                         restaurantesListener.onRefreshListaRestaurantes(restaurantes);
                 }
@@ -311,6 +294,30 @@ public class SingletonFoodly {
                 Map<String, String> params = new HashMap<>();
                 params.put("profiles_userId", profiles_userId + "");
                 params.put("restaurant_restaurantId", restaurant_restaurantId + "");
+                return params;
+            }
+        };
+        volleyQueue.add(req);
+    }
+
+    public void removerFavoritoAPI(final int restaurant_id, final Context context) {
+        StringRequest req = new StringRequest(Request.Method.POST, mUrlAPI + "/profile-restaurant-favorites/delete", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if (restaurantesListener != null)
+                    restaurantesListener.onRefreshDetalhes();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("restaurant_id", restaurant_id + "");
+                params.put("profile_id", getProfileId() + "");
                 return params;
             }
         };
@@ -427,7 +434,6 @@ public class SingletonFoodly {
             }
         };
         volleyQueue.add(req);
-
     }
     //endregion
 }

@@ -32,7 +32,7 @@ public class RestauranteJsonParser {
                     int allowsPets = restaurante.getInt("allowsPets");
                     int hasVegan = restaurante.getInt("hasVegan");
 
-                    Restaurante l = new Restaurante(restaurantId, maxPeople, currentPeople, name, image, phone, email, description, location, openingHour, closingHour, wifiPassword, allowsPets, hasVegan, false);
+                    Restaurante l = new Restaurante(restaurantId, maxPeople, currentPeople, name, image, phone, email, description, location, openingHour, closingHour, wifiPassword, allowsPets, hasVegan);
                     restaurantes.add(l);
                 } catch (JSONException e) {
                     e.printStackTrace();
