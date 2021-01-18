@@ -280,7 +280,12 @@ public class SingletonFoodly {
         StringRequest req = new StringRequest(Request.Method.PUT, mUrlAPIProfile + profile.getProfileId(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
+                profile.setFullname(fullname);
+                profile.setAge(age);
+                profile.setAlergias(alergias);
+                profile.setGenero(genero);
+                profile.setTelefone(telefone);
+                profile.setMorada(morada);
 
                 if (profileListener != null)
                     profileListener.onRefreshProfile(profile);

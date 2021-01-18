@@ -145,7 +145,7 @@
                         android:layout_height="match_parent"
                         android:fontFamily="@font/montserrat_regular"
                         android:hint="Idade"
-                        android:inputType="textPersonName" />
+                        android:inputType="number" />
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
