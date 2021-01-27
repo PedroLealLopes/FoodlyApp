@@ -99,6 +99,7 @@ public class EditarPerfilActivity extends AppCompatActivity implements ProfileLi
         TextInputLayoutEmail.setVisibility(View.GONE);
 
         fabCriarConta = findViewById(R.id.fabCriarConta);
+        fabCriarConta.setImageResource(R.drawable.ic_save);
         fabCriarConta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

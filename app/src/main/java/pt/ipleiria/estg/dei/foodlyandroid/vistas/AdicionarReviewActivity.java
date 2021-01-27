@@ -1,8 +1,10 @@
 package pt.ipleiria.estg.dei.foodlyandroid.vistas;
 
+import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -71,9 +74,8 @@ public class AdicionarReviewActivity extends AppCompatActivity implements View.O
                                 current_date,
                                 SingletonFoodly.getInstance(getApplicationContext()).getProfile().getUsername(),
                                 SingletonFoodly.getInstance(getApplicationContext()).getProfile().getImage());
+
                         SingletonFoodly.getInstance(getApplicationContext()).adicionarReviewAPI(review, restaurantId, getApplicationContext());
-                        Intent intent = new Intent(AdicionarReviewActivity.this, MenuMainActivity.class);
-                        startActivity(intent);
                         finish();
                         Toast.makeText(AdicionarReviewActivity.this, R.string.reviewSucesso, Toast.LENGTH_SHORT).show();
                     }
@@ -87,6 +89,18 @@ public class AdicionarReviewActivity extends AppCompatActivity implements View.O
                 .setIcon(R.drawable.ic_adicionar)
                 .show();
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        //Voltar para trás
+        super.onOptionsItemSelected(item);
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return true;
     }
 
     public void onClick(View view) {

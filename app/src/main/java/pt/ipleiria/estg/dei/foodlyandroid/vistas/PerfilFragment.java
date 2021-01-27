@@ -74,8 +74,6 @@ public class PerfilFragment extends Fragment implements ProfileListener {
                     .commit();
         }
 
-
-
         bottomNav.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
             @Override
             public void onItemSelected(int id) {
@@ -125,11 +123,8 @@ public class PerfilFragment extends Fragment implements ProfileListener {
         return view;
     }
 
-
-
     @Override
     public void onRefreshProfile(Profile profile) {
-        Toast.makeText(getContext(), "Foo", Toast.LENGTH_SHORT).show();
         if(profile != null){
             imageViewProfilePic = getView().findViewById(R.id.imageViewProfilePic);
 

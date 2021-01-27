@@ -95,14 +95,14 @@ public class RestauranteInfoFragment extends Fragment implements RestaurantesLis
     private void carregarDetalhesRestaurante() {
         if (restaurante != null) {
 
-            tvCurrentPeople.setText(restaurante.getCurrentPeople() + "");
-            tvMaxPeople.setText(restaurante.getMaxPeople() + "");
+            tvCurrentPeople.setText(" " + restaurante.getCurrentPeople() + " ");
+            tvMaxPeople.setText(" " + restaurante.getMaxPeople());
             tvName.setText(restaurante.getName());
             tvLocation.setText(restaurante.getLocation());
-            tvPhone.setText(restaurante.getPhone());
-            tvEmail.setText(restaurante.getEmail());
-            tvOpeningHour.setText(restaurante.getOpeningHour());
-            tvClosingHour.setText(restaurante.getClosingHour());
+            tvPhone.setText(" " + restaurante.getPhone());
+            tvEmail.setText(" " + restaurante.getEmail());
+            tvOpeningHour.setText(" " + restaurante.getOpeningHour() + " ");
+            tvClosingHour.setText(" " + restaurante.getClosingHour());
             tvDescription.setText(restaurante.getDescription());
             if (!restaurante.getWifiPassword().equals("null")) {
                 tvWifiPassword.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_task_true, 0, 0, 0);

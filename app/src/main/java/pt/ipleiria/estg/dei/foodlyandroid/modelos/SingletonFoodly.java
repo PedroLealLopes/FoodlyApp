@@ -8,6 +8,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -57,9 +58,7 @@ public class SingletonFoodly {
     private static final String IP_MiiTU = "192.168.1.8";
     private static final String IP_Luckdude = "192.168.1.229";
     private static final String IP_Johnny = "192.168.1.253";
-    private static final String mUrlAPILogin = "http://"+ IP_Luckdude +"/FoodlyWeb/frontend/web/api/users/login";
-    private static final String mUrlAPIProfile = "http://" + IP_Luckdude + "/FoodlyWeb/frontend/web/api/profiles/";
-    private static final String mUrlAPI = "http://" + IP_Luckdude + "/FoodlyWeb/frontend/web/api";
+    private static final String mUrlAPI = "http://" + IP_MiiTU + "/FoodlyWeb/frontend/web/api";
 
     public static synchronized SingletonFoodly getInstance(Context context) {
         if (instance == null)
@@ -87,19 +86,6 @@ public class SingletonFoodly {
         this.loginListener = loginListener;
     }
 
-    public void setProfile(Profile profile) {
-        this.profile = profile;
-    }
-
-    public Profile getProfile() {
-        return this.profile;
-    }
-
-    public int getProfileId() {
-        return getProfile().getProfileId();
-    }
-
-    //region LOGIN_API
     public void loginAPI(final String username, final String password, final Context context) {
         if (!GenericUtils.isConnectionInternet(context)) {
             Toast.makeText(context, "Não há internet", Toast.LENGTH_SHORT).show();
@@ -107,7 +93,7 @@ public class SingletonFoodly {
             if (loginListener != null)
                 loginListener.onValidateLogin(false, null);
         }
-        StringRequest req = new StringRequest(Request.Method.POST, mUrlAPILogin, new Response.Listener<String>() {
+        StringRequest req = new StringRequest(Request.Method.POST, mUrlAPI + "/users/login", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -137,6 +123,80 @@ public class SingletonFoodly {
                 Map<String, String> params = new HashMap<>();
                 params.put("username", username);
                 params.put("password", password);
+                return params;
+            }
+        };
+        volleyQueue.add(req);
+    }
+    //endregion
+
+    //region PROFILE
+    public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
+
+    public Profile getProfile() {
+        return this.profile;
+    }
+
+    public int getProfileId() {
+        return getProfile().getProfileId();
+    }
+
+    public void editProfileAPI(final String fullname, final String age, final String alergias, final String genero, final String telefone, final String morada, final Context context){
+        StringRequest req = new StringRequest(Request.Method.PUT, mUrlAPI + "/profiles/" + profile.getProfileId(), new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                profile.setFullname(fullname);
+                profile.setAge(age);
+                profile.setAlergias(alergias);
+                profile.setGenero(genero);
+                profile.setTelefone(telefone);
+                profile.setMorada(morada);
+
+                if (profileListener != null)
+                    profileListener.onRefreshProfile(profile);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("fullname", fullname);
+                params.put("age", age);
+                params.put("alergias", alergias);
+                params.put("genero", genero);
+                params.put("telefone", telefone);
+                params.put("morada", morada);
+                return params;
+            }
+        };
+        volleyQueue.add(req);
+    }
+
+    public void adicionarImagemApi(final String image, final Context context){
+        StringRequest req = new StringRequest(Request.Method.PUT, mUrlAPI + "/profiles/" + profile.getProfileId() + "/upload", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                profile.setImage(image);
+
+                if (profileListener != null)
+                    profileListener.onRefreshProfile(profile);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("image", image);
                 return params;
             }
         };
@@ -226,9 +286,7 @@ public class SingletonFoodly {
         return foo;
     }
 
-    //EMENT API
     public void getAllEmentasAPI(final int restaurantId, final Context context) {
-
         if (!GenericUtils.isConnectionInternet(context)) {
             Toast.makeText(context, "Não há internet", Toast.LENGTH_SHORT).show();
         } else {
@@ -249,68 +307,6 @@ public class SingletonFoodly {
             volleyQueue.add(req);
         }
     }
-
-
-    public void adicionarImagemApi(final String image, final Context context){
-        StringRequest req = new StringRequest(Request.Method.PUT, mUrlAPIProfile + profile.getProfileId() + "/upload", new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                profile.setImage(image);
-
-                if (profileListener != null)
-                    profileListener.onRefreshProfile(profile);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        }){
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                params.put("image", image);
-                return params;
-            }
-        };
-        volleyQueue.add(req);
-    }
-
-    public void editProfileAPI(final String fullname, final String age, final String alergias, final String genero, final String telefone, final String morada, final Context context){
-        StringRequest req = new StringRequest(Request.Method.PUT, mUrlAPIProfile + profile.getProfileId(), new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                profile.setFullname(fullname);
-                profile.setAge(age);
-                profile.setAlergias(alergias);
-                profile.setGenero(genero);
-                profile.setTelefone(telefone);
-                profile.setMorada(morada);
-
-                if (profileListener != null)
-                    profileListener.onRefreshProfile(profile);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        }){
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                params.put("fullname", fullname);
-                params.put("age", age);
-                params.put("alergias", alergias);
-                params.put("genero", genero);
-                params.put("telefone", telefone);
-                params.put("morada", morada);
-                return params;
-            }
-        };
-        volleyQueue.add(req);
-    }
-
     //endregion
 
     //region FAVORITOS

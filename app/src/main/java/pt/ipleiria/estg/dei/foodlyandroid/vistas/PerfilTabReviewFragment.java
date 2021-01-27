@@ -13,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import java.util.ArrayList;
 
@@ -26,6 +28,7 @@ public class PerfilTabReviewFragment extends Fragment implements ReviewsListener
 
     private ListView lvListaReviewsUser;
     private ArrayList<Review> reviewsArrayList;
+    private FragmentManager fragmentManager;
 
     @Nullable
     @Override
@@ -49,7 +52,6 @@ public class PerfilTabReviewFragment extends Fragment implements ReviewsListener
 
     @Override
     public void onRefreshListaReviews(ArrayList<Review> reviews) {
-
         if (reviews != null) {
             reviewsArrayList = reviews;
             lvListaReviewsUser.setAdapter(new ListaReviewUserAdaptador(getContext(), reviews));
@@ -62,7 +64,6 @@ public class PerfilTabReviewFragment extends Fragment implements ReviewsListener
     }
 
     private void dialogReview(int id) {
-
         final Review review = reviewsArrayList.get(id);
 
         AlertDialog.Builder builder;
@@ -74,6 +75,12 @@ public class PerfilTabReviewFragment extends Fragment implements ReviewsListener
                     public void onClick(DialogInterface dialog, int which) {
                         SingletonFoodly.getInstance(getContext()).removerReviewUserAPI(review, getContext());
                         Toast.makeText(getContext(), R.string.reviewRemovidaSucesso, Toast.LENGTH_SHORT).show();
+
+                        Fragment fragment = new PerfilTabReviewFragment();
+                        fragmentManager = getFragmentManager();
+                        fragmentManager.beginTransaction()
+                                .replace(R.id.fragment_container, fragment)
+                                .commit();
                     }
                 })
                 .setNegativeButton(R.string.respostaNao, new DialogInterface.OnClickListener() {

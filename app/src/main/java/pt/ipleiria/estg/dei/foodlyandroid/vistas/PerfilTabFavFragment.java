@@ -11,6 +11,7 @@ import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import java.util.ArrayList;
 
@@ -23,6 +24,7 @@ import pt.ipleiria.estg.dei.foodlyandroid.modelos.SingletonFoodly;
 public class PerfilTabFavFragment extends Fragment implements RestaurantesListener {
 
     private ListView lvListaFavoritos;
+    private FragmentManager fragmentManager;
 
     @Nullable
     @Override
@@ -41,6 +43,8 @@ public class PerfilTabFavFragment extends Fragment implements RestaurantesListen
                 startActivity(intent);
             }
         });
+
+
 
         SingletonFoodly.getInstance(getContext()).setRestaurantesListener(this);
         SingletonFoodly.getInstance(getContext()).getAllFavoritosAPI(getContext());
