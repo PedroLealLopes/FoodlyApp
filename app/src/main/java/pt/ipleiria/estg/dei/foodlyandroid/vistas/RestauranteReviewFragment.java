@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import java.util.ArrayList;
 
@@ -30,6 +31,7 @@ public class RestauranteReviewFragment extends Fragment implements ReviewsListen
     private TextView tvRating, tvTotalReviews, tvAverage, tv1, tv2, tv3;
     private ImageView ivRed, ivOrange, ivYellow, ivLightPurple, ivPurple;
     private ArrayList<Review> reviewsArray;
+    private FragmentManager fragmentManager;
 
     public RestauranteReviewFragment() {
     }
@@ -161,6 +163,10 @@ public class RestauranteReviewFragment extends Fragment implements ReviewsListen
 
     @Override
     public void onRefreshDetalhes() {
-
+        Fragment fragment = new RestauranteReviewFragment();
+        fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .commit();
     }
 }

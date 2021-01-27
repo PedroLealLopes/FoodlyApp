@@ -46,6 +46,7 @@ public class RegistarActivity extends AppCompatActivity implements DatePickerDia
         });
 
         FloatingActionButton fab = findViewById(R.id.fabCriarConta);
+        fab.setImageResource(R.drawable.ic_adicionar);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
