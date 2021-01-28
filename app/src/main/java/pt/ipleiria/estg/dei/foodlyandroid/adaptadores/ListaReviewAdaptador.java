@@ -71,7 +71,7 @@ public class ListaReviewAdaptador extends BaseAdapter {
             tvData = view.findViewById(R.id.textViewDataCriacao);
             tvClassificacao = view.findViewById(R.id.textViewClassificacao);
             tvComentario = view.findViewById(R.id.textViewComentario);
-            ivPic = view.findViewById(R.id.imageViewProfilePic);
+            ivPic = view.findViewById(R.id.imageViewProfilePicture);
         }
 
         public void update(Review review) {
