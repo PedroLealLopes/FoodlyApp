@@ -1,6 +1,7 @@
 package pt.ipleiria.estg.dei.foodlyandroid.vistas;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,5 +15,19 @@ public class FinalizarPedidoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_finalizar_pedido);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle(getString(R.string.finalizarPedido));
+
+        //TODO CLICK BOTAO - SINGLETON E COLOCAR A ORDERLIST A NULL
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        //Voltar para trás
+        super.onOptionsItemSelected(item);
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return true;
     }
 }

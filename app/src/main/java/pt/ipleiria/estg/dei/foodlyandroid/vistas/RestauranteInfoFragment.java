@@ -22,6 +22,7 @@ import java.util.ArrayList;
 
 import pt.ipleiria.estg.dei.foodlyandroid.R;
 import pt.ipleiria.estg.dei.foodlyandroid.listeners.RestaurantesListener;
+import pt.ipleiria.estg.dei.foodlyandroid.modelos.Ementa;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.Restaurante;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.SingletonFoodly;
 
@@ -31,7 +32,7 @@ public class RestauranteInfoFragment extends Fragment implements RestaurantesLis
     private Restaurante restaurante;
     private TextView tvCurrentPeople, tvMaxPeople, tvName, tvLocation, tvPhone, tvEmail, tvOpeningHour, tvClosingHour, tvDescription, tvWifiPassword, tvWifiPasswordText, tvHasVegan, tvAllowsPets;
     private ImageView ivImage, ivFav;
-    private ArrayList<Restaurante> favoritosArray;
+    private ArrayList<Ementa> orderItems;
 
     public RestauranteInfoFragment() {
 
@@ -84,7 +85,9 @@ public class RestauranteInfoFragment extends Fragment implements RestaurantesLis
         btnFazerPedido.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SingletonFoodly.getInstance(getContext()).inicializarListaPedido();
                 Intent intent = new Intent(getContext(), FazerPedidoActivity.class);
+                intent.putExtra(FazerPedidoActivity.ID_RESTAURANTE, restauranteId);
                 startActivity(intent);
             }
         });

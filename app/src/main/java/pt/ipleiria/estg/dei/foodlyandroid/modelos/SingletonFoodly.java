@@ -38,6 +38,7 @@ public class SingletonFoodly {
     private ArrayList<Restaurante> favRestaurants;
     private ArrayList<Review> reviewsUsers;
     private ArrayList<Review> reviews;
+    private ArrayList<Ementa> orderItems;
 
     private static SingletonFoodly instance = null;
     private static RequestQueue volleyQueue;
@@ -104,8 +105,7 @@ public class SingletonFoodly {
                             profileListener.onRefreshProfile(profile);
 
                         loginListener.onValidateLogin(true, profileResponse);
-                    }
-                    else{
+                    } else {
                         loginListener.onValidateLogin(false, null);
                     }
                 } catch (JSONException e) {
@@ -143,7 +143,7 @@ public class SingletonFoodly {
         return getProfile().getProfileId();
     }
 
-    public void editProfileAPI(final String fullname, final String age, final String alergias, final String genero, final String telefone, final String morada, final Context context){
+    public void editProfileAPI(final String fullname, final String age, final String alergias, final String genero, final String telefone, final String morada, final Context context) {
         StringRequest req = new StringRequest(Request.Method.PUT, mUrlAPI + "/profiles/" + profile.getProfileId(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -162,7 +162,7 @@ public class SingletonFoodly {
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
             }
-        }){
+        }) {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
@@ -178,7 +178,7 @@ public class SingletonFoodly {
         volleyQueue.add(req);
     }
 
-    public void adicionarImagemApi(final String image, final Context context){
+    public void adicionarImagemApi(final String image, final Context context) {
         StringRequest req = new StringRequest(Request.Method.PUT, mUrlAPI + "/profiles/" + profile.getProfileId() + "/upload", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -192,7 +192,7 @@ public class SingletonFoodly {
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
             }
-        }){
+        }) {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
@@ -266,7 +266,6 @@ public class SingletonFoodly {
     }
 
     public void setProfileListener(ProfileListener profileListener) {
-        System.out.println("--> Entrou no listener");
         this.profileListener = profileListener;
     }
 
@@ -514,4 +513,35 @@ public class SingletonFoodly {
         volleyQueue.add(req);
     }
     //endregion
+
+    //PEDIDOS
+    public void inicializarListaPedido() {
+        orderItems = new ArrayList<>();
+    }
+
+    //TODO FAZER RETURN DA LISTA
+
+    public Ementa getDishItem(int id) {
+        for (Ementa oi : orderItems)
+            if (oi.getDishId() == id)
+                return oi;
+        return null;
+    }
+
+    public ArrayList<Ementa> getListaPedido(){
+        return orderItems;
+    }
+
+    public void adicionarListaPedido(Ementa orderItem) {
+        orderItems.add(orderItem);
+    }
+
+    public void editarQuantidadePedido(int id, int quantity) {
+        for (Ementa oi : orderItems)
+            if (oi.getDishId() == id) {
+                oi.setQuantity(quantity);
+                return;
+            }
+    }
+
 }

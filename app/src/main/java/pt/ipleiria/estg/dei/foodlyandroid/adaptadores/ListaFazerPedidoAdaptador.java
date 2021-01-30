@@ -1,10 +1,14 @@
 package pt.ipleiria.estg.dei.foodlyandroid.adaptadores;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -12,13 +16,13 @@ import java.util.ArrayList;
 
 import pt.ipleiria.estg.dei.foodlyandroid.R;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.Ementa;
+import pt.ipleiria.estg.dei.foodlyandroid.vistas.FazerPedidoActivity;
 
 public class ListaFazerPedidoAdaptador extends BaseAdapter {
 
-    private Context context;
+    private final Context context;
     private LayoutInflater inflater;
-    private ArrayList<Ementa> ementas;
-    private TextInputEditText tvItem;
+    private final ArrayList<Ementa> ementas;
 
     public ListaFazerPedidoAdaptador(Context context, ArrayList<Ementa> ementas) {
         this.context = context;
@@ -37,7 +41,7 @@ public class ListaFazerPedidoAdaptador extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return position;
+        return ementas.get(position).getDishId();
     }
 
     @Override
@@ -60,17 +64,25 @@ public class ListaFazerPedidoAdaptador extends BaseAdapter {
         return convertView;
     }
 
-    private class ViewHolderLista {
-        private TextInputEditText tvEmenta;
-        //declarar a TextView para qtd
+    public static class ViewHolderLista {
+        private final TextView tvDishName, tvDishPrice, tvQuantity;
+        private int quantity;
 
         public ViewHolderLista(View view) {
-            tvEmenta = view.findViewById(R.id.textViewItemEmenta);
+            tvDishName = view.findViewById(R.id.textViewDishNameOrder);
+            tvDishPrice = view.findViewById(R.id.textViewDishPriceOrder);
+            tvQuantity = view.findViewById(R.id.textViewQtdOrder);
+
         }
 
         public void update(Ementa ementa) {
-            // Verificar a qtd != 0, visisel ou não visivel, setText
-            //tvEmenta.setText(ementa.getNome() + "................" + ementa.getPreco() + "€");
+            quantity = Integer.parseInt(tvQuantity.getText().toString());
+
+            tvDishName.setText(ementa.getName());
+            tvDishPrice.setText(ementa.getPrice() + " €");
+            if(quantity == 0){
+                tvQuantity.setVisibility(View.INVISIBLE);
+            }
         }
     }
 }
