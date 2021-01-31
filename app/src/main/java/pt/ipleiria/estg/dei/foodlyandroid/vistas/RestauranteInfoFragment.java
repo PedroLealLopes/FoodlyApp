@@ -32,7 +32,6 @@ public class RestauranteInfoFragment extends Fragment implements RestaurantesLis
     private Restaurante restaurante;
     private TextView tvCurrentPeople, tvMaxPeople, tvName, tvLocation, tvPhone, tvEmail, tvOpeningHour, tvClosingHour, tvDescription, tvWifiPassword, tvWifiPasswordText, tvHasVegan, tvAllowsPets;
     private ImageView ivImage, ivFav;
-    private ArrayList<Ementa> orderItems;
 
     public RestauranteInfoFragment() {
 

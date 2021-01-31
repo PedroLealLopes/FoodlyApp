@@ -21,8 +21,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import pt.ipleiria.estg.dei.foodlyandroid.R;
 import pt.ipleiria.estg.dei.foodlyandroid.listeners.EmentasListener;
 import pt.ipleiria.estg.dei.foodlyandroid.listeners.LoginListener;
+import pt.ipleiria.estg.dei.foodlyandroid.listeners.PedidosListener;
 import pt.ipleiria.estg.dei.foodlyandroid.listeners.ProfileListener;
 import pt.ipleiria.estg.dei.foodlyandroid.listeners.RestaurantesListener;
 import pt.ipleiria.estg.dei.foodlyandroid.listeners.ReviewsListener;
@@ -55,6 +57,7 @@ public class SingletonFoodly {
     private LoginListener loginListener;
     private ProfileListener profileListener;
     private ReviewsListener reviewsListener;
+    private PedidosListener pedidosListener;
 
     private static final String IP_MiiTU = "192.168.1.8";
     private static final String IP_Luckdude = "192.168.1.229";
@@ -89,7 +92,7 @@ public class SingletonFoodly {
 
     public void loginAPI(final String username, final String password, final Context context) {
         if (!GenericUtils.isConnectionInternet(context)) {
-            Toast.makeText(context, "Não há internet", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT).show();
 
             if (loginListener != null)
                 loginListener.onValidateLogin(false, null);
@@ -218,7 +221,7 @@ public class SingletonFoodly {
 
     public void getAllRestaurantesAPI(final Context context) {
         if (!GenericUtils.isConnectionInternet(context)) {
-            Toast.makeText(context, "Não há internet", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT).show();
 
             if (restaurantesListener != null)
                 restaurantesListener.onRefreshListaRestaurantes(foodlyBDHelper.getAllRestaurantesDB());
@@ -287,7 +290,7 @@ public class SingletonFoodly {
 
     public void getAllEmentasAPI(final int restaurantId, final Context context) {
         if (!GenericUtils.isConnectionInternet(context)) {
-            Toast.makeText(context, "Não há internet", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT).show();
         } else {
             JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlAPI + "/dishes/restaurant/" + restaurantId, null, new Response.Listener<JSONArray>() {
                 @Override
@@ -319,7 +322,7 @@ public class SingletonFoodly {
 
     public void getAllFavoritosAPI(final Context context) {
         if (!GenericUtils.isConnectionInternet(context)) {
-            Toast.makeText(context, "Não há internet", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT).show();
         } else {
             JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlAPI + "/profile-restaurant-favorites/user/" + getProfileId(), null, new Response.Listener<JSONArray>() {
                 @Override
@@ -418,7 +421,7 @@ public class SingletonFoodly {
     public void getAllReviewsAPI(final int restaurantId, final Context context) {
 
         if (!GenericUtils.isConnectionInternet(context)) {
-            Toast.makeText(context, "Não há internet", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT).show();
         } else {
             JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlAPI + "/restaurant-reviews/restaurant/" + restaurantId, null, new Response.Listener<JSONArray>() {
                 @Override
@@ -469,7 +472,7 @@ public class SingletonFoodly {
     public void getAllReviewsUsersAPI(final Context context) {
 
         if (!GenericUtils.isConnectionInternet(context)) {
-            Toast.makeText(context, "Não há internet", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT).show();
         } else {
             JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlAPI + "/restaurant-reviews/user/" + getProfileId(), null, new Response.Listener<JSONArray>() {
                 @Override
@@ -515,11 +518,14 @@ public class SingletonFoodly {
     //endregion
 
     //PEDIDOS
+
+    public void setPedidosListener(PedidosListener pedidosListener) {
+        this.pedidosListener = pedidosListener;
+    }
+
     public void inicializarListaPedido() {
         orderItems = new ArrayList<>();
     }
-
-    //TODO FAZER RETURN DA LISTA
 
     public Ementa getDishItem(int id) {
         for (Ementa oi : orderItems)
@@ -528,20 +534,41 @@ public class SingletonFoodly {
         return null;
     }
 
+    public ArrayList<Ementa> setListaPedido(ArrayList<Ementa> orderItems){
+        this.orderItems = orderItems;
+        return orderItems;
+    }
+
     public ArrayList<Ementa> getListaPedido(){
         return orderItems;
     }
 
-    public void adicionarListaPedido(Ementa orderItem) {
-        orderItems.add(orderItem);
-    }
-
-    public void editarQuantidadePedido(int id, int quantity) {
-        for (Ementa oi : orderItems)
-            if (oi.getDishId() == id) {
-                oi.setQuantity(quantity);
-                return;
+    public void adicionarPedidoAPI(final Ementa order, final Context context) {
+        StringRequest req = new StringRequest(Request.Method.POST, mUrlAPI + "/orders", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if (pedidosListener != null)
+                    pedidosListener.onRefreshDetalhes();
             }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("dishId", order.getDishId() + "");
+                params.put("type", order.getType());
+                params.put("price", order.getPrice() + "");
+                params.put("menuId", order.getRestaurantId()+"");
+                params.put("name", order.getName());
+                params.put("quantity", order.getQuantity()+"");
+                return params;
+            }
+        };
+        volleyQueue.add(req);
     }
 
 }

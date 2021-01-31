@@ -1,13 +1,29 @@
 package pt.ipleiria.estg.dei.foodlyandroid.vistas;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+
 import pt.ipleiria.estg.dei.foodlyandroid.R;
+import pt.ipleiria.estg.dei.foodlyandroid.adaptadores.ListaFinalizarPedidoAdaptador;
+import pt.ipleiria.estg.dei.foodlyandroid.adaptadores.ListaRestauranteAdaptador;
+import pt.ipleiria.estg.dei.foodlyandroid.modelos.Ementa;
+import pt.ipleiria.estg.dei.foodlyandroid.modelos.SingletonFoodly;
 
 public class FinalizarPedidoActivity extends AppCompatActivity {
+
+    private TextView tvTotalOrder;
+    private Button btnPedir;
+    private ListView lvListaFinalizarPedido;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,7 +32,33 @@ public class FinalizarPedidoActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle(getString(R.string.finalizarPedido));
 
-        //TODO CLICK BOTAO - SINGLETON E COLOCAR A ORDERLIST A NULL
+        lvListaFinalizarPedido = findViewById(R.id.listViewFinalizarPedido);
+        tvTotalOrder = findViewById(R.id.textViewTotalOrder);
+
+        final ArrayList<Ementa> listaEmenta = SingletonFoodly.getInstance(getApplicationContext()).getListaPedido();
+        if (listaEmenta != null)
+            lvListaFinalizarPedido.setAdapter(new ListaFinalizarPedidoAdaptador(getApplicationContext(), listaEmenta));
+
+        double totalPriceOrder = 0;
+        for(int i = 0; i < listaEmenta.size(); i++){
+            int quantItem = listaEmenta.get(i).getQuantity();
+            double priceItem = listaEmenta.get(i).getPrice();
+            double totalPriceItem = quantItem * priceItem;
+            totalPriceOrder = totalPriceItem + totalPriceOrder;
+        }
+        tvTotalOrder.setText(totalPriceOrder+"€");
+
+        btnPedir = findViewById(R.id.buttonFinalizarPedido);
+        btnPedir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //SingletonFoodly.getInstance(getApplicationContext()).adicionarPedidoAPI(, getApplicationContext());
+                Intent intent = new Intent(FinalizarPedidoActivity.this, RestauranteInfoFragment.class);
+                startActivity(intent);
+                Toast.makeText(FinalizarPedidoActivity.this, "Pedido adicionado com sucesso", Toast.LENGTH_SHORT).show();
+                listaEmenta.clear();
+            }
+        });
     }
 
     @Override

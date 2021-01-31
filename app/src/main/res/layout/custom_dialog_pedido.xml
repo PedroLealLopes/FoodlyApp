@@ -1,71 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp"
-    android:orientation="vertical"
-    android:padding="10dp">
+    android:orientation="vertical">
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="30dp" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/textViewDishNameDialog"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+        <Button
+            android:id="@+id/btnSub"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_bold"
-            android:text="PRATO"
-            android:textColor="@color/cinza"
-            android:textSize="25sp" />
+            android:backgroundTint="@color/colorAccent"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="-" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal">
+        <EditText
+            android:id="@+id/etQuantidade"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:inputType="number" />
 
-            <ImageView
-                android:id="@+id/imageViewSubDialog"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:layout_gravity="center"
-                app:srcCompat="@drawable/ic_subtract" />
-
-            <TextView
-                android:id="@+id/textViewQtyDialog"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:fontFamily="@font/montserrat_regular"
-                android:text="0"
-                android:textColor="@color/cinza"
-                android:textSize="25sp" />
-
-            <ImageView
-                android:id="@+id/imageViewAddDialog"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_marginEnd="80dp"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/ic_adicionar" />
-
-            <Button
-                android:id="@+id/buttonOKDialog"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/button_branco_reto"
-                android:text="OK"
-                android:clickable="true"
-                android:fontFamily="@font/montserrat_regular"
-                android:textColor="@color/cinza"
-                android:textSize="20sp"/>
-        </LinearLayout>
+        <Button
+            android:id="@+id/btnSoma"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorAccent"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="+" />
     </LinearLayout>
-</RelativeLayout>
+</LinearLayout>

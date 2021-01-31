@@ -23,6 +23,18 @@ public class Ementa {
         this.quantity = 0;
     }
 
+    @Override
+    public String toString() {
+        return "Ementa{" +
+                "dishId=" + dishId +
+                ", restaurantId=" + restaurantId +
+                ", quantity=" + quantity +
+                ", name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", price=" + price +
+                '}';
+    }
+
     public int getDishId() {
         return dishId;
     }

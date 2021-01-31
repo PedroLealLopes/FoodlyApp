@@ -26,7 +26,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".vistas.FazerPedidoActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".vistas.RegistarActivity"
             android:parentActivityName=".vistas.LoginActivity"

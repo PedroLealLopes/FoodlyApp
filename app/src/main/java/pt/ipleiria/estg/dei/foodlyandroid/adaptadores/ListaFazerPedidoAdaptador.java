@@ -22,26 +22,26 @@ public class ListaFazerPedidoAdaptador extends BaseAdapter {
 
     private final Context context;
     private LayoutInflater inflater;
-    private final ArrayList<Ementa> ementas;
+    private final ArrayList<Ementa> orderItems;
 
-    public ListaFazerPedidoAdaptador(Context context, ArrayList<Ementa> ementas) {
+    public ListaFazerPedidoAdaptador(Context context, ArrayList<Ementa> orderItems) {
         this.context = context;
-        this.ementas = ementas;
+        this.orderItems = orderItems;
     }
 
     @Override
     public int getCount() {
-        return ementas.size();
+        return orderItems.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return ementas.get(position);
+        return orderItems.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return ementas.get(position).getDishId();
+        return orderItems.get(position).getDishId();
     }
 
     @Override
@@ -59,7 +59,7 @@ public class ListaFazerPedidoAdaptador extends BaseAdapter {
             convertView.setTag(viewHolderLista);
         }
 
-        viewHolderLista.update(ementas.get(position));
+        viewHolderLista.update(orderItems.get(position));
 
         return convertView;
     }
@@ -75,13 +75,16 @@ public class ListaFazerPedidoAdaptador extends BaseAdapter {
 
         }
 
-        public void update(Ementa ementa) {
-            quantity = Integer.parseInt(tvQuantity.getText().toString());
+        public void update(Ementa orderItems) {
+            quantity = Integer.parseInt(orderItems.getQuantity() + "");
 
-            tvDishName.setText(ementa.getName());
-            tvDishPrice.setText(ementa.getPrice() + " €");
+            tvDishName.setText(orderItems.getName());
+            tvDishPrice.setText(orderItems.getPrice() + " €");
             if(quantity == 0){
                 tvQuantity.setVisibility(View.INVISIBLE);
+            }else{
+                tvQuantity.setVisibility(View.VISIBLE);
+                tvQuantity.setText(quantity+"");
             }
         }
     }

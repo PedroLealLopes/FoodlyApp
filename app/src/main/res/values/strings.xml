@@ -97,4 +97,5 @@
     <string name="reviews">Reviews</string>
     <string name="pesquisar">Pesquisar</string>
     <string name="favoritos">Favoritos</string>
+    <string name="noConnection">Não tem ligação à rede</string>
 </resources>
