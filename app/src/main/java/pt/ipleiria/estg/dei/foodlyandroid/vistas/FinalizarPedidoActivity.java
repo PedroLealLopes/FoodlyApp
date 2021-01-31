@@ -10,6 +10,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import java.util.ArrayList;
 
@@ -40,23 +42,21 @@ public class FinalizarPedidoActivity extends AppCompatActivity {
             lvListaFinalizarPedido.setAdapter(new ListaFinalizarPedidoAdaptador(getApplicationContext(), listaEmenta));
 
         double totalPriceOrder = 0;
-        for(int i = 0; i < listaEmenta.size(); i++){
+        for (int i = 0; i < listaEmenta.size(); i++) {
             int quantItem = listaEmenta.get(i).getQuantity();
             double priceItem = listaEmenta.get(i).getPrice();
             double totalPriceItem = quantItem * priceItem;
             totalPriceOrder = totalPriceItem + totalPriceOrder;
         }
-        tvTotalOrder.setText(totalPriceOrder+"€");
+        tvTotalOrder.setText(totalPriceOrder + "€");
 
         btnPedir = findViewById(R.id.buttonFinalizarPedido);
         btnPedir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //SingletonFoodly.getInstance(getApplicationContext()).adicionarPedidoAPI(, getApplicationContext());
-                Intent intent = new Intent(FinalizarPedidoActivity.this, RestauranteInfoFragment.class);
-                startActivity(intent);
                 Toast.makeText(FinalizarPedidoActivity.this, "Pedido adicionado com sucesso", Toast.LENGTH_SHORT).show();
-                listaEmenta.clear();
+                //TODO GO TO FRAGMENT
             }
         });
     }

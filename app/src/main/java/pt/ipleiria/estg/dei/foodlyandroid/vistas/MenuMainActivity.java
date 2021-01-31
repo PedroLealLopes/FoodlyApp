@@ -89,10 +89,6 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
         carregarFragmentoInicial();
     }
 
-
-
-
-
     private void carregarCabecalho() {
         username = getIntent().getStringExtra(USERNAME);
         SharedPreferences sharedPrefUser = getSharedPreferences(USER, Context.MODE_PRIVATE);
