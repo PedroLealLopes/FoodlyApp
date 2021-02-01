@@ -70,10 +70,10 @@ public class FazerPedidoActivity extends AppCompatActivity implements EmentasLis
                             orderItems.add(new Ementa(e.getDishId(), e.getName(), e.getType(), e.getPrice(), e.getRestaurantId(), e.getQuantity()));
                             SingletonFoodly.getInstance(getApplicationContext()).setListaPedido(orderItems);
                             //verificar se a lista de pratos está correta - serve só para teste
-                            System.out.println("---> ID:" + e.getDishId() + " TITULO:" + e.getName() + " QUANT:" + e.getQuantity());
+                            //System.out.println("---> ID:" + e.getDishId() + " TITULO:" + e.getName() + " QUANT:" + e.getQuantity());
                         }
                     }
-                    System.out.println("---> orderItems:" + SingletonFoodly.getInstance(getApplicationContext()).getListaPedido().toString());
+                    //System.out.println("---> orderItems:" + SingletonFoodly.getInstance(getApplicationContext()).getListaPedido().toString());
                     Intent intent = new Intent(FazerPedidoActivity.this, FinalizarPedidoActivity.class);
                     startActivity(intent);
                 } else
@@ -167,7 +167,7 @@ public class FazerPedidoActivity extends AppCompatActivity implements EmentasLis
                 if (quantInicial != quantFinal) {
                     // envio de info para o fragmento
                     envioDataFragmento(quantFinal, id);
-                    System.out.println("--->Id: " + id + " quant: " + quantFinal);
+                    //System.out.println("--->Id: " + id + " quant: " + quantFinal);
                 }
             }
         });
