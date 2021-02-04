@@ -52,6 +52,7 @@ public class SingletonFoodly {
     private FoodlyBDHelper foodlyBDHelper = null;
     public Profile profile;
     public Review review;
+    public int orderId;
 
     private RestaurantesListener restaurantesListener;
     private EmentasListener ementasListener;
@@ -64,7 +65,7 @@ public class SingletonFoodly {
     private static final String IP_MiiTU = "192.168.1.8";
     private static final String IP_Luckdude = "192.168.1.229";
     private static final String IP_Johnny = "192.168.1.253";
-    private static final String mUrlAPI = "http://" + IP_MiiTU + "/FoodlyWeb/frontend/web/api";
+    private static final String mUrlAPI = "http://" + IP_Luckdude + "/FoodlyWeb/frontend/web/api";
 
     public static synchronized SingletonFoodly getInstance(Context context) {
         if (instance == null)
@@ -543,11 +544,6 @@ public class SingletonFoodly {
         return orderItems;
     }
 
-    public int getOrderId(ArrayList<Pedido> pedidos) {
-        this.pedidos = pedidos;
-        int auxId = pedidos.get(pedidos.size() - 1).getOrderId() + 1;
-        return auxId;
-    }
 
     public void getAllPedidosAPI(final Context context) {
         if (!GenericUtils.isConnectionInternet(context)) {
@@ -571,12 +567,20 @@ public class SingletonFoodly {
         }
     }
 
+    public void setOrderId(int id){
+        this.orderId = id;
+    }
+
+    public int getOrderId(){
+        return this.orderId;
+    }
+
     public void adicionarPedidoAPI(final Context context) {
         StringRequest req = new StringRequest(Request.Method.POST, mUrlAPI + "/orders/create", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if (pedidosListener != null)
-                    pedidosListener.onRefreshDetalhes();
+                    pedidosListener.onRefreshDetalhes(Integer.parseInt(response));
             }
         }, new Response.ErrorListener() {
             @Override

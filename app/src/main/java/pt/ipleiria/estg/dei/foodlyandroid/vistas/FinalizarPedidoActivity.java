@@ -66,10 +66,10 @@ public class FinalizarPedidoActivity extends AppCompatActivity implements Pedido
                 pedido = new Pedido(0,
                         "",
                         SingletonFoodly.getInstance(getApplicationContext()).getProfileId());
+
                 SingletonFoodly.getInstance(getApplicationContext()).adicionarPedidoAPI(getApplicationContext());
 
-                orderId = SingletonFoodly.getInstance(getApplicationContext()).getOrderId(pedidos);
-                System.out.println("---> orderId: " + (orderId));
+                orderId = SingletonFoodly.getInstance(getApplicationContext()).getOrderId();
 
                 for (int i = 0; i < listaEmenta.size(); i++) {
                     System.out.println("---> i: " + i);
@@ -102,7 +102,8 @@ public class FinalizarPedidoActivity extends AppCompatActivity implements Pedido
     }
 
     @Override
-    public void onRefreshDetalhes() {
-
+    public void onRefreshDetalhes(int orderId) {
+        System.out.println("---> orderId: " + orderId);
     }
+
 }
