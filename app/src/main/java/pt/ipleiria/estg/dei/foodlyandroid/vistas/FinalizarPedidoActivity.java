@@ -1,6 +1,5 @@
 package pt.ipleiria.estg.dei.foodlyandroid.vistas;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,22 +9,27 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import pt.ipleiria.estg.dei.foodlyandroid.R;
 import pt.ipleiria.estg.dei.foodlyandroid.adaptadores.ListaFinalizarPedidoAdaptador;
-import pt.ipleiria.estg.dei.foodlyandroid.adaptadores.ListaRestauranteAdaptador;
+import pt.ipleiria.estg.dei.foodlyandroid.listeners.PedidosListener;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.Ementa;
+import pt.ipleiria.estg.dei.foodlyandroid.modelos.Pedido;
+import pt.ipleiria.estg.dei.foodlyandroid.modelos.Review;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.SingletonFoodly;
 
-public class FinalizarPedidoActivity extends AppCompatActivity {
+public class FinalizarPedidoActivity extends AppCompatActivity implements PedidosListener {
 
     private TextView tvTotalOrder;
     private Button btnPedir;
     private ListView lvListaFinalizarPedido;
+    private ArrayList<Pedido> pedidos;
+    private Pedido pedido;
+    private int orderId = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +40,9 @@ public class FinalizarPedidoActivity extends AppCompatActivity {
 
         lvListaFinalizarPedido = findViewById(R.id.listViewFinalizarPedido);
         tvTotalOrder = findViewById(R.id.textViewTotalOrder);
+
+        SingletonFoodly.getInstance(getApplicationContext()).setPedidosListener(this);
+        SingletonFoodly.getInstance(getApplicationContext()).getAllPedidosAPI(getApplicationContext());
 
         final ArrayList<Ementa> listaEmenta = SingletonFoodly.getInstance(getApplicationContext()).getListaPedido();
         if (listaEmenta != null)
@@ -50,13 +57,28 @@ public class FinalizarPedidoActivity extends AppCompatActivity {
         }
         tvTotalOrder.setText(totalPriceOrder + "€");
 
+        SingletonFoodly.getInstance(getApplicationContext()).setPedidosListener(this);
+
         btnPedir = findViewById(R.id.buttonFinalizarPedido);
         btnPedir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //SingletonFoodly.getInstance(getApplicationContext()).adicionarPedidoAPI(, getApplicationContext());
+                pedido = new Pedido(0,
+                        "",
+                        SingletonFoodly.getInstance(getApplicationContext()).getProfileId());
+                SingletonFoodly.getInstance(getApplicationContext()).adicionarPedidoAPI(getApplicationContext());
+
+                orderId = SingletonFoodly.getInstance(getApplicationContext()).getOrderId(pedidos);
+                System.out.println("---> orderId: " + (orderId));
+
+                for (int i = 0; i < listaEmenta.size(); i++) {
+                    System.out.println("---> i: " + i);
+                    listaEmenta.get(i).setOrderId(orderId);
+                    SingletonFoodly.getInstance(getApplicationContext()).adicionarItensPedidoAPI(listaEmenta.get(i), getApplicationContext());
+                    System.out.println("---> finalOrderItem: " + listaEmenta.get(i).toString());
+                }
                 Toast.makeText(FinalizarPedidoActivity.this, "Pedido adicionado com sucesso", Toast.LENGTH_SHORT).show();
-                System.out.println("---> finalOrder:" + SingletonFoodly.getInstance(getApplicationContext()).getListaPedido().toString());
+                //System.out.println("---> finalOrder:" + SingletonFoodly.getInstance(getApplicationContext()).getListaPedido().toString());
                 //TODO GO TO FRAGMENT
             }
         });
@@ -72,5 +94,15 @@ public class FinalizarPedidoActivity extends AppCompatActivity {
                 break;
         }
         return true;
+    }
+
+    @Override
+    public void onRefreshListaPedidos(ArrayList<Pedido> listaPedidos) {
+        pedidos = listaPedidos;
+    }
+
+    @Override
+    public void onRefreshDetalhes() {
+
     }
 }

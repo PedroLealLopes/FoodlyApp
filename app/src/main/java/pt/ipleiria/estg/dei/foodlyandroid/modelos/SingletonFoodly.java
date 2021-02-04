@@ -8,7 +8,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -16,7 +15,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,12 +22,14 @@ import java.util.Map;
 import pt.ipleiria.estg.dei.foodlyandroid.R;
 import pt.ipleiria.estg.dei.foodlyandroid.listeners.EmentasListener;
 import pt.ipleiria.estg.dei.foodlyandroid.listeners.LoginListener;
+import pt.ipleiria.estg.dei.foodlyandroid.listeners.ItensPedidosListener;
 import pt.ipleiria.estg.dei.foodlyandroid.listeners.PedidosListener;
 import pt.ipleiria.estg.dei.foodlyandroid.listeners.ProfileListener;
 import pt.ipleiria.estg.dei.foodlyandroid.listeners.RestaurantesListener;
 import pt.ipleiria.estg.dei.foodlyandroid.listeners.ReviewsListener;
 import pt.ipleiria.estg.dei.foodlyandroid.utils.EmentaJsonParser;
 import pt.ipleiria.estg.dei.foodlyandroid.utils.GenericUtils;
+import pt.ipleiria.estg.dei.foodlyandroid.utils.PedidoJsonParser;
 import pt.ipleiria.estg.dei.foodlyandroid.utils.ProfileJsonParser;
 import pt.ipleiria.estg.dei.foodlyandroid.utils.RestauranteJsonParser;
 import pt.ipleiria.estg.dei.foodlyandroid.utils.ReviewJsonParser;
@@ -41,6 +41,7 @@ public class SingletonFoodly {
     private ArrayList<Review> reviewsUsers;
     private ArrayList<Review> reviews;
     private ArrayList<Ementa> orderItems;
+    private ArrayList<Pedido> pedidos;
 
     private static SingletonFoodly instance = null;
     private static RequestQueue volleyQueue;
@@ -57,6 +58,7 @@ public class SingletonFoodly {
     private LoginListener loginListener;
     private ProfileListener profileListener;
     private ReviewsListener reviewsListener;
+    private ItensPedidosListener itensPedidosListener;
     private PedidosListener pedidosListener;
 
     private static final String IP_MiiTU = "192.168.1.8";
@@ -77,6 +79,7 @@ public class SingletonFoodly {
         favRestaurants = new ArrayList<>();
         reviews = new ArrayList<>();
         reviewsUsers = new ArrayList<>();
+        pedidos = new ArrayList<>();
 
         foodlyBDHelper = new FoodlyBDHelper(context);
     }
@@ -523,28 +526,53 @@ public class SingletonFoodly {
         this.pedidosListener = pedidosListener;
     }
 
+    public void setItensPedidosListener(ItensPedidosListener itensPedidosListener) {
+        this.itensPedidosListener = itensPedidosListener;
+    }
+
     public void inicializarListaPedido() {
         orderItems = new ArrayList<>();
     }
 
-    public Ementa getDishItem(int id) {
-        for (Ementa oi : orderItems)
-            if (oi.getDishId() == id)
-                return oi;
-        return null;
-    }
-
-    public ArrayList<Ementa> setListaPedido(ArrayList<Ementa> orderItems){
+    public ArrayList<Ementa> setListaPedido(ArrayList<Ementa> orderItems) {
         this.orderItems = orderItems;
         return orderItems;
     }
 
-    public ArrayList<Ementa> getListaPedido(){
+    public ArrayList<Ementa> getListaPedido() {
         return orderItems;
     }
 
-    public void adicionarPedidoAPI(final Ementa order, final Context context) {
-        StringRequest req = new StringRequest(Request.Method.POST, mUrlAPI + "/orders", new Response.Listener<String>() {
+    public int getOrderId(ArrayList<Pedido> pedidos) {
+        this.pedidos = pedidos;
+        int auxId = pedidos.get(pedidos.size() - 1).getOrderId() + 1;
+        return auxId;
+    }
+
+    public void getAllPedidosAPI(final Context context) {
+        if (!GenericUtils.isConnectionInternet(context)) {
+            Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT).show();
+        } else {
+            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlAPI + "/orders", null, new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray response) {
+                    pedidos = PedidoJsonParser.parserJsonPedidos(response);
+
+                    if (pedidosListener != null)
+                        pedidosListener.onRefreshListaPedidos(pedidos);
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+            volleyQueue.add(req);
+        }
+    }
+
+    public void adicionarPedidoAPI(final Context context) {
+        StringRequest req = new StringRequest(Request.Method.POST, mUrlAPI + "/orders/create", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if (pedidosListener != null)
@@ -559,16 +587,36 @@ public class SingletonFoodly {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("dishId", order.getDishId() + "");
-                params.put("type", order.getType());
-                params.put("price", order.getPrice() + "");
-                params.put("menuId", order.getRestaurantId()+"");
-                params.put("name", order.getName());
-                params.put("quantity", order.getQuantity()+"");
+                params.put("userId", getProfileId() + "");
                 return params;
             }
         };
         volleyQueue.add(req);
     }
 
+    public void adicionarItensPedidoAPI(final Ementa orderItem, final Context context) {
+        StringRequest req = new StringRequest(Request.Method.POST, mUrlAPI + "/order-items/create", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if (itensPedidosListener != null)
+                    itensPedidosListener.onRefreshDetalhes();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("orderId", orderItem.getOrderId() + "");
+                params.put("dishId", orderItem.getDishId() + "");
+                params.put("quantity", orderItem.getQuantity() + "");
+                System.out.println("---> params:" + params.toString());
+                return params;
+            }
+        };
+        volleyQueue.add(req);
+    }
 }

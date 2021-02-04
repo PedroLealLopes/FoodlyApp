@@ -1,11 +1,12 @@
 package pt.ipleiria.estg.dei.foodlyandroid.modelos;
 
 public class Ementa {
-    private int dishId, restaurantId, quantity;
+    private int orderId, dishId, restaurantId, quantity;
     private String name, type;
     private double price;
 
-    public Ementa(int dishId, String name, String type, double price, int restaurantId, int quantity) {
+    public Ementa(int orderId, int dishId, String name, String type, double price, int restaurantId, int quantity) {
+        this.orderId = orderId;
         this.dishId = dishId;
         this.name = name;
         this.type = type;
@@ -15,6 +16,7 @@ public class Ementa {
     }
 
     public Ementa(int dishId, String name, String type, double price, int restaurantId) {
+        this.orderId = 0;
         this.dishId = dishId;
         this.name = name;
         this.type = type;
@@ -26,7 +28,8 @@ public class Ementa {
     @Override
     public String toString() {
         return "Ementa{" +
-                "dishId=" + dishId +
+                "orderId=" + orderId +
+                ", dishId=" + dishId +
                 ", restaurantId=" + restaurantId +
                 ", quantity=" + quantity +
                 ", name='" + name + '\'' +
@@ -35,10 +38,21 @@ public class Ementa {
                 '}';
     }
 
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
+    }
+
     public int getDishId() {
         return dishId;
     }
 
+    public void setDishId(int dishId) {
+        this.dishId = dishId;
+    }
 
     public int getRestaurantId() {
         return restaurantId;
@@ -46,10 +60,6 @@ public class Ementa {
 
     public void setRestaurantId(int restaurantId) {
         this.restaurantId = restaurantId;
-    }
-
-    public void setDishId(int dishId) {
-        this.dishId = dishId;
     }
 
     public String getName() {

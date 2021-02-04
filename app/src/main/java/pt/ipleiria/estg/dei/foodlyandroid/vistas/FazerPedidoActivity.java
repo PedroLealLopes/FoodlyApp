@@ -63,17 +63,13 @@ public class FazerPedidoActivity extends AppCompatActivity implements EmentasLis
             @Override
             public void onClick(View v) {
                 if (GenericUtils.isConnectionInternet(getApplicationContext())) {
-                    //criar uma lista de orderItems com os pratos q têm quantidade>0
                     orderItems = new ArrayList<>();
                     for (Ementa e : listaEmenta) {
                         if (e.getQuantity() > 0) {
-                            orderItems.add(new Ementa(e.getDishId(), e.getName(), e.getType(), e.getPrice(), e.getRestaurantId(), e.getQuantity()));
+                            orderItems.add(new Ementa(0, e.getDishId(), e.getName(), e.getType(), e.getPrice(), e.getRestaurantId(), e.getQuantity()));
                             SingletonFoodly.getInstance(getApplicationContext()).setListaPedido(orderItems);
-                            //verificar se a lista de pratos está correta - serve só para teste
-                            //System.out.println("---> ID:" + e.getDishId() + " TITULO:" + e.getName() + " QUANT:" + e.getQuantity());
                         }
                     }
-                    //System.out.println("---> orderItems:" + SingletonFoodly.getInstance(getApplicationContext()).getListaPedido().toString());
                     Intent intent = new Intent(FazerPedidoActivity.this, FinalizarPedidoActivity.class);
                     startActivity(intent);
                 } else
