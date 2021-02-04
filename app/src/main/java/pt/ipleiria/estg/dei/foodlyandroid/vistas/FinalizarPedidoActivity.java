@@ -68,15 +68,6 @@ public class FinalizarPedidoActivity extends AppCompatActivity implements Pedido
                         SingletonFoodly.getInstance(getApplicationContext()).getProfileId());
 
                 SingletonFoodly.getInstance(getApplicationContext()).adicionarPedidoAPI(getApplicationContext());
-
-                orderId = SingletonFoodly.getInstance(getApplicationContext()).getOrderId();
-
-                for (int i = 0; i < listaEmenta.size(); i++) {
-                    System.out.println("---> i: " + i);
-                    listaEmenta.get(i).setOrderId(orderId);
-                    SingletonFoodly.getInstance(getApplicationContext()).adicionarItensPedidoAPI(listaEmenta.get(i), getApplicationContext());
-                    System.out.println("---> finalOrderItem: " + listaEmenta.get(i).toString());
-                }
                 Toast.makeText(FinalizarPedidoActivity.this, "Pedido adicionado com sucesso", Toast.LENGTH_SHORT).show();
                 //System.out.println("---> finalOrder:" + SingletonFoodly.getInstance(getApplicationContext()).getListaPedido().toString());
                 //TODO GO TO FRAGMENT

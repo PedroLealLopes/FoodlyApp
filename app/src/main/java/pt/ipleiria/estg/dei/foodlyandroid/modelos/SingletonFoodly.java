@@ -578,9 +578,38 @@ public class SingletonFoodly {
     public void adicionarPedidoAPI(final Context context) {
         StringRequest req = new StringRequest(Request.Method.POST, mUrlAPI + "/orders/create", new Response.Listener<String>() {
             @Override
-            public void onResponse(String response) {
+            public void onResponse(final String response) {
                 if (pedidosListener != null)
                     pedidosListener.onRefreshDetalhes(Integer.parseInt(response));
+
+                final ArrayList<Ementa> listaEmenta = getListaPedido();
+
+                for (int i = 0; i < listaEmenta.size(); i++) {
+                    final int j = i;
+                    StringRequest req2 = new StringRequest(Request.Method.POST, mUrlAPI + "/order-items/create", new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            if (itensPedidosListener != null)
+                                itensPedidosListener.onRefreshDetalhes();
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }) {
+                        @Override
+                        protected Map<String, String> getParams() {
+                            Map<String, String> params = new HashMap<>();
+                            params.put("orderId", Integer.parseInt(response) + "");
+                            params.put("dishId", listaEmenta.get(j).getDishId() + "");
+                            params.put("quantity", listaEmenta.get(j).getQuantity() + "");
+                            return params;
+                        }
+                    };
+                    volleyQueue.add(req2);
+                }
+
             }
         }, new Response.ErrorListener() {
             @Override
