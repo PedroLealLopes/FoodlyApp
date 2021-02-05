@@ -41,7 +41,7 @@ public class FazerPedidoActivity extends AppCompatActivity implements EmentasLis
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle(getString(R.string.fazerPedidoTitulo));
 
-        int restaurantId = getIntent().getIntExtra(ID_RESTAURANTE, -1);
+        final int restaurantId = getIntent().getIntExtra(ID_RESTAURANTE, -1);
 
         //inicializei a lista - nesta fase tem 0 eltos
         listaEmenta = new ArrayList<>();
@@ -64,8 +64,13 @@ public class FazerPedidoActivity extends AppCompatActivity implements EmentasLis
                             SingletonFoodly.getInstance(getApplicationContext()).setListaPedido(orderItems);
                         }
                     }
-                    Intent intent = new Intent(FazerPedidoActivity.this, FinalizarPedidoActivity.class);
-                    startActivity(intent);
+                    if (orderItems.size() == 0) {
+                        Toast.makeText(FazerPedidoActivity.this, R.string.check_finalizarpedido, Toast.LENGTH_SHORT).show();
+                    } else {
+                        Intent intent = new Intent(FazerPedidoActivity.this, FinalizarPedidoActivity.class);
+                        intent.putExtra(FinalizarPedidoActivity.ID_RESTAURANTE, restaurantId);
+                        startActivity(intent);
+                    }
                 } else
                     Toast.makeText(FazerPedidoActivity.this, R.string.noConnection, Toast.LENGTH_SHORT).show();
             }

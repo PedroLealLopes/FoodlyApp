@@ -24,7 +24,7 @@ public class AdicionarReviewActivity extends AppCompatActivity implements View.O
     private EditText etDescricao;
     private Button btnSubmit;
     private Review review;
-    private double total;
+    private double total = 0;
     public static final String ID_RESTAURANTE = "ID_RESTAURANTE";
 
     public AdicionarReviewActivity() {
@@ -72,9 +72,13 @@ public class AdicionarReviewActivity extends AppCompatActivity implements View.O
                                 SingletonFoodly.getInstance(getApplicationContext()).getProfile().getUsername(),
                                 SingletonFoodly.getInstance(getApplicationContext()).getProfile().getImage());
 
-                        SingletonFoodly.getInstance(getApplicationContext()).adicionarReviewAPI(review, restaurantId, getApplicationContext());
-                        finish();
-                        Toast.makeText(AdicionarReviewActivity.this, R.string.reviewSucesso, Toast.LENGTH_SHORT).show();
+                        if (total == 0) {
+                            Toast.makeText(AdicionarReviewActivity.this, R.string.reviewMaiorZero, Toast.LENGTH_SHORT).show();
+                        } else {
+                            SingletonFoodly.getInstance(getApplicationContext()).adicionarReviewAPI(review, restaurantId, getApplicationContext());
+                            finish();
+                            Toast.makeText(AdicionarReviewActivity.this, R.string.reviewSucesso, Toast.LENGTH_SHORT).show();
+                        }
                     }
                 })
                 .setNegativeButton(R.string.respostaNao, new DialogInterface.OnClickListener() {
@@ -83,7 +87,6 @@ public class AdicionarReviewActivity extends AppCompatActivity implements View.O
                         //Cancelar
                     }
                 })
-                .setIcon(R.drawable.ic_adicionar)
                 .show();
     }
 

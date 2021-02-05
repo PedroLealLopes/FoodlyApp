@@ -98,4 +98,7 @@
     <string name="pesquisar">Pesquisar</string>
     <string name="favoritos">Favoritos</string>
     <string name="noConnection">Não tem ligação à rede</string>
+    <string name="check_finalizarpedido">Faça o seu pedido antes de o finalizar</string>
+    <string name="reviewMaiorZero">Review NÃO adicionada. Nrº de estrelas tem que ser maior que 0</string>
+    <string name="pedidoAdicionadoSucesso">Pedido adicionado com sucesso</string>
 </resources>
