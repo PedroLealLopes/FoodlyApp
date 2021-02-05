@@ -5,46 +5,54 @@
     android:layout_height="match_parent"
     android:theme="@style/AppTheme.MaterialComponents">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="30dp"
+    <LinearLayout
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/layout_border"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textViewItemEmenta"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/textViewDishNameOrder"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_ementa"
-            android:editable="false"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
             android:fontFamily="@font/montserrat_regular"
-            android:text="Ementa.......................1€"
+            android:text="@string/nome"
             android:textColor="@color/cinza"
             android:textSize="16sp" />
-    </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/textViewDishPriceOrder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/montserrat_regular"
+            android:gravity="end"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:textColor="@color/cinza"
+            android:textSize="16sp" />
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/textViewNrItem"
+        android:id="@+id/textViewQtdOrder"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/forma_redonda"
         android:fontFamily="@font/montserrat_semi_bold"
         android:gravity="center"
-        android:text="3"
+        android:text="0"
         android:textColor="@color/branco"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-

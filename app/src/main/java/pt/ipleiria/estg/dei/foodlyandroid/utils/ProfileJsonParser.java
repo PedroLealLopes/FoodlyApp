@@ -28,16 +28,4 @@ public class ProfileJsonParser {
         }
         return profile;
     }
-
-    public static String parserJsonImagemRestaurante(String response) {
-        String capa = null;
-        try {
-            JSONObject login = new JSONObject(response);
-            if (login.getBoolean("success"))
-                capa = login.getString("image");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return capa;
-    }
 }

@@ -8,7 +8,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -16,18 +15,21 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import pt.ipleiria.estg.dei.foodlyandroid.R;
 import pt.ipleiria.estg.dei.foodlyandroid.listeners.EmentasListener;
+import pt.ipleiria.estg.dei.foodlyandroid.listeners.ItensPedidosListener;
 import pt.ipleiria.estg.dei.foodlyandroid.listeners.LoginListener;
+import pt.ipleiria.estg.dei.foodlyandroid.listeners.PedidosListener;
 import pt.ipleiria.estg.dei.foodlyandroid.listeners.ProfileListener;
 import pt.ipleiria.estg.dei.foodlyandroid.listeners.RestaurantesListener;
 import pt.ipleiria.estg.dei.foodlyandroid.listeners.ReviewsListener;
 import pt.ipleiria.estg.dei.foodlyandroid.utils.EmentaJsonParser;
 import pt.ipleiria.estg.dei.foodlyandroid.utils.GenericUtils;
+import pt.ipleiria.estg.dei.foodlyandroid.utils.PedidoJsonParser;
 import pt.ipleiria.estg.dei.foodlyandroid.utils.ProfileJsonParser;
 import pt.ipleiria.estg.dei.foodlyandroid.utils.RestauranteJsonParser;
 import pt.ipleiria.estg.dei.foodlyandroid.utils.ReviewJsonParser;
@@ -38,6 +40,8 @@ public class SingletonFoodly {
     private ArrayList<Restaurante> favRestaurants;
     private ArrayList<Review> reviewsUsers;
     private ArrayList<Review> reviews;
+    private ArrayList<Ementa> orderItems;
+    private ArrayList<Pedido> pedidos;
 
     private static SingletonFoodly instance = null;
     private static RequestQueue volleyQueue;
@@ -54,6 +58,8 @@ public class SingletonFoodly {
     private LoginListener loginListener;
     private ProfileListener profileListener;
     private ReviewsListener reviewsListener;
+    private ItensPedidosListener itensPedidosListener;
+    private PedidosListener pedidosListener;
 
     private static final String IP_MiiTU = "192.168.1.8";
     private static final String IP_Luckdude = "192.168.1.229";
@@ -73,6 +79,7 @@ public class SingletonFoodly {
         favRestaurants = new ArrayList<>();
         reviews = new ArrayList<>();
         reviewsUsers = new ArrayList<>();
+        pedidos = new ArrayList<>();
 
         foodlyBDHelper = new FoodlyBDHelper(context);
     }
@@ -88,7 +95,7 @@ public class SingletonFoodly {
 
     public void loginAPI(final String username, final String password, final Context context) {
         if (!GenericUtils.isConnectionInternet(context)) {
-            Toast.makeText(context, "Não há internet", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT).show();
 
             if (loginListener != null)
                 loginListener.onValidateLogin(false, null);
@@ -104,8 +111,7 @@ public class SingletonFoodly {
                             profileListener.onRefreshProfile(profile);
 
                         loginListener.onValidateLogin(true, profileResponse);
-                    }
-                    else{
+                    } else {
                         loginListener.onValidateLogin(false, null);
                     }
                 } catch (JSONException e) {
@@ -143,7 +149,7 @@ public class SingletonFoodly {
         return getProfile().getProfileId();
     }
 
-    public void editProfileAPI(final String fullname, final String age, final String alergias, final String genero, final String telefone, final String morada, final Context context){
+    public void editProfileAPI(final String fullname, final String age, final String alergias, final String genero, final String telefone, final String morada, final Context context) {
         StringRequest req = new StringRequest(Request.Method.PUT, mUrlAPI + "/profiles/" + profile.getProfileId(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -162,7 +168,7 @@ public class SingletonFoodly {
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
             }
-        }){
+        }) {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
@@ -178,7 +184,7 @@ public class SingletonFoodly {
         volleyQueue.add(req);
     }
 
-    public void adicionarImagemApi(final String image, final Context context){
+    public void adicionarImagemApi(final String image, final Context context) {
         StringRequest req = new StringRequest(Request.Method.PUT, mUrlAPI + "/profiles/" + profile.getProfileId() + "/upload", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -192,7 +198,7 @@ public class SingletonFoodly {
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
             }
-        }){
+        }) {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
@@ -218,7 +224,7 @@ public class SingletonFoodly {
 
     public void getAllRestaurantesAPI(final Context context) {
         if (!GenericUtils.isConnectionInternet(context)) {
-            Toast.makeText(context, "Não há internet", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT).show();
 
             if (restaurantesListener != null)
                 restaurantesListener.onRefreshListaRestaurantes(foodlyBDHelper.getAllRestaurantesDB());
@@ -266,7 +272,6 @@ public class SingletonFoodly {
     }
 
     public void setProfileListener(ProfileListener profileListener) {
-        System.out.println("--> Entrou no listener");
         this.profileListener = profileListener;
     }
 
@@ -288,7 +293,7 @@ public class SingletonFoodly {
 
     public void getAllEmentasAPI(final int restaurantId, final Context context) {
         if (!GenericUtils.isConnectionInternet(context)) {
-            Toast.makeText(context, "Não há internet", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT).show();
         } else {
             JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlAPI + "/dishes/restaurant/" + restaurantId, null, new Response.Listener<JSONArray>() {
                 @Override
@@ -320,7 +325,7 @@ public class SingletonFoodly {
 
     public void getAllFavoritosAPI(final Context context) {
         if (!GenericUtils.isConnectionInternet(context)) {
-            Toast.makeText(context, "Não há internet", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT).show();
         } else {
             JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlAPI + "/profile-restaurant-favorites/user/" + getProfileId(), null, new Response.Listener<JSONArray>() {
                 @Override
@@ -419,7 +424,7 @@ public class SingletonFoodly {
     public void getAllReviewsAPI(final int restaurantId, final Context context) {
 
         if (!GenericUtils.isConnectionInternet(context)) {
-            Toast.makeText(context, "Não há internet", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT).show();
         } else {
             JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlAPI + "/restaurant-reviews/restaurant/" + restaurantId, null, new Response.Listener<JSONArray>() {
                 @Override
@@ -470,7 +475,7 @@ public class SingletonFoodly {
     public void getAllReviewsUsersAPI(final Context context) {
 
         if (!GenericUtils.isConnectionInternet(context)) {
-            Toast.makeText(context, "Não há internet", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT).show();
         } else {
             JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlAPI + "/restaurant-reviews/user/" + getProfileId(), null, new Response.Listener<JSONArray>() {
                 @Override
@@ -508,6 +513,99 @@ public class SingletonFoodly {
                 Map<String, String> params = new HashMap<>();
                 params.put("restaurant_id", review.getRestaurantId() + "");
                 params.put("profile_id", review.getProfileId() + "");
+                return params;
+            }
+        };
+        volleyQueue.add(req);
+    }
+    //endregion
+
+    //region PEDIDOS
+
+    public void setPedidosListener(PedidosListener pedidosListener) {
+        this.pedidosListener = pedidosListener;
+    }
+
+    public void inicializarListaPedido() {
+        orderItems = new ArrayList<>();
+    }
+
+    public ArrayList<Ementa> setListaPedido(ArrayList<Ementa> orderItems) {
+        this.orderItems = orderItems;
+        return orderItems;
+    }
+
+    public ArrayList<Ementa> getListaPedido() {
+        return orderItems;
+    }
+
+    public void getAllPedidosAPI(final Context context) {
+        if (!GenericUtils.isConnectionInternet(context)) {
+            Toast.makeText(context, R.string.noConnection, Toast.LENGTH_SHORT).show();
+        } else {
+            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, mUrlAPI + "/orders", null, new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray response) {
+                    pedidos = PedidoJsonParser.parserJsonPedidos(response);
+
+                    if (pedidosListener != null)
+                        pedidosListener.onRefreshListaPedidos(pedidos);
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+            volleyQueue.add(req);
+        }
+    }
+
+    public void adicionarPedidoAPI(final Context context) {
+        StringRequest req = new StringRequest(Request.Method.POST, mUrlAPI + "/orders/create", new Response.Listener<String>() {
+            @Override
+            public void onResponse(final String response) {
+                if (pedidosListener != null)
+                    pedidosListener.onRefreshDetalhes(Integer.parseInt(response));
+
+                final ArrayList<Ementa> listaEmenta = getListaPedido();
+
+                for (int i = 0; i < listaEmenta.size(); i++) {
+                    final int j = i;
+                    StringRequest req2 = new StringRequest(Request.Method.POST, mUrlAPI + "/order-items/create", new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            if (itensPedidosListener != null)
+                                itensPedidosListener.onRefreshDetalhes();
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }) {
+                        @Override
+                        protected Map<String, String> getParams() {
+                            Map<String, String> params = new HashMap<>();
+                            params.put("orderId", Integer.parseInt(response) + "");
+                            params.put("dishId", listaEmenta.get(j).getDishId() + "");
+                            params.put("quantity", listaEmenta.get(j).getQuantity() + "");
+                            return params;
+                        }
+                    };
+                    volleyQueue.add(req2);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("userId", getProfileId() + "");
                 return params;
             }
         };

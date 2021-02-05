@@ -12,30 +12,30 @@ import java.util.ArrayList;
 import pt.ipleiria.estg.dei.foodlyandroid.R;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.Ementa;
 
-public class ListaFazerPedidoAdaptador extends BaseAdapter {
+public class ListaFinalizarPedidoAdaptador extends BaseAdapter {
 
     private final Context context;
     private LayoutInflater inflater;
-    private final ArrayList<Ementa> orderItems;
+    private final ArrayList<Ementa> listaEmenta;
 
-    public ListaFazerPedidoAdaptador(Context context, ArrayList<Ementa> orderItems) {
+    public ListaFinalizarPedidoAdaptador(Context context, ArrayList<Ementa> listaEmenta) {
         this.context = context;
-        this.orderItems = orderItems;
+        this.listaEmenta = listaEmenta;
     }
 
     @Override
     public int getCount() {
-        return orderItems.size();
+        return listaEmenta.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return orderItems.get(position);
+        return listaEmenta.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return orderItems.get(position).getDishId();
+        return listaEmenta.get(position).getDishId();
     }
 
     @Override
@@ -44,7 +44,7 @@ public class ListaFazerPedidoAdaptador extends BaseAdapter {
             inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         if (convertView == null)
-            convertView = inflater.inflate(R.layout.item_lista_fazer_pedido, null);
+            convertView = inflater.inflate(R.layout.item_lista_finalizar_pedido, null);
 
         //OTIMIZAÇÃO
         ViewHolderLista viewHolderLista = (ViewHolderLista) convertView.getTag();
@@ -53,33 +53,27 @@ public class ListaFazerPedidoAdaptador extends BaseAdapter {
             convertView.setTag(viewHolderLista);
         }
 
-        viewHolderLista.update(orderItems.get(position));
+        viewHolderLista.update(listaEmenta.get(position));
 
         return convertView;
     }
 
     public static class ViewHolderLista {
-        private final TextView tvDishName, tvDishPrice, tvQuantity;
-        private int quantity;
+        private final TextView tvDishName, tvQuantity, tvDishPrice, tvTotal;
 
         public ViewHolderLista(View view) {
-            tvDishName = view.findViewById(R.id.textViewDishNameOrder);
-            tvDishPrice = view.findViewById(R.id.textViewDishPriceOrder);
-            tvQuantity = view.findViewById(R.id.textViewQtdOrder);
-
+            tvDishName = view.findViewById(R.id.textViewDishNameFP);
+            tvQuantity = view.findViewById(R.id.textViewDishQuantityFP);
+            tvDishPrice = view.findViewById(R.id.textViewDishPriceFP);
+            tvTotal = view.findViewById(R.id.textViewDishTotalFP);
         }
 
-        public void update(Ementa orderItems) {
-            quantity = Integer.parseInt(orderItems.getQuantity() + "");
-
-            tvDishName.setText(orderItems.getName());
-            tvDishPrice.setText(orderItems.getPrice() + " €");
-            if (quantity == 0) {
-                tvQuantity.setVisibility(View.INVISIBLE);
-            } else {
-                tvQuantity.setVisibility(View.VISIBLE);
-                tvQuantity.setText(quantity + "");
-            }
+        public void update(Ementa ementa) {
+            double total = ementa.getPrice() * ementa.getQuantity();
+            tvDishName.setText(ementa.getName());
+            tvQuantity.setText(ementa.getQuantity() + "");
+            tvDishPrice.setText(ementa.getPrice() + " €");
+            tvTotal.setText(String.format("%.1f", total) + "€");
         }
     }
 }
