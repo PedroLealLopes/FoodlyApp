@@ -65,7 +65,7 @@ public class SingletonFoodly {
     private static final String IP_MiiTU = "192.168.1.8";
     private static final String IP_Luckdude = "192.168.1.229";
     private static final String IP_Johnny = "192.168.1.253";
-    private static final String mUrlAPI = "http://" + IP_Luckdude + "/FoodlyWeb/frontend/web/api";
+    private static final String mUrlAPI = "http://" + IP_MiiTU + "/FoodlyWeb/frontend/web/api";
 
     public static synchronized SingletonFoodly getInstance(Context context) {
         if (instance == null)
