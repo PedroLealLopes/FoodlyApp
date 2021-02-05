@@ -34,24 +34,4 @@ public class ReviewJsonParser {
         }
         return reviews;
     }
-
-    public static Review parserJsonReview(String response) {
-        Review auxReview = null;
-        try {
-            JSONObject review = new JSONObject(response);
-
-            int restaurantId = review.getInt("restaurant_restaurantId");
-            int profileId = review.getInt("profiles_userId");
-            double stars = review.getDouble("stars");
-            String comment = review.getString("comment");
-            String creation_date = review.getString("creation_date");
-            String username = review.getString("username");
-            String image = review.getString("image");
-
-            auxReview = new Review(restaurantId, profileId, stars, comment, creation_date, username, image);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return auxReview;
-    }
 }

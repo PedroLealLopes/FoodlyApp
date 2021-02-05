@@ -10,16 +10,13 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import pt.ipleiria.estg.dei.foodlyandroid.R;
 import pt.ipleiria.estg.dei.foodlyandroid.adaptadores.ListaFinalizarPedidoAdaptador;
 import pt.ipleiria.estg.dei.foodlyandroid.listeners.PedidosListener;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.Ementa;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.Pedido;
-import pt.ipleiria.estg.dei.foodlyandroid.modelos.Review;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.SingletonFoodly;
 
 public class FinalizarPedidoActivity extends AppCompatActivity implements PedidosListener {

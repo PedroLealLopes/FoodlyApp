@@ -11,7 +11,6 @@ import java.util.ArrayList;
 
 import pt.ipleiria.estg.dei.foodlyandroid.R;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.Ementa;
-import pt.ipleiria.estg.dei.foodlyandroid.modelos.SingletonFoodly;
 
 public class ListaFinalizarPedidoAdaptador extends BaseAdapter {
 

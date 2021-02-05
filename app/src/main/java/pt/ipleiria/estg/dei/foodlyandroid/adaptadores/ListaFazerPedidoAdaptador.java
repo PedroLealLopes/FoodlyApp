@@ -1,22 +1,16 @@
 package pt.ipleiria.estg.dei.foodlyandroid.adaptadores;
 
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 
 import pt.ipleiria.estg.dei.foodlyandroid.R;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.Ementa;
-import pt.ipleiria.estg.dei.foodlyandroid.vistas.FazerPedidoActivity;
 
 public class ListaFazerPedidoAdaptador extends BaseAdapter {
 
@@ -80,11 +74,11 @@ public class ListaFazerPedidoAdaptador extends BaseAdapter {
 
             tvDishName.setText(orderItems.getName());
             tvDishPrice.setText(orderItems.getPrice() + " €");
-            if(quantity == 0){
+            if (quantity == 0) {
                 tvQuantity.setVisibility(View.INVISIBLE);
-            }else{
+            } else {
                 tvQuantity.setVisibility(View.VISIBLE);
-                tvQuantity.setText(quantity+"");
+                tvQuantity.setText(quantity + "");
             }
         }
     }

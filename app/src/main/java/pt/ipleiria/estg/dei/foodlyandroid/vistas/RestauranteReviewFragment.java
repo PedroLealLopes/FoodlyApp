@@ -96,7 +96,6 @@ public class RestauranteReviewFragment extends Fragment implements ReviewsListen
         int i = 0;
         reviewsArray = reviews;
 
-
         tvTotalReviews.setText(reviews.size() + "");
 
         if (reviews.size() == 1) {

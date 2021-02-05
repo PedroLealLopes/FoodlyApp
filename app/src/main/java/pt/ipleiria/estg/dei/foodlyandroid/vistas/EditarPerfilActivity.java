@@ -21,17 +21,16 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.textfield.TextInputEditText;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.ByteArrayOutputStream;
@@ -42,7 +41,6 @@ import java.util.Date;
 
 import pt.ipleiria.estg.dei.foodlyandroid.R;
 import pt.ipleiria.estg.dei.foodlyandroid.listeners.ProfileListener;
-import pt.ipleiria.estg.dei.foodlyandroid.modelos.FoodlyBDHelper;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.Profile;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.SingletonFoodly;
 
@@ -58,15 +56,9 @@ public class EditarPerfilActivity extends AppCompatActivity implements ProfileLi
     private ImageView imageViewFoto;
     private Button buttonAdicionarFoto;
     private TextInputLayout TextInputLayoutPassword, TextInputLayoutUsername, TextInputLayoutEmail;
-
     private FloatingActionButton fabCriarConta;
-
-
-    private TextInputEditText editTextUsername, editTextIdadeProfile, editTextNomeAlergiaProfile,editTextNomeContactoProfile, editTextNomeMoradaProfile, editTextEmailProfile, editTextNomeCompletoProfile;
-
+    private TextInputEditText editTextUsername, editTextIdadeProfile, editTextNomeAlergiaProfile, editTextNomeContactoProfile, editTextNomeMoradaProfile, editTextEmailProfile, editTextNomeCompletoProfile;
     private AutoCompleteTextView autoCompleteTextViewGenero;
-
-
     private String currentPhotoPath;
 
     @Override
@@ -103,13 +95,12 @@ public class EditarPerfilActivity extends AppCompatActivity implements ProfileLi
         fabCriarConta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SingletonFoodly.getInstance(getApplicationContext()).editProfileAPI(editTextNomeCompletoProfile.getText().toString(), editTextIdadeProfile.getText().toString(), editTextNomeAlergiaProfile.getText().toString(), editTextGenero.getText().toString(), editTextNomeContactoProfile.getText().toString(), editTextNomeMoradaProfile.getText().toString(), getApplicationContext() );
+                SingletonFoodly.getInstance(getApplicationContext()).editProfileAPI(editTextNomeCompletoProfile.getText().toString(), editTextIdadeProfile.getText().toString(), editTextNomeAlergiaProfile.getText().toString(), editTextGenero.getText().toString(), editTextNomeContactoProfile.getText().toString(), editTextNomeMoradaProfile.getText().toString(), getApplicationContext());
                 finish();
             }
 
 
         });
-
 
         buttonAdicionarFoto = findViewById(R.id.buttonAdicionarFoto);
         buttonAdicionarFoto.setOnClickListener(new View.OnClickListener() {
@@ -118,8 +109,6 @@ public class EditarPerfilActivity extends AppCompatActivity implements ProfileLi
                 dialogUpload();
             }
         });
-
-
 
         editTextIdadeProfile.setText(profile.getAge());
         editTextNomeAlergiaProfile.setText(profile.getAlergias());
@@ -145,7 +134,6 @@ public class EditarPerfilActivity extends AppCompatActivity implements ProfileLi
                 finish();
                 break;
         }
-
         return true;
     }
 
@@ -253,7 +241,7 @@ public class EditarPerfilActivity extends AppCompatActivity implements ProfileLi
                     String[] paths = new String[]{currentPhotoPath};
                     Bitmap bitmap = BitmapFactory.decodeFile(currentPhotoPath);
                     imageViewFoto.setImageBitmap(bitmap);
-                    SingletonFoodly.getInstance(getApplicationContext()).adicionarImagemApi(getStringImage(bitmap),getApplicationContext());
+                    SingletonFoodly.getInstance(getApplicationContext()).adicionarImagemApi(getStringImage(bitmap), getApplicationContext());
                     MediaScannerConnection.scanFile(this, paths, null, new
                             MediaScannerConnection.MediaScannerConnectionClient() {
 
@@ -275,7 +263,7 @@ public class EditarPerfilActivity extends AppCompatActivity implements ProfileLi
                     try {
                         Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
                         imageViewFoto.setImageBitmap(bitmap);
-                        SingletonFoodly.getInstance(getApplicationContext()).adicionarImagemApi(getStringImage(bitmap),getApplicationContext());
+                        SingletonFoodly.getInstance(getApplicationContext()).adicionarImagemApi(getStringImage(bitmap), getApplicationContext());
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -288,7 +276,7 @@ public class EditarPerfilActivity extends AppCompatActivity implements ProfileLi
     public String getStringImage(Bitmap bmp) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bmp.compress(Bitmap.CompressFormat.JPEG, 10, byteArrayOutputStream);
-        byte[] byteArray = byteArrayOutputStream .toByteArray();
+        byte[] byteArray = byteArrayOutputStream.toByteArray();
 
         String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
         return encoded;
@@ -296,7 +284,7 @@ public class EditarPerfilActivity extends AppCompatActivity implements ProfileLi
 
     @Override
     public void onRefreshProfile(Profile profile) {
-        if(profile != null){
+        if (profile != null) {
             imageViewFoto = findViewById(R.id.imageViewFoto);
 
             Glide.with(getApplicationContext())

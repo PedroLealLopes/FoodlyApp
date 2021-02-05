@@ -8,7 +8,6 @@ import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,7 +45,6 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
 
         cboxLembrarConta = findViewById(R.id.checkBoxLembrarConta);
         btnLogin = findViewById(R.id.buttonLogin);
-
 
         SharedPreferences sharedPrefUser = getSharedPreferences(MenuMainActivity.PROFILE, Context.MODE_PRIVATE);
         String profile = sharedPrefUser.getString("Profile", "");
@@ -112,8 +110,8 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
     @Override
 
     public void onValidateLogin(boolean canLogin, JSONObject profile) {
-        if(canLogin){
-            if(cboxLembrarConta.isChecked()) {
+        if (canLogin) {
+            if (cboxLembrarConta.isChecked()) {
                 SharedPreferences sharedPrefUser = getSharedPreferences(MenuMainActivity.PROFILE, Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPrefUser.edit();
                 editor.putString("Profile", profile + "");
