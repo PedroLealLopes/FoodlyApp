@@ -50,7 +50,7 @@ public class PerfilFragment extends Fragment implements ProfileListener {
 
         tvUsername = view.findViewById(R.id.textViewUsernamePerfil);
         tvUsername.setText(SingletonFoodly.getInstance(getContext()).getProfile().getUsername());
-        ivProfilePic = view.findViewById(R.id.imageViewProfilePic);
+        ivProfilePic = view.findViewById(R.id.imageViewProfilePicture);
         Glide.with(this)
                 .load(SingletonFoodly.getInstance(getContext()).getProfile().getImage())
                 .placeholder(R.drawable.gordon)
@@ -106,7 +106,7 @@ public class PerfilFragment extends Fragment implements ProfileListener {
             }
         });
 
-        imageViewProfilePic = view.findViewById(R.id.imageViewProfilePic);
+        imageViewProfilePic = view.findViewById(R.id.imageViewProfilePicture);
 
         Glide.with(this)
                 .load(Base64.decode(SingletonFoodly.getInstance(context).getProfile().getImage(), Base64.DEFAULT))
@@ -120,9 +120,8 @@ public class PerfilFragment extends Fragment implements ProfileListener {
 
     @Override
     public void onRefreshProfile(Profile profile) {
-        if (profile != null) {
-            imageViewProfilePic = getView().findViewById(R.id.imageViewProfilePic);
-
+        if(profile != null){
+            imageViewProfilePic = getView().findViewById(R.id.imageViewProfilePicture);
             Glide.with(getContext())
                     .load(Base64.decode(profile.getImage(), Base64.DEFAULT))
                     .placeholder(R.drawable.gordon)
