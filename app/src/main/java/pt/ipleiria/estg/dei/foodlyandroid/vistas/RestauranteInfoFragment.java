@@ -31,7 +31,6 @@ public class RestauranteInfoFragment extends Fragment implements RestaurantesLis
     private Restaurante restaurante;
     private TextView tvCurrentPeople, tvMaxPeople, tvName, tvLocation, tvPhone, tvEmail, tvOpeningHour, tvClosingHour, tvDescription, tvWifiPassword, tvWifiPasswordText, tvHasVegan, tvAllowsPets;
     private ImageView ivImage, ivFav;
-    private ArrayList<Restaurante> favoritosArray;
 
     public RestauranteInfoFragment() {
 
@@ -84,7 +83,9 @@ public class RestauranteInfoFragment extends Fragment implements RestaurantesLis
         btnFazerPedido.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SingletonFoodly.getInstance(getContext()).inicializarListaPedido();
                 Intent intent = new Intent(getContext(), FazerPedidoActivity.class);
+                intent.putExtra(FazerPedidoActivity.ID_RESTAURANTE, restauranteId);
                 startActivity(intent);
             }
         });

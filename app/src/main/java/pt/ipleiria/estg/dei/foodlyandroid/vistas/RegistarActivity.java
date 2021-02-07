@@ -56,7 +56,6 @@ public class RegistarActivity extends AppCompatActivity implements DatePickerDia
         });
     }
 
-
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         Calendar c = Calendar.getInstance();

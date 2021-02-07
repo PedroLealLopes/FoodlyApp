@@ -122,7 +122,6 @@ public class PerfilFragment extends Fragment implements ProfileListener {
     public void onRefreshProfile(Profile profile) {
         if(profile != null){
             imageViewProfilePic = getView().findViewById(R.id.imageViewProfilePicture);
-
             Glide.with(getContext())
                     .load(Base64.decode(profile.getImage(), Base64.DEFAULT))
                     .placeholder(R.drawable.gordon)
