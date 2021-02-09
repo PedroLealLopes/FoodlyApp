@@ -39,8 +39,8 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
 
         SingletonFoodly.getInstance(getApplicationContext()).setLoginListener(this);
 
-        etUsername = findViewById(R.id.editTextUsername);
-        etPassword = findViewById(R.id.editTextPassword);
+        etUsername = findViewById(R.id.editTextUsernameR);
+        etPassword = findViewById(R.id.editTextPasswordR);
         tvRegistar = findViewById(R.id.textViewRegistar);
 
         cboxLembrarConta = findViewById(R.id.checkBoxLembrarConta);
@@ -74,6 +74,7 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
         if (password != null) {
             SingletonFoodly.getInstance(getApplicationContext()).loginAPI(username, password, getApplicationContext());
         }
+        //System.out.println("--->pass " + password );
     }
 
     private boolean isUsernameValido(String username) {
@@ -87,7 +88,7 @@ public class LoginActivity extends AppCompatActivity implements LoginListener {
         if (password == null) {
             return false;
         }
-        return password.length() >= 4;
+        return password.length() >= 8;
     }
 
     private String encodePassword(String password) {

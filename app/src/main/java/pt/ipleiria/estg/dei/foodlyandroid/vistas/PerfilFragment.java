@@ -52,8 +52,8 @@ public class PerfilFragment extends Fragment implements ProfileListener {
         tvUsername.setText(SingletonFoodly.getInstance(getContext()).getProfile().getUsername());
         ivProfilePic = view.findViewById(R.id.imageViewProfilePicture);
         Glide.with(this)
-                .load(SingletonFoodly.getInstance(getContext()).getProfile().getImage())
-                .placeholder(R.drawable.gordon)
+                .load(android.util.Base64.decode(SingletonFoodly.getInstance(context).getProfile().getImage(), Base64.DEFAULT))
+                .placeholder(R.drawable.noprofile)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(ivProfilePic);
 
@@ -110,7 +110,7 @@ public class PerfilFragment extends Fragment implements ProfileListener {
 
         Glide.with(this)
                 .load(Base64.decode(SingletonFoodly.getInstance(context).getProfile().getImage(), Base64.DEFAULT))
-                .placeholder(R.drawable.gordon)
+                .placeholder(R.drawable.noprofile)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(imageViewProfilePic);
 
@@ -120,13 +120,18 @@ public class PerfilFragment extends Fragment implements ProfileListener {
 
     @Override
     public void onRefreshProfile(Profile profile) {
-        if(profile != null){
+        if (profile != null) {
             imageViewProfilePic = getView().findViewById(R.id.imageViewProfilePicture);
             Glide.with(getContext())
                     .load(Base64.decode(profile.getImage(), Base64.DEFAULT))
-                    .placeholder(R.drawable.gordon)
+                    .placeholder(R.drawable.noprofile)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(imageViewProfilePic);
         }
+    }
+
+    @Override
+    public void onRefreshDetalhes() {
+
     }
 }

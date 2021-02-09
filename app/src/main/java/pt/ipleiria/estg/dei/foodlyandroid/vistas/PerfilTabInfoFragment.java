@@ -60,4 +60,9 @@ public class PerfilTabInfoFragment extends Fragment implements ProfileListener {
         editTextNomeMoradaProfile.setText(profile.getMorada());
         editTextNomeCompletoProfile.setText(profile.getFullname());
     }
+
+    @Override
+    public void onRefreshDetalhes() {
+
+    }
 }

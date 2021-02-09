@@ -57,8 +57,7 @@ public class EditarPerfilActivity extends AppCompatActivity implements ProfileLi
     private Button buttonAdicionarFoto;
     private TextInputLayout TextInputLayoutPassword, TextInputLayoutUsername, TextInputLayoutEmail;
     private FloatingActionButton fabCriarConta;
-    private TextInputEditText editTextUsername, editTextIdadeProfile, editTextNomeAlergiaProfile, editTextNomeContactoProfile, editTextNomeMoradaProfile, editTextEmailProfile, editTextNomeCompletoProfile;
-    private AutoCompleteTextView autoCompleteTextViewGenero;
+    private TextInputEditText editTextIdadeProfile, editTextNomeAlergiaProfile, editTextNomeContactoProfile, editTextNomeMoradaProfile, editTextNomeCompletoProfile;
     private String currentPhotoPath;
 
     @Override
@@ -74,13 +73,13 @@ public class EditarPerfilActivity extends AppCompatActivity implements ProfileLi
         TextInputLayoutUsername = findViewById(R.id.TextInputLayoutUsername);
         TextInputLayoutEmail = findViewById(R.id.TextInputLayoutEmail);
 
-        editTextIdadeProfile = findViewById(R.id.editTextIdade);
-        editTextNomeAlergiaProfile = findViewById(R.id.editTextNomeAlergia);
-        editTextNomeContactoProfile = findViewById(R.id.editTextNomeContacto);
-        editTextNomeMoradaProfile = findViewById(R.id.editTextNomeMorada);
-        editTextNomeCompletoProfile = findViewById(R.id.editTextNomeCompleto);
+        editTextIdadeProfile = findViewById(R.id.editTextIdadeR);
+        editTextNomeAlergiaProfile = findViewById(R.id.editTextNomeAlergiaR);
+        editTextNomeContactoProfile = findViewById(R.id.editTextNomeContactoR);
+        editTextNomeMoradaProfile = findViewById(R.id.editTextNomeMoradaR);
+        editTextNomeCompletoProfile = findViewById(R.id.editTextNomeCompletoR);
 
-        final AutoCompleteTextView editTextGenero = findViewById(R.id.autoCompleteTextViewGenero);
+        final AutoCompleteTextView editTextGenero = findViewById(R.id.autoCompleteTextViewGeneroR);
         ArrayAdapter<String> adaptadorGenero = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, GENEROS);
         editTextGenero.setText(profile.getGenero());
         editTextGenero.setAdapter(adaptadorGenero);
@@ -120,7 +119,7 @@ public class EditarPerfilActivity extends AppCompatActivity implements ProfileLi
 
         Glide.with(this)
                 .load(Base64.decode(SingletonFoodly.getInstance(getApplicationContext()).getProfile().getImage(), Base64.DEFAULT))
-                .placeholder(R.drawable.gordon)
+                .placeholder(R.drawable.noprofile)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(imageViewFoto);
     }
@@ -289,9 +288,14 @@ public class EditarPerfilActivity extends AppCompatActivity implements ProfileLi
 
             Glide.with(getApplicationContext())
                     .load(Base64.decode(profile.getImage(), Base64.DEFAULT))
-                    .placeholder(R.drawable.gordon)
+                    .placeholder(R.drawable.noprofile)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(imageViewFoto);
         }
+    }
+
+    @Override
+    public void onRefreshDetalhes() {
+
     }
 }

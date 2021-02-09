@@ -1,6 +1,7 @@
 package pt.ipleiria.estg.dei.foodlyandroid.adaptadores;
 
 import android.content.Context;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 
 import pt.ipleiria.estg.dei.foodlyandroid.R;
 import pt.ipleiria.estg.dei.foodlyandroid.modelos.Review;
+import pt.ipleiria.estg.dei.foodlyandroid.modelos.SingletonFoodly;
 
 public class ListaReviewAdaptador extends BaseAdapter {
 
@@ -71,7 +73,7 @@ public class ListaReviewAdaptador extends BaseAdapter {
             tvData = view.findViewById(R.id.textViewDataCriacao);
             tvClassificacao = view.findViewById(R.id.textViewClassificacao);
             tvComentario = view.findViewById(R.id.textViewComentario);
-            ivPic = view.findViewById(R.id.imageViewProfilePicture);
+            ivPic = view.findViewById(R.id.imageViewProfilePictureReview);
         }
 
         public void update(Review review) {
@@ -80,8 +82,8 @@ public class ListaReviewAdaptador extends BaseAdapter {
             tvClassificacao.setText(review.getStars() + "");
             tvComentario.setText(review.getComment());
             Glide.with(context)
-                    .load(review.getImage())
-                    .placeholder(R.drawable.gordon)
+                    .load(android.util.Base64.decode(review.getImage(), Base64.DEFAULT))
+                    .placeholder(R.drawable.noprofile)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(ivPic);
         }
