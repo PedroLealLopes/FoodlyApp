@@ -26,7 +26,7 @@
                     android:layout_height="70dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="30dp"
-                    android:src="@drawable/gordon" />
+                    android:src="@drawable/noprofile" />
 
                 <Button
                     android:id="@+id/buttonAdicionarFoto"
@@ -55,7 +55,7 @@
                 android:hint="@string/username">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextUsername"
+                    android:id="@+id/editTextUsernameR"
                     android:layout_width="350dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_regular"
@@ -72,7 +72,7 @@
                 android:hint="@string/email">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextEmail"
+                    android:id="@+id/editTextEmailR"
                     android:layout_width="350dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_regular"
@@ -89,7 +89,7 @@
                 android:hint="@string/password">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextPassword"
+                    android:id="@+id/editTextPasswordR"
                     android:layout_width="350dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_regular"
@@ -105,7 +105,7 @@
                 android:hint="@string/nome_completo">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextNomeCompleto"
+                    android:id="@+id/editTextNomeCompletoR"
                     android:layout_width="350dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_regular"
@@ -125,7 +125,7 @@
                     android:layout_height="wrap_content">
 
                     <AutoCompleteTextView
-                        android:id="@+id/autoCompleteTextViewGenero"
+                        android:id="@+id/autoCompleteTextViewGeneroR"
                         android:layout_width="165dp"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/montserrat_regular"
@@ -140,7 +140,7 @@
                     android:layout_marginStart="20dp">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/editTextIdade"
+                        android:id="@+id/editTextIdadeR"
                         android:layout_width="165dp"
                         android:layout_height="match_parent"
                         android:fontFamily="@font/montserrat_regular"
@@ -158,12 +158,12 @@
                 android:hint="@string/contacto">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextNomeContacto"
+                    android:id="@+id/editTextNomeContactoR"
                     android:layout_width="350dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_regular"
                     android:inputType="number"
-                    android:maxLength="9" />
+                    android:maxLength="16" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -175,7 +175,7 @@
                 android:hint="@string/morada">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextNomeMorada"
+                    android:id="@+id/editTextNomeMoradaR"
                     android:layout_width="350dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_regular"
@@ -191,7 +191,7 @@
                 android:hint="@string/alergias">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextNomeAlergia"
+                    android:id="@+id/editTextNomeAlergiaR"
                     android:layout_width="350dp"
                     android:layout_height="200dp"
                     android:fontFamily="@font/montserrat_regular"

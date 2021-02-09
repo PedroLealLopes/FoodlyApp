@@ -60,9 +60,9 @@ public class MenuMainActivity extends AppCompatActivity implements NavigationVie
 
 
                 profile_image = drawerView.findViewById(R.id.profile_image);
-
                 Glide.with(getApplicationContext())
                         .load(android.util.Base64.decode(SingletonFoodly.getInstance(getApplicationContext()).getProfile().getImage(), Base64.DEFAULT))
+                        .placeholder(R.drawable.noprofile)
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .into(profile_image);
             }

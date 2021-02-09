@@ -4,4 +4,6 @@ import pt.ipleiria.estg.dei.foodlyandroid.modelos.Profile;
 
 public interface ProfileListener {
     void onRefreshProfile(Profile profile);
+
+    void onRefreshDetalhes();
 }

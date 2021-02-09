@@ -64,7 +64,8 @@ public class SingletonFoodly {
     private static final String IP_MiiTU = "192.168.1.8";
     private static final String IP_Luckdude = "192.168.1.229";
     private static final String IP_Johnny = "192.168.1.253";
-    private static final String mUrlAPI = "http://" + IP_Luckdude + "/FoodlyWeb/frontend/web/api";
+    private static final String IP_PC_ESCOLA = "";
+    private static final String mUrlAPI = "http://" + IP_MiiTU + "/FoodlyWeb/frontend/web/api";
 
     public static synchronized SingletonFoodly getInstance(Context context) {
         if (instance == null)
@@ -129,6 +130,40 @@ public class SingletonFoodly {
                 Map<String, String> params = new HashMap<>();
                 params.put("username", username);
                 params.put("password", password);
+                return params;
+            }
+        };
+        volleyQueue.add(req);
+    }
+    //endregion
+
+    //region REGISTAR USER
+    public void registarUtilizadorAPI(final Profile profile, final Context context) {
+        StringRequest req = new StringRequest(Request.Method.POST, mUrlAPI + "/users/register", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if (profileListener != null)
+                    profileListener.onRefreshDetalhes();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("password", profile.getPassword());
+                params.put("username", profile.getUsername());
+                params.put("fullname", profile.getFullname());
+                params.put("age", profile.getAge());
+                params.put("alergias", profile.getAlergias());
+                params.put("telefone", profile.getTelefone());
+                params.put("morada", profile.getMorada());
+                params.put("genero", profile.getGenero());
+                params.put("email", profile.getEmail());
+                System.out.println("--->params " + params.toString());
                 return params;
             }
         };
