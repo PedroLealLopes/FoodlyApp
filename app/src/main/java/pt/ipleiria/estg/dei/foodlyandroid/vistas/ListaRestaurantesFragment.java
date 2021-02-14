@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import pt.ipleiria.estg.dei.foodlyandroid.R;
@@ -29,6 +30,7 @@ public class ListaRestaurantesFragment extends Fragment implements SwipeRefreshL
     private ListView lvListaRestaurantes;
     private SearchView searchView;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private ArrayList<Restaurante> listaRestaurantes;
 
     public ListaRestaurantesFragment() {
 
@@ -76,7 +78,7 @@ public class ListaRestaurantesFragment extends Fragment implements SwipeRefreshL
             public boolean onQueryTextChange(String newText) {
                 ArrayList<Restaurante> tempRestaurantes = new ArrayList<>();
 
-                for (Restaurante r : SingletonFoodly.getInstance(getContext()).getRestaurantesBD())
+                for (Restaurante r : listaRestaurantes)
                     if (r.getName().toLowerCase().contains(newText.toLowerCase()))
                         tempRestaurantes.add(r);
                 lvListaRestaurantes.setAdapter(new ListaRestauranteAdaptador(getContext(), tempRestaurantes));
@@ -103,6 +105,7 @@ public class ListaRestaurantesFragment extends Fragment implements SwipeRefreshL
 
     @Override
     public void onRefreshListaRestaurantes(ArrayList<Restaurante> restaurantes) {
+        listaRestaurantes = restaurantes;
         if (restaurantes != null)
             lvListaRestaurantes.setAdapter(new ListaRestauranteAdaptador(getContext(), restaurantes));
     }
